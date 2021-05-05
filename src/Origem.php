@@ -37,9 +37,14 @@ class Origem {
     }
 
     public static function consulta(int $index): array {
+        $data = self::lista();
+        if(!key_exists($index, $data)){
+            throw new Exception("Índice $index não encontrado.");
+        }
         
+        return $data[$index];
     }
-
+    
     public static function altera(int $index, string $novoNome = '', string $novaDescricao = ''): void {
         
     }
