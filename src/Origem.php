@@ -29,7 +29,8 @@ class Origem {
         $data = self::lista();
         $data[] = [
             'nome' => $nome,
-            'descricao' => $descricao
+            'descricao' => $descricao,
+            'ativo' => true
         ];
         
         self::salva($data);
@@ -43,8 +44,15 @@ class Origem {
         
     }
 
-    public static function trocaStatus(int $index, bool $ativa): void {
+    public static function ativo(int $index, bool $ativo): void {
+        $data = self::lista();
+        if(!key_exists($index, $data)){
+            throw new Exception("Índice $index não encontrado.");
+        }
         
+        $data[$index]['ativo'] = $ativo;
+        
+        self::salva($data);
     }
 
     public static function lista(): array {
