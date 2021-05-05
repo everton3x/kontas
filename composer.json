@@ -1,0 +1,22 @@
+{
+    "name": "everton3x/kontas",
+    "description": "Gestão financeira e orçamentária na linha de comando.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Everton da Rosa",
+            "email": "everton3x@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0.3",
+        "league/climate": "@beta"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kontas\\": "src"
+        }
+    }
+}
