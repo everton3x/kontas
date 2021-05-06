@@ -23,7 +23,7 @@ try {
 //    Comando::parseArgs($climate);
     /////
     $input = $climate->input('>>>');
-//    $input->multiLine();
+    $input->multiLine();
 //    $input->defaultTo("isto é um valor padrão\n\raperte control z e enter para aplicar\n\rou quando terminar de digitar");
 //    $input = $climate->password('Senha');
 
@@ -32,7 +32,7 @@ try {
 
     $response = $input->prompt();
     print_r($response);
-    $climate->clear();
+//    $climate->clear();
     
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
