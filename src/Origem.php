@@ -45,8 +45,21 @@ class Origem {
         return $data[$index];
     }
     
-    public static function altera(int $index, string $novoNome = '', string $novaDescricao = ''): void {
+    public static function altera(int $index, ?string $novoNome = null, ?string $novaDescricao = null): void {
+        $data = self::lista();
+        if(!key_exists($index, $data)){
+            throw new Exception("Índice $index não encontrado.");
+        }
         
+        if($novoNome !== null){
+            $data[$index]['nome'] = $novoNome;
+        }
+        
+        if($novaDescricao!== null){
+            $data[$index]['descricao'] = $novaDescricao;
+        }
+        
+        self::salva($data);
     }
 
     public static function ativo(int $index, bool $ativo): void {
