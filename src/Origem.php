@@ -86,5 +86,29 @@ class Origem {
             throw new Exception("Não foi possível salvar os dados em $filename.");
         }
     }
+    
+    public static function listaAtivos(): array {
+        $data = self::lista();
+        $result = [];
+        foreach ($data as $index => $item){
+            if($item['ativo'] === true){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
+    
+    public static function listaInativos(): array {
+        $data = self::lista();
+        $result = [];
+        foreach ($data as $index => $item){
+            if($item['ativo'] === false){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
 
 }

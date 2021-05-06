@@ -13,7 +13,7 @@ $climate->description('Ativa/desativa uma origem de receita.');
 try {
     $climate->arguments->add([
         'index' => [
-            'prefix' => 'i',
+            'prefix' => 'k',
             'longPrefix' => 'index',
             'description' => 'Índice da origem da receita',
             'required' => true,
