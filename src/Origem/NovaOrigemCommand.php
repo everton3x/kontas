@@ -29,6 +29,7 @@ class NovaOrigemCommand extends \Kontas\Command\CommandAbstract {
         $this->climate->inline('Nome:')->tab()->bold()->out($record['nome']);
         $this->climate->inline('Descrição:')->tab()->bold()->out($record['descricao']);
         $this->climate->inline('Ativo:')->tab()->bold()->out($record['ativo']);
+        
     }
 
 }

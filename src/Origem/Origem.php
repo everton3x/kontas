@@ -15,6 +15,15 @@ class Origem {
     
     public function __construct() {
         $this->data = \Kontas\Json\Json::read($this->filename);
+        $this->ordena();
+    }
+    
+    protected function ordena(): void {
+        foreach ($this->data as $index => $item){
+            $nome[$index] = $item['nome'];
+            $ativo[$index] = $item['ativo'];
+        }
+        array_multisort($nome, SORT_ASC, $this->data);
     }
     
     public function adiciona(string $nome, $descricao): int {
@@ -31,14 +40,12 @@ class Origem {
             'ativo' => true
         ];
         
-        \Kontas\Json\Json::write($this->data, $this->filename);
+        $this->salvar();
         return $index;
     }
     
-    public function consulta($index): array {
-        if(key_exists($index, $this->data) === false){
-            throw new Exception("Índice não encontrado: $index");
-        }
+    public function consulta(int $index): array {
+        $this->indexExiste($index);
         
         return $this->data[$index];
     }
@@ -69,9 +76,57 @@ class Origem {
                 throw new \Exception("Campo [nome] com valor faltando na linha [$index]");
             }
             
-            if(gettype($item['ativo']) !== 'bool'){
+            if(gettype($item['ativo']) !== 'boolean'){
                 throw new \Exception("Campo [ativo] com valor não booleano na linha [$index]");
             }
         }
+    }
+    
+    public function lista(): array {
+        return $this->data;
+    }
+    
+    public function listaAtivos(): array {
+        $result = [];
+        
+        foreach ($this->data as $index => $item){
+            if($item['ativo'] === true){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
+    
+    public function listaInativos(): array {
+        $result = [];
+        
+        foreach ($this->data as $index => $item){
+            if($item['ativo'] === false){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
+    
+    protected function indexExiste(int $index): void {
+        if(key_exists($index, $this->data) === false){
+            throw new Exception("Índice não encontrado: $index");
+        }
+    }
+    public function alteraStatus(int $index, bool $ativo): void {
+        $this->indexExiste($index);
+        
+        $this->data[$index]['ativo'] = $ativo;
+        
+        $this->salvar();
+        
+    }
+    
+    protected function salvar(): void {
+        $this->valida($this->data);
+        
+        \Kontas\Json\Json::write($this->data, $this->filename);
     }
 }
