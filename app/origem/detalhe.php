@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Kontas\Origem\Command\AlteraStatusOrigemCommand;
+use Kontas\Origem\Command\DetalheOrigemCommand;
 
 try {
 
-    $cmd = new AlteraStatusOrigemCommand();
+    $cmd = new DetalheOrigemCommand();
     $cmd->execute();
 } catch (Exception $ex) {
     echo $ex->getMessage(), PHP_EOL;

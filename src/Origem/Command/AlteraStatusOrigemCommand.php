@@ -1,13 +1,16 @@
 <?php
 
-namespace Kontas\Origem;
+namespace Kontas\Origem\Command;
+
+use Kontas\Command\CommandAbstract;
+use Kontas\Origem\Origem;
 
 /**
  * Description of OrigemCommand
  *
  * @author Everton
  */
-class AlteraStatusOrigemCommand extends \Kontas\Command\CommandAbstract {
+class AlteraStatusOrigemCommand extends CommandAbstract {
 
     public function __construct() {
         parent::__construct('Altera o status da origem da receita.');
@@ -76,9 +79,9 @@ class AlteraStatusOrigemCommand extends \Kontas\Command\CommandAbstract {
         $record = $origem->consulta($index);
 
         $this->climate->flank('Registro alterado:');
-        $this->climate->inline('Nome:')->tab()->bold()->out($record['nome']);
+        $this->climate->inline('Nome:')->tab(2)->bold()->out($record['nome']);
         $this->climate->inline('Descrição:')->tab()->bold()->out($record['descricao']);
-        $this->climate->inline('Ativo:')->tab()->bold()->out($record['ativo']);
+        $this->climate->inline('Ativo:')->tab(2)->bold()->out($record['ativo']);
     }
 
 }
