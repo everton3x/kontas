@@ -4,11 +4,81 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4234f308225d9815f0c1382b5fae26ea",
+    "content-hash": "6d049dd53215a931c06fc2ed33452da7",
     "packages": [
         {
+            "name": "ergebnis/json-printer",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-printer.git",
+                "reference": "b665ccd41159094481593fd5fd2ca797582c523b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-printer/zipball/b665ccd41159094481593fd5fd2ca797582c523b",
+                "reference": "b665ccd41159094481593fd5fd2ca797582c523b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "ergebnis/license": "^1.1.0",
+                "ergebnis/php-cs-fixer-config": "^2.13.1",
+                "ergebnis/phpstan-rules": "~0.15.3",
+                "ergebnis/test-util": "^1.5.0",
+                "infection/infection": "~0.15.3",
+                "phpstan/extension-installer": "^1.1.0",
+                "phpstan/phpstan": "~0.12.84",
+                "phpstan/phpstan-deprecation-rules": "~0.12.6",
+                "phpstan/phpstan-phpunit": "~0.12.18",
+                "phpstan/phpstan-strict-rules": "~0.12.9",
+                "phpunit/phpunit": "^8.5.15",
+                "psalm/plugin-phpunit": "~0.15.1",
+                "vimeo/psalm": "^4.7.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\Printer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides a JSON printer, allowing for flexible indentation.",
+            "homepage": "https://github.com/ergebnis/json-printer",
+            "keywords": [
+                "formatter",
+                "json",
+                "printer"
+            ],
+            "support": {
+                "issues": "https://github.com/ergebnis/json-printer/issues",
+                "source": "https://github.com/ergebnis/json-printer"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-26T05:46:09+00:00"
+        },
+        {
             "name": "league/climate",
-            "version": "3.7.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/climate.git",
@@ -33,6 +103,7 @@
             "suggest": {
                 "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -182,7 +253,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "league/climate": 10
+        "league/climate": 20,
+        "ergebnis/json-printer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
