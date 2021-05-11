@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Kontas\Origem\Command\ListaOrigemCommand;
+use Kontas\CC\Command\ListaCCCommand;
 
 try {
 
-    $cmd = new ListaOrigemCommand();
+    $cmd = new ListaCCCommand();
     $cmd->execute();
 } catch (Exception $ex) {
     echo $ex->getMessage(), PHP_EOL;
