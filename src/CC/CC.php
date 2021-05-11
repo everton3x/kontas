@@ -31,7 +31,7 @@ class CC {
         array_multisort($nome, SORT_ASC, $this->data);
     }
 
-    public function adiciona(string $nome, $descricao): int {
+    public function adiciona(string $nome, string $descricao): int {
         if ($this->existe($nome)) {
             throw new Exception("Centro de custo já existe: $nome");
         }

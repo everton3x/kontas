@@ -1,23 +1,22 @@
 <?php
 
-namespace Kontas\Origem;
+namespace Kontas\CC;
 
 use Exception;
 use Kontas\Config\Config;
 use Kontas\Json\Json;
 
 /**
- * Description of Origem
  *
  * @author Everton
  */
-class Origem {
+class CC {
 
     protected string $filename;
     protected array $data;
 
     public function __construct() {
-        $this->filename = Config::getOrigemJsonFile();
+        $this->filename = Config::getCCJsonFile();
         $this->data = Json::read($this->filename);
         if (sizeof($this->data) > 0) {
             $this->ordena();
@@ -32,9 +31,9 @@ class Origem {
         array_multisort($nome, SORT_ASC, $this->data);
     }
 
-    public function adiciona(string $nome, string $descricao): int {
+    public function adiciona(string $nome, $descricao): int {
         if ($this->existe($nome)) {
-            throw new Exception("Origem já existe: $nome");
+            throw new Exception("Centro de custo já existe: $nome");
         }
 
         $index = array_key_last($this->data);
