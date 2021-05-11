@@ -23,4 +23,8 @@ class Config {
     public static function getMPJsonFile(): string {
         return 'data/auxiliar/mp.json';
     }
+    
+    public static function getPeriodosJsonDir(): string {
+        return 'data/periodos/';
+    }
 }

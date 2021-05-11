@@ -142,5 +142,24 @@ class MP {
 
         Json::write($this->data, $this->filename);
     }
+    
+    public function tabular(bool $todos = false): array {
+        $lista = $this->listaAtivos();
+        if($todos){
+            $lista = $this->lista();
+        }
+        
+        $tabular = [];
+        foreach ($lista as $index => $item){
+            $tabular[] = [
+                'ID' => $index,
+                'Nome' => $item['nome'],
+                'Descrição' => $item['descricao'],
+                'Ativo' => $item['ativo'],
+                'Auto-pagamento' => $item['autopagar']
+            ];
+        }
+        return $tabular;
+    }
 
 }

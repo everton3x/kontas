@@ -1,6 +1,32 @@
 {
     "periodo": "AAAAMM",
-    "receitas": [],
+    "receitas": [
+        {
+            "descricao": "Descrição da receita",
+            "origem": "origem da receita",
+            "devedor": "Nome de quem deve",
+            "cc": "Centro de custo",
+            "vencimento": "aaaammdd",
+            "agrupador": "",
+            "parcela": "1",
+            "totalParcelas": "1",
+            "previsao": [
+                {
+                    "valor": "0.00",
+                    "data": "aaaammdd",
+                    "observacao": "Uma observação opcional"
+                }
+            ],
+            "recebimento": [
+                {
+                    "valor": "0.00",
+                    "data": "aaaa-mm-dd",
+                    "observacao": "observação opcional"
+                }
+            ]
+            
+        }
+    ],
     "despesas": [],
     "saldos": [],
     "meta": {
