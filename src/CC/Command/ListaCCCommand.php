@@ -45,6 +45,11 @@ class ListaCCCommand extends CommandAbstract {
             $lista = $cc->lista();
         }
 
+        if(sizeof($lista) === 0){
+            $this->climate->info("Nada para mostrar");
+            return;
+        }
+        
         $this->climate->flank("Centros de custos cadastrados");
 
         $this->climate->table($lista);

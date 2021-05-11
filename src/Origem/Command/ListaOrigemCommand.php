@@ -46,6 +46,11 @@ class ListaOrigemCommand extends CommandAbstract {
             $lista = $origem->lista();
         }
 
+        if(sizeof($lista) === 0){
+            $this->climate->info("Nada para mostrar");
+            return;
+        }
+        
         $this->climate->flank("Origens cadastradas");
 
         $this->climate->table($lista);
