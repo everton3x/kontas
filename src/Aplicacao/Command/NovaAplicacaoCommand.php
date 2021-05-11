@@ -1,34 +1,33 @@
 <?php
 
-namespace Kontas\Origem\Command;
+namespace Kontas\Aplicacao\Command;
 
 use Kontas\Command\CommandAbstract;
-use Kontas\Origem\Origem;
+use Kontas\Aplicacao\Aplicacao;
 
 /**
- * Description of OrigemCommand
  *
  * @author Everton
  */
-class NovaOrigemCommand extends CommandAbstract {
+class NovaAplicacaoCommand extends CommandAbstract {
 
     public function __construct() {
-        parent::__construct('Inclui nova origem da receita.');
+        parent::__construct('Inclui nova aplicação da despesa.');
     }
 
     public function execute(): void {
-        $input = $this->climate->input('Nome da origem: ');
+        $input = $this->climate->input('Nome da aplicação: ');
         $nome = $input->prompt();
 
-        $input = $this->climate->input('Descrição da origem (opcional): ');
+        $input = $this->climate->input('Descrição da aplicação (opcional): ');
         $descricao = $input->prompt();
 
-        $origem = new Origem();
-        $index = $origem->adiciona($nome, $descricao);
+        $aplicacao = new Aplicacao();
+        $index = $aplicacao->adiciona($nome, $descricao);
 
-        $record = $origem->consulta($index);
+        $record = $aplicacao->consulta($index);
 
-        $this->climate->info('Origem cadastrada');
+        $this->climate->info('Aplicação cadastrada');
         $this->climate->inline('Nome:')->tab(2)->bold()->out($record['nome']);
         $this->climate->inline('Descrição:')->tab()->bold()->out($record['descricao']);
         $this->climate->inline('Ativo:')->tab(2)->bold()->out($record['ativo']);

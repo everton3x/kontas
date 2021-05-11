@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Kontas\Origem\Command\NovaOrigemCommand;
+use Kontas\Aplicacao\Command\NovaAplicacaoCommand;
 
 try {
 
-    $cmd = new NovaOrigemCommand();
+    $cmd = new NovaAplicacaoCommand();
     $cmd->execute();
 } catch (Exception $ex) {
     echo $ex->getMessage(), PHP_EOL;

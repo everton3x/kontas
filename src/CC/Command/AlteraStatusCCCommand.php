@@ -69,7 +69,7 @@ class AlteraStatusCCCommand extends CommandAbstract {
                 $ativo = false;
                 break;
             default :
-                $this->climate->error("A opção [$choice] não é vãlida.");
+                $this->climate->error("A opção [$choice] não é válida.");
                 exit();
         }
 

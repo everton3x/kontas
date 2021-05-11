@@ -1,34 +1,34 @@
 <?php
 
-namespace Kontas\CC\Command;
+namespace Kontas\MP\Command;
 
 use Kontas\Command\CommandAbstract;
-use Kontas\CC\CC;
+use Kontas\MP\MP;
 
 /**
  *
  * @author Everton
  */
-class DetalheCCCommand extends CommandAbstract {
+class DetalheMPCommand extends CommandAbstract {
 
     public function __construct() {
-        parent::__construct('Mostra detalhes do centro de custos.');
+        parent::__construct('Mostra detalhes do meio de pagamento.');
     }
 
     public function execute(): void {
 
-        $cc = new CC();
+        $mp = new MP();
         $ativos = [];
         $inativos = [];
 
-        foreach ($cc->listaAtivos() as $index => $item) {
+        foreach ($mp->listaAtivos() as $index => $item) {
             $ativos[] = [
                 'Id' => $index,
                 'Nome' => $item['nome']
             ];
         }
 
-        foreach ($cc->listaInativos() as $index => $item) {
+        foreach ($mp->listaInativos() as $index => $item) {
             $inativos[] = [
                 'Id' => $index,
                 'Nome' => $item['nome']
@@ -49,10 +49,11 @@ class DetalheCCCommand extends CommandAbstract {
         $input = $this->climate->input('>>>');
         $index = $input->prompt();
 
-        $record = $cc->consulta($index);
+        $record = $mp->consulta($index);
         $this->climate->flank('Detalhes do registro:');
         $this->climate->inline('Nome:')->tab(2)->bold()->out($record['nome']);
         $this->climate->inline('Descrição:')->tab()->bold()->out($record['descricao']);
+        $this->climate->inline('Auto-pagamento:')->tab()->bold()->out($record['autopagar']);
         $this->climate->inline('Ativo:')->tab(2)->bold()->out($record['ativo']);
     }
 

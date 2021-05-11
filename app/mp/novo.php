@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Kontas\Aplicacao\Command\ListaAplicacaoCommand;
+use Kontas\MP\Command\NovoMPCommand;
 
 try {
 
-    $cmd = new ListaAplicacaoCommand();
+    $cmd = new NovoMPCommand();
     $cmd->execute();
 } catch (Exception $ex) {
     echo $ex->getMessage(), PHP_EOL;

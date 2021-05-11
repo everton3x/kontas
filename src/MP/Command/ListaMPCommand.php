@@ -1,18 +1,18 @@
 <?php
 
-namespace Kontas\CC\Command;
+namespace Kontas\MP\Command;
 
 use Kontas\Command\CommandAbstract;
-use Kontas\CC\CC;
+use Kontas\MP\MP;
 
 /**
  *
  * @author Everton
  */
-class ListaCCCommand extends CommandAbstract {
+class ListaMPCommand extends CommandAbstract {
 
     public function __construct() {
-        parent::__construct('Lista os centros de custos cadastrados.', [
+        parent::__construct('Lista os meios de pagamento cadastrados.', [
             'ativos' => [
                 'prefix' => 'a',
                 'longPrefix' => 'ativos',
@@ -29,20 +29,20 @@ class ListaCCCommand extends CommandAbstract {
     }
 
     public function execute(): void {
-        $cc = new CC();
+        $mp = new MP();
 
-        $lista = $cc->lista();
+        $lista = $mp->lista();
 
         if ($this->climate->arguments->get('ativos')) {
-            $lista = $cc->listaAtivos();
+            $lista = $mp->listaAtivos();
         }
 
         if ($this->climate->arguments->get('inativos')) {
-            $lista = $cc->listaInativos();
+            $lista = $mp->listaInativos();
         }
 
         if ($this->climate->arguments->get('ativos') && $this->climate->arguments->get('inativos')) {
-            $lista = $cc->lista();
+            $lista = $mp->lista();
         }
 
         if(sizeof($lista) === 0){
@@ -50,7 +50,7 @@ class ListaCCCommand extends CommandAbstract {
             return;
         }
         
-        $this->climate->flank("Centros de custos cadastrados");
+        $this->climate->flank("Meios de pagamento cadastrados");
 
         $this->climate->table($lista);
     }

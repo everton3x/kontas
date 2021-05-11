@@ -1,82 +1,50 @@
 [
     {
-        "nome": "Arthur",
+        "nome": "Agendamento",
+        "descricao": "Agendamento em conta corrente",
+        "autopagar": false,
+        "ativo": true
+    },
+    {
+        "nome": "Boleto",
         "descricao": "",
+        "autopagar": false,
         "ativo": true
     },
     {
-        "nome": "Beatriz",
+        "nome": "Cheque",
         "descricao": "",
+        "autopagar": false,
         "ativo": true
     },
     {
-        "nome": "Casa",
+        "nome": "Credito",
+        "descricao": "Cartao de credito",
+        "autopagar": false,
+        "ativo": true
+    },
+    {
+        "nome": "Debito",
+        "descricao": "Cartao de debito",
+        "autopagar": true,
+        "ativo": true
+    },
+    {
+        "nome": "Dinheiro",
+        "descricao": "Pagamento em especie",
+        "autopagar": true,
+        "ativo": true
+    },
+    {
+        "nome": "PIX",
         "descricao": "",
+        "autopagar": true,
         "ativo": true
     },
     {
-        "nome": "Da Rosa",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Evaldi",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Everton",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Familia",
-        "descricao": "Eu, a patroa e as criancas",
-        "ativo": true
-    },
-    {
-        "nome": "Filhos",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Flavio",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "HB20S",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Inacio",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Lara Lemes",
-        "descricao": "Evaldi e Marina",
-        "ativo": true
-    },
-    {
-        "nome": "Marina",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Marlise",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Pedro Henrique",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "YBR Factor",
-        "descricao": "",
+        "nome": "Transferencia",
+        "descricao": "Transferencia bancaria tipo TED\/DOC",
+        "autopagar": true,
         "ativo": true
     }
 ]

@@ -2,11 +2,11 @@
 
 require 'vendor/autoload.php';
 
-use Kontas\Origem\Command\DetalheOrigemCommand;
+use Kontas\Aplicacao\Command\DetalheAplicacaoCommand;
 
 try {
 
-    $cmd = new DetalheOrigemCommand();
+    $cmd = new DetalheAplicacaoCommand();
     $cmd->execute();
 } catch (Exception $ex) {
     echo $ex->getMessage(), PHP_EOL;

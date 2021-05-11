@@ -1,35 +1,34 @@
 <?php
 
-namespace Kontas\Origem\Command;
+namespace Kontas\Aplicacao\Command;
 
 use Kontas\Command\CommandAbstract;
-use Kontas\Origem\Origem;
+use Kontas\Aplicacao\Aplicacao;
 
 /**
- * Description of OrigemCommand
  *
  * @author Everton
  */
-class AlteraStatusOrigemCommand extends CommandAbstract {
+class AlteraStatusAplicacaoCommand extends CommandAbstract {
 
     public function __construct() {
-        parent::__construct('Altera o status da origem da receita.');
+        parent::__construct('Altera o status da aplicação da despesa.');
     }
 
     public function execute(): void {
 
-        $origem = new Origem();
+        $aplicacao = new Aplicacao();
         $ativos = [];
         $inativos = [];
 
-        foreach ($origem->listaAtivos() as $index => $item) {
+        foreach ($aplicacao->listaAtivos() as $index => $item) {
             $ativos[] = [
                 'Id' => $index,
                 'Nome' => $item['nome']
             ];
         }
 
-        foreach ($origem->listaInativos() as $index => $item) {
+        foreach ($aplicacao->listaInativos() as $index => $item) {
             $inativos[] = [
                 'Id' => $index,
                 'Nome' => $item['nome']
@@ -50,7 +49,7 @@ class AlteraStatusOrigemCommand extends CommandAbstract {
         $input = $this->climate->input('>>>');
         $index = $input->prompt();
 
-        $record = $origem->consulta($index);
+        $record = $aplicacao->consulta($index);
         $this->climate->flank('Registro para alterar:');
         $this->climate->inline('Nome:')->tab()->bold()->out($record['nome']);
         $this->climate->inline('Descrição:')->tab()->bold()->out($record['descricao']);
@@ -70,13 +69,13 @@ class AlteraStatusOrigemCommand extends CommandAbstract {
                 $ativo = false;
                 break;
             default :
-                $this->climate->error("A opção [$choice] não é vãlida.");
+                $this->climate->error("A opção [$choice] não é válida.");
                 exit();
         }
 
-        $origem->alteraStatus($index, $ativo);
+        $aplicacao->alteraStatus($index, $ativo);
 
-        $record = $origem->consulta($index);
+        $record = $aplicacao->consulta($index);
 
         $this->climate->flank('Registro alterado:');
         $this->climate->inline('Nome:')->tab(2)->bold()->out($record['nome']);

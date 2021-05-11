@@ -1,19 +1,18 @@
 <?php
 
-namespace Kontas\Origem\Command;
+namespace Kontas\Aplicacao\Command;
 
 use Kontas\Command\CommandAbstract;
-use Kontas\Origem\Origem;
+use Kontas\Aplicacao\Aplicacao;
 
 /**
- * Description of OrigemCommand
  *
  * @author Everton
  */
-class ListaOrigemCommand extends CommandAbstract {
+class ListaAplicacaoCommand extends CommandAbstract {
 
     public function __construct() {
-        parent::__construct('Lista as origens cadastradas.', [
+        parent::__construct('Lista as aplicações cadastradas.', [
             'ativos' => [
                 'prefix' => 'a',
                 'longPrefix' => 'ativos',
@@ -51,7 +50,7 @@ class ListaOrigemCommand extends CommandAbstract {
             return;
         }
         
-        $this->climate->flank("Origens cadastradas");
+        $this->climate->flank("Aplicações cadastradas");
 
         $this->climate->table($lista);
     }

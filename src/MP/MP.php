@@ -1,6 +1,6 @@
 <?php
 
-namespace Kontas\CC;
+namespace Kontas\MP;
 
 use Exception;
 use Kontas\Config\Config;
@@ -10,13 +10,13 @@ use Kontas\Json\Json;
  *
  * @author Everton
  */
-class CC {
+class MP {
 
     protected string $filename;
     protected array $data;
 
     public function __construct() {
-        $this->filename = Config::getCCJsonFile();
+        $this->filename = Config::getMPJsonFile();
         $this->data = Json::read($this->filename);
         if (sizeof($this->data) > 0) {
             $this->ordena();
@@ -31,9 +31,9 @@ class CC {
         array_multisort($nome, SORT_ASC, $this->data);
     }
 
-    public function adiciona(string $nome, $descricao): int {
+    public function adiciona(string $nome, string $descricao, bool $autopagar): int {
         if ($this->existe($nome)) {
-            throw new Exception("Centro de custo já existe: $nome");
+            throw new Exception("Meio de pagamento já existe: $nome");
         }
 
         $index = array_key_last($this->data);
@@ -42,6 +42,7 @@ class CC {
         $this->data[$index] = [
             'nome' => $nome,
             'descricao' => $descricao,
+            'autopagar' => $autopagar,
             'ativo' => true
         ];
 
@@ -73,6 +74,9 @@ class CC {
             if (key_exists('descricao', $item) === false) {
                 throw new Exception("Campo [descricao] faltando na linha [$index]");
             }
+            if (key_exists('autopagar', $item) === false) {
+                throw new Exception("Campo [autopagar] faltando na linha [$index]");
+            }
             if (key_exists('ativo', $item) === false) {
                 throw new Exception("Campo [ativo] faltando na linha [$index]");
             }
@@ -83,6 +87,10 @@ class CC {
 
             if (gettype($item['ativo']) !== 'boolean') {
                 throw new Exception("Campo [ativo] com valor não booleano na linha [$index]");
+            }
+            
+            if (gettype($item['autopagar']) !== 'boolean') {
+                throw new Exception("Campo [autopagar] com valor não booleano na linha [$index]");
             }
         }
     }
