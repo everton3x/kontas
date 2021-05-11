@@ -3,6 +3,7 @@
 namespace Kontas\Origem;
 
 use Exception;
+use Kontas\Config\Config;
 use Kontas\Json\Json;
 
 /**
@@ -12,12 +13,15 @@ use Kontas\Json\Json;
  */
 class Origem {
 
-    protected string $filename = 'data/auxiliar/origem.json';
+    protected string $filename;
     protected array $data;
 
     public function __construct() {
+        $this->filename = Config::getOrigemJsonFile();
         $this->data = Json::read($this->filename);
-        $this->ordena();
+        if (sizeof($this->data) > 0) {
+            $this->ordena();
+        }
     }
 
     protected function ordena(): void {

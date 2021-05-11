@@ -1,1 +1,17 @@
-[{"nome":"Di\u00e1rias","descricao":"","ativo":false},{"nome":"Indeniza\u0000\u0000es\/Restitui\u0000\u0000es","descricao":"Valores devolvidos e\/ou indenizados por compras para terceiros, empr\u0000stimos, etc.","ativo":true},{"nome":"Poupan\u0000a","descricao":"","ativo":true},{"nome":"Sal\u0000rio","descricao":"","ativo":false}]
+[
+    {
+        "nome": "Indenizacoes e restituicoes",
+        "descricao": "Devolucao de emprestimos, pagamento de compras feitas para terceiros, etc.",
+        "ativo": true
+    },
+    {
+        "nome": "Salario",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Poupanca",
+        "descricao": "Recursos retirados da poupanca",
+        "ativo": true
+    }
+]
