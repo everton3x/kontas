@@ -3,7 +3,6 @@
 namespace Kontas\Util;
 
 /**
- * Description of Number
  *
  * @author Everton
  */
