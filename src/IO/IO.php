@@ -21,6 +21,38 @@ class IO {
     }
     
     public static function choice(array $options, $default = null) {
+        $cli = new \League\CLImate\CLImate();
+        
+        $cli->info("Opções disponíveis:");
+        foreach ($options as $index => $label){
+            $cli->inline($index)->tab()->out($label);
+        }
+        
+        $cli->out('Escolha uma opção:');
+        
+        if($default !== null){
+            $cli->out("ENTER para padrão [$default]");
+        }
+        
+        $input = $cli->input('>>>');
+        
+        $response = $input->prompt();
+        
+        if(key_exists($response, $options) === false){
+            if($default !== null){
+                $response = $default;
+            }
+        }
+        
+        if(key_exists($response, $options) === false){
+            throw new FailException("Opção $response não reconhecida.");
+        }
+        
+        return $response;
+        
+    }
+    
+    public static function confirm(): bool {
         
     }
     

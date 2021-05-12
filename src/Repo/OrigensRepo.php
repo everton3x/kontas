@@ -89,5 +89,39 @@ class OrigensRepo {
             throw new FailException("Índice $index não existe.");
         }
     }
+    
+    public function changeStatus(int $index, bool $status): void {
+        $this->indexExist($index);
+        $this->data[$index]['ativo'] = $status;
+        $this->write();
+    }
+    
+    public function list(): array {
+        return $this->data;
+    }
+    
+    public function listAtivos(): array {
+        $result = [];
+        
+        foreach ($this->data as $index => $item){
+            if($item['ativo'] === true){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
+    
+    public function listInativos(): array {
+        $result = [];
+        
+        foreach ($this->data as $index => $item){
+            if($item['ativo'] === false){
+                $result[$index] = $item;
+            }
+        }
+        
+        return $result;
+    }
 
 }
