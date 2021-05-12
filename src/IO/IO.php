@@ -52,8 +52,10 @@ class IO {
         
     }
     
-    public static function confirm(): bool {
-        
+    public static function confirm(string $msg): bool {
+        $cli = new \League\CLImate\CLImate();
+        $input = $cli->confirm($msg);
+        return $input->confirmed();
     }
     
 }

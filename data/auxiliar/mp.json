@@ -1,50 +1,68 @@
-[
-    {
-        "nome": "Agendamento",
-        "descricao": "Agendamento em conta corrente",
-        "autopagar": false,
-        "ativo": true
-    },
-    {
-        "nome": "Boleto",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    {
-        "nome": "Cheque",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    {
-        "nome": "Credito",
-        "descricao": "Cartao de credito",
-        "autopagar": false,
-        "ativo": true
-    },
-    {
-        "nome": "Debito",
-        "descricao": "Cartao de debito",
-        "autopagar": true,
-        "ativo": true
-    },
-    {
+{
+    "1": {
         "nome": "Dinheiro",
-        "descricao": "Pagamento em especie",
+        "descricao": "Valor em especie",
         "autopagar": true,
         "ativo": true
     },
-    {
+    "2": {
+        "nome": "Cartao de Debito",
+        "descricao": "",
+        "autopagar": true,
+        "ativo": true
+    },
+    "3": {
+        "nome": "Americanas (Credito)",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "4": {
+        "nome": "Inter (Credito)",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "5": {
+        "nome": "Banricompras",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "6": {
         "nome": "PIX",
         "descricao": "",
         "autopagar": true,
         "ativo": true
     },
-    {
-        "nome": "Transferencia",
-        "descricao": "Transferencia bancaria tipo TED\/DOC",
+    "7": {
+        "nome": "Cheque",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "8": {
+        "nome": "TED",
+        "descricao": "",
         "autopagar": true,
         "ativo": true
+    },
+    "9": {
+        "nome": "Agendamento Banrisul",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "10": {
+        "nome": "Agendamento Inter",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    "11": {
+        "nome": "Agendamento CEF",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
     }
-]
+}
