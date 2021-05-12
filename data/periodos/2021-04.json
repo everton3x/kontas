@@ -1,12 +1,12 @@
 {
-    "periodo": "202105",
+    "periodo": "2021-04",
     "receitas": [
         {
             "descricao": "teste",
             "origem": "Salario",
             "devedor": "everton",
             "cc": "Everton",
-            "vencimento": "2021-05-30",
+            "vencimento": "2021-04-30",
             "agrupador": "",
             "parcela": 1,
             "totalParcelas": 1,
@@ -23,7 +23,7 @@
             "origem": "Poupanca",
             "devedor": "pedro",
             "cc": "Evaldi",
-            "vencimento": "2021-05-30",
+            "vencimento": "2021-04-30",
             "agrupador": "",
             "parcela": 1,
             "totalParcelas": 1,
@@ -39,6 +39,6 @@
     "despesas": [],
     "saldos": [],
     "meta": {
-        "aberto": "true"
+        "aberto": "false"
     }
 }

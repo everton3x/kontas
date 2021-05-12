@@ -1,17 +1,27 @@
-[
-    {
-        "nome": "Indenizacoes e restituicoes",
-        "descricao": "Devolucao de emprestimos, pagamento de compras feitas para terceiros, etc.",
-        "ativo": true
-    },
-    {
+{
+    "1": {
         "nome": "Salario",
         "descricao": "",
         "ativo": true
     },
-    {
+    "2": {
+        "nome": "Indenizacoes e restituicoes",
+        "descricao": "Devolucao de emprestimos, gastos com compras para terceiros, etc.",
+        "ativo": true
+    },
+    "3": {
+        "nome": "Diarias",
+        "descricao": "",
+        "ativo": true
+    },
+    "4": {
         "nome": "Poupanca",
-        "descricao": "Recursos retirados da poupanca",
+        "descricao": "",
+        "ativo": true
+    },
+    "5": {
+        "nome": "Vendas",
+        "descricao": "Vendas de bens, produtos ou servicos",
         "ativo": true
     }
-]
+}
