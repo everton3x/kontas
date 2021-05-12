@@ -18,14 +18,11 @@ class OrigemIO {
         $data = $this->repo->record($index);
         $cli = new \League\CLImate\CLImate();
         
-        $cli->out('Nome:');
-        $cli->bold()->green()->out($data['nome']);
+        $cli->inline('Nome:')->tab(2)->bold()->green()->out($data['nome']);
         
-        $cli->out('Descrição:');
-        $cli->bold()->green()->out($data['descricao']);
+        $cli->inline('Descrição:')->tab()->bold()->green()->out($data['descricao']);
         
-        $cli->out('Ativo:');
-        $cli->bold()->green()->out($data['ativo']);
+        $cli->inline('Ativo:')->tab(2)->bold()->green()->out($data['ativo']);
     }
     
     public function select(?bool $status = null): int {
