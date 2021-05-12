@@ -29,6 +29,7 @@ try {
     }
 
     $lista = $repo->listInativos();
+    $nome = [];
     foreach ($lista as $key => $value) {
         $nome[$key] = $value['nome'];
     }
