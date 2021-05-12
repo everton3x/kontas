@@ -1,6 +1,8 @@
 <?php
 
 use Kontas\Exception\FailException;
+use Kontas\IO\OrigemIO;
+use Kontas\Repo\OrigensRepo;
 use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
@@ -10,8 +12,8 @@ try{
     
     $cli->info('Mostra detalhes de uma origem da receita...');
     
-    $repo = new Kontas\Repo\OrigensRepo();
-    $io = new Kontas\IO\OrigemIO($repo);
+    $repo = new OrigensRepo();
+    $io = new OrigemIO($repo);
     
     $index = $io->select();
     $io->detail($index);

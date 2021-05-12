@@ -1,9 +1,6 @@
 <?php
 
 use Kontas\Exception\FailException;
-use Kontas\IO\IO;
-use Kontas\IO\OrigemIO;
-use Kontas\Repo\OrigensRepo;
 use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
@@ -11,19 +8,12 @@ require 'vendor/autoload.php';
 try{
     $cli = new CLImate();
     
-    $cli->info('Altera o status de uma origem da receita...');
+    $cli->info('Mostra detalhes de uma aplicação da despesa...');
     
-    $repo = new OrigensRepo();
-    $io = new OrigemIO($repo);
+    $repo = new Kontas\Repo\AplicacoesRepo();
+    $io = new Kontas\IO\AplicacaoIO($repo);
     
     $index = $io->select();
-    $io->detail($index);
-    
-    $status = IO::choice([1=>'Ativo', 0=>'Inativo']);
-    
-    $repo->changeStatus($index, $status);
-    
-    $cli->info("Registro salvo.");
     $io->detail($index);
     
     

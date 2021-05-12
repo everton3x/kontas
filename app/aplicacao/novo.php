@@ -1,9 +1,9 @@
 <?php
 
 use Kontas\Exception\FailException;
+use Kontas\IO\AplicacaoIO;
 use Kontas\IO\IO;
-use Kontas\IO\OrigemIO;
-use Kontas\Repo\OrigensRepo;
+use Kontas\Repo\AplicacoesRepo;
 use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
@@ -11,7 +11,7 @@ require 'vendor/autoload.php';
 try{
     $cli = new CLImate();
     
-    $cli->info('Cadastrando nova origem da receita...');
+    $cli->info('Cadastrando nova aplicação da despesa...');
     
     $nome = IO::input('Nome:');
     $descricao = IO::input('Descrição (opcional):');
@@ -21,12 +21,12 @@ try{
         throw new FailException('Nome é obrigatório.');
     }
     
-    $repo = new OrigensRepo();
+    $repo = new AplicacoesRepo();
     $index = $repo->add($nome, $descricao, $ativo);
     
     $cli->info("Registro salvo.");
     
-    $io = new OrigemIO($repo);
+    $io = new AplicacaoIO($repo);
     $io->detail($index);
     
 } catch (FailException $ex) {

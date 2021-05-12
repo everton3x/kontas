@@ -1,52 +1,17 @@
-[
-    {
-        "nome": "Agua e esgoto",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Energia eletrica",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Financiamento",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Internet",
-        "descricao": "",
-        "ativo": true
-    },
-    {
+{
+    "1": {
         "nome": "Mercado",
-        "descricao": "",
+        "descricao": "Despesas com produtos de mercado, padarias, etc.",
         "ativo": true
     },
-    {
-        "nome": "Plano de saude",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Tarifas bancarias",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Telefone",
-        "descricao": "",
-        "ativo": true
-    },
-    {
-        "nome": "Vestuario",
-        "descricao": "Roupas, calcados e acessorios",
-        "ativo": true
-    },
-    {
+    "2": {
         "nome": "Farmacia",
-        "descricao": "Medicamentos e outros itens de farmacia",
+        "descricao": "Despesas com medicamentos e outros itens de farmacia",
+        "ativo": true
+    },
+    "3": {
+        "nome": "Combustivel",
+        "descricao": "",
         "ativo": true
     }
-]
+}

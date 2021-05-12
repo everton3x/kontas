@@ -1,8 +1,6 @@
 <?php
 
 use Kontas\Exception\FailException;
-use Kontas\IO\OrigemIO;
-use Kontas\Repo\OrigensRepo;
 use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
@@ -10,10 +8,10 @@ require 'vendor/autoload.php';
 try {
     $cli = new CLImate();
 
-    $cli->info('Mostra a lista de origens da receita...');
+    $cli->info('Mostra a lista de aplicações da despesa...');
 
-    $repo = new OrigensRepo();
-    $io = new OrigemIO($repo);
+    $repo = new Kontas\Repo\AplicacoesRepo();
+    $io = new Kontas\IO\AplicacaoIO($repo);
 
     $lista = $repo->listAtivos();
     foreach ($lista as $key => $value) {

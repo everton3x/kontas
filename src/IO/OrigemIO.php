@@ -2,21 +2,24 @@
 
 namespace Kontas\IO;
 
+use Kontas\Repo\OrigensRepo;
+use League\CLImate\CLImate;
+
 /**
  * Description of OrigemIO
  *
  * @author Everton
  */
 class OrigemIO {
-    protected \Kontas\Repo\OrigensRepo $repo;
+    protected OrigensRepo $repo;
     
-    public function __construct(\Kontas\Repo\OrigensRepo $repo) {
+    public function __construct(OrigensRepo $repo) {
         $this->repo = $repo;
     }
     
     public function detail(int $index): void {
         $data = $this->repo->record($index);
-        $cli = new \League\CLImate\CLImate();
+        $cli = new CLImate();
         
         $cli->inline('Nome:')->tab(2)->bold()->green()->out($data['nome']);
         
