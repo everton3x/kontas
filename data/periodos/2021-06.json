@@ -1,0 +1,13 @@
+{
+    "periodo": "2021-06",
+    "receitas": [],
+    "despesas": [],
+    "saldos": {
+        "periodo": 0,
+        "anterior": 0,
+        "final": 0
+    },
+    "meta": {
+        "aberto": true
+    }
+}

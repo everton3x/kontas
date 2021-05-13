@@ -3,6 +3,7 @@
 use Kontas\Exception\FailException;
 use Kontas\IO\IO;
 use Kontas\IO\PeriodoIO;
+use Kontas\Recordset\PeriodoRecord;
 use Kontas\Util\Periodo;
 use League\CLImate\CLImate;
 
@@ -11,19 +12,15 @@ require 'vendor/autoload.php';
 try{
     $cli = new CLImate();
     
-    $cli->info('Cria um novo período...');
+    $cli->info('Mostra um resumo do período...');
     
     $periodo = IO::input('Período [MMAAAA]:');
-    $copiar = IO::input('Período para copiar (opcional) [MMAAAA]:');
     
-    if(mb_strlen($copiar) > 0){
-        //@todo
-    }
     
     $periodo = Periodo::parseInput($periodo);
-    $rs = Periodo::criar($periodo);
+    $rs = new PeriodoRecord($periodo);
     $io = new PeriodoIO($rs);
-    $cli->info("Período salvo.");
+    $cli->info("Resumo");
     $io->resume();
     
     

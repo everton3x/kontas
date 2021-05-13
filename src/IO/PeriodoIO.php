@@ -16,13 +16,14 @@ class PeriodoIO {
         $this->rs = $rs;
     }
     
-    public function detail(): void {
+    public function resume(): void {
         $cli = new CLImate();
         
         $cli->inline('Periodo:')->tab()->bold()->green()->out($this->rs->format());
         //@todo
-        //total de receita prevista, arrecadada e saldo
-        //total de despesa prevista, arrecadada e saldo
+        $cli->inline('Item')->tab()->inline('Previsto')->tab()->inline('Executado')->tab()->inline('Saldo')->br();
+        $cli->inline('Receita')->tab()->inline($this->rs->receitaPrevistaTotal(true))->tab()->inline($this->rs->receitaRecebidaTotal(true))->tab()->inline($this->rs->receitaAReceberTotal(true))->br();
+        $cli->inline('Despesa')->tab()->inline('0,00')->tab()->inline('0,00')->tab()->inline('0,00')->br();
         //saldos
         //aberto/fechado
         

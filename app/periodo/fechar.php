@@ -11,19 +11,16 @@ require 'vendor/autoload.php';
 try{
     $cli = new CLImate();
     
-    $cli->info('Cria um novo período...');
+    $cli->info('Fecha um período...');
     
     $periodo = IO::input('Período [MMAAAA]:');
-    $copiar = IO::input('Período para copiar (opcional) [MMAAAA]:');
     
-    if(mb_strlen($copiar) > 0){
-        //@todo
-    }
     
     $periodo = Periodo::parseInput($periodo);
-    $rs = Periodo::criar($periodo);
+    $rs = new \Kontas\Recordset\PeriodoRecord($periodo);
+    $rs->fechar();
     $io = new PeriodoIO($rs);
-    $cli->info("Período salvo.");
+    $cli->info("Período fechado.");
     $io->resume();
     
     

@@ -39,6 +39,6 @@
     "despesas": [],
     "saldos": [],
     "meta": {
-        "aberto": "true"
+        "aberto": true
     }
 }
