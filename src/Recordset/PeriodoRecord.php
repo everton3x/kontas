@@ -114,4 +114,22 @@ class PeriodoRecord {
                 throw new FailException("Valor de meta.aberto é inválido: {$this->data['meta']['aberto']}");
         }
     }
+    
+    public function reabrir(): void {
+        if($this->aberto() === true){
+            $atual = $this->format();
+            throw new FailException("Não é possível reabrir [$atual] porque ele já está aberto.");
+        }
+        
+        $posterior = new PeriodoRecord(Periodo::posterior($this->periodo));
+        if($posterior->aberto() === false){
+            $posterior = $posterior->format();
+            $atual = $this->format();
+            throw new FailException("Não é possível reabrir [$atual] porque [$posterior] ainda está fechado.");
+        }
+        
+        $this->data['meta']['aberto'] = true;
+        
+        $this->salvar();
+    }
 }
