@@ -24,4 +24,28 @@ class PeriodosRepo {
         
         return $periodos;
     }
+    
+    public function listaAbertos(): array {
+        $lista = $this->lista();
+        $abertos = [];
+        foreach ($lista as $periodo => $instancia){
+            if($instancia->aberto()){
+                $abertos[$periodo] = $instancia;
+            }
+        }
+        
+        return $abertos;
+    }
+    
+    public function listaFechados(): array {
+        $lista = $this->lista();
+        $fechados = [];
+        foreach ($lista as $periodo => $instancia){
+            if($instancia->aberto() === false){
+                $fechados[$periodo] = $instancia;
+            }
+        }
+        
+        return $fechados;
+    }
 }
