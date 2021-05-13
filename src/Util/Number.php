@@ -8,14 +8,14 @@ namespace Kontas\Util;
  */
 class Number {
     public static function format($number): string {
-        $formatado = number_format($number, 2, ',', '.');
+        $formatado = '<green>'.number_format($number, 2, ',', '.').'</green>';
         
         if($number == 0){
             $formatado = '-';
         }
         
         if($number < 0){
-            $formatado = '('.number_format($number*-1, 2, ',', '.').')';
+            $formatado = '<red>('.number_format($number*-1, 2, ',', '.').')</red>';
         }
         
         return $formatado;

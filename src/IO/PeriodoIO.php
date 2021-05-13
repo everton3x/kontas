@@ -19,37 +19,44 @@ class PeriodoIO {
     
     public function resume(): void {
         $cli = new CLImate();
+        $padding = $cli->padding(50);
         
         $cli->inline('Periodo:')
                 ->tab()->bold()->green()
                 ->out($this->rs->format());
-        //@todo
-        $cli->inline('Item')
-                ->tab(2)->inline('Previsto')
-                ->tab()->inline('Executado')
-                ->tab()->inline('Saldo')
-                ->br();
-        $cli->inline('Receita')
-                ->tab(2)->inline($this->rs->receitaPrevistaTotal(true))
-                ->tab()->inline($this->rs->receitaRecebidaTotal(true))
-                ->tab()->inline($this->rs->receitaAReceberTotal(true))
-                ->br();
-        $cli->inline('Despesa')
-                ->tab(2)->inline($this->rs->despesaPrevistaTotal(true))
-                ->tab()->inline($this->rs->despesaGastaTotal(true))
-                ->tab()->inline($this->rs->despesaAGastarTotal(true))
-                ->br();
+        
+        $cli->bold()->out('Receitas:');
+        $padding->label('Previstas:')
+                ->result($this->rs->receitaPrevistaTotal(true));
+        $padding->label('Recebidas:')
+                ->result($this->rs->receitaRecebidaTotal(true));
+        $padding->label('A Receber:')
+                ->result($this->rs->receitaAReceberTotal(true));
+        $cli->br();
+        
+        $cli->bold()->out('Despesas:');
+        $padding->label('Previstas:')
+                ->result($this->rs->despesaPrevistaTotal(true));
+        $padding->label('Gastos:')
+                ->result($this->rs->despesaGastaTotal(true));
+        $padding->label('A Gastar:')
+                ->result($this->rs->despesaAGastarTotal(true));
+        $padding->label('Paga:')
+                ->result($this->rs->despesaPagaTotal(true));
+        $padding->label('A Pagar:')
+                ->result($this->rs->despesaAPagarTotal(true));
+        $cli->br();
         
         $cli->bold()->out('Saldos');
-        $cli->inline('Anterior')
-                ->tab()->out($this->rs->saldoAnterior(true));
-        $cli->inline('Período')
-                ->tab(2)->out($this->rs->saldoPeriodo(true));
-        $cli->inline('Acumulado')
-                ->tab()->out($this->rs->saldoAcumulado(true));
+        $padding->label('Anterior')
+                ->result($this->rs->saldoAnterior(true));
+        $padding->label('Período')
+                ->result($this->rs->saldoPeriodo(true));
+        $padding->label('Acumulado')
+                ->result($this->rs->saldoAcumulado(true));
         
         $cli->bold()->inline('Aberto:')
-                ->tab(2)->out($this->rs->aberto());
+                ->tab()->out($this->rs->aberto());
         
     }
     
@@ -59,6 +66,10 @@ class PeriodoIO {
         foreach ($periodos as $periodo => $instancia){
             $cli->inline(Periodo::format($periodo))->tab()->out($instancia->aberto());
         }
+    }
+    
+    public function detalhe(): void {
+        //@todo Mostra detalhadamente todas as receitas, despesas e saldos
     }
     
 //    public function select(?bool $status = null): int {

@@ -12,7 +12,7 @@ require 'vendor/autoload.php';
 try{
     $cli = new CLImate();
     
-    $cli->info('Mostra um resumo do período...');
+    $cli->info('Mostra os detalhes do período...');
     
     $periodo = IO::input('Período [MMAAAA]:');
     
@@ -20,8 +20,8 @@ try{
     $periodo = Periodo::parseInput($periodo);
     $rs = new PeriodoRecord($periodo);
     $io = new PeriodoIO($rs);
-    $cli->info("Resumo do período");
-    $io->resume();
+    $cli->info("Detalhes do período");
+    $io->detalhe();
     
     
 } catch (FailException $ex) {
