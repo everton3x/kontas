@@ -37,7 +37,11 @@
         }
     ],
     "despesas": [],
-    "saldos": [],
+    "saldos": {
+        "periodo": "0.00",
+        "anterior": "0.00",
+        "acumulado": "0.00"
+    },
     "meta": {
         "aberto": false
     }

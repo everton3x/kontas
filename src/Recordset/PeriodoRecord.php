@@ -28,7 +28,12 @@ class PeriodoRecord {
         $this->data = Json::read($filename);
     }
     
+    protected function valida(): void {
+        
+    }
+    
     protected function salvar(): void {
+        $this->valida();
         $filename = Config::periodosJsonDir(). $this->periodo.'.json';
         Json::write($this->data, $filename);
     }
@@ -49,6 +54,85 @@ class PeriodoRecord {
                 $total += $subitem['valor'];
             }
         }
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function despesaPrevistaTotal(bool $format = false) {
+        $total = 0.0;
+        
+        //@todo
+        $total = rand(0,10000);
+        
+//        foreach ($this->data['despesas'] as $item){
+//            foreach ($item['previsao'] as $subitem){
+//                $total += $subitem['valor'];
+//            }
+//        }
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function despesaGastaTotal(bool $format = false) {
+        $total = 0.0;
+        
+        //@todo
+        $total = rand(0,10000);
+        
+//        foreach ($this->data['despesas'] as $item){
+//            foreach ($item['previsao'] as $subitem){
+//                $total += $subitem['valor'];
+//            }
+//        }
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function despesaPagaTotal(bool $format = false) {
+        $total = 0.0;
+        
+        //@todo
+        $total = rand(0,10000);
+        
+//        foreach ($this->data['despesas'] as $item){
+//            foreach ($item['previsao'] as $subitem){
+//                $total += $subitem['valor'];
+//            }
+//        }
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function despesaAGastarTotal(bool $format = false) {
+        $total = $this->despesaPrevistaTotal() - $this->despesaGastaTotal();
+        
+        
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function despesaAPagarTotal(bool $format = false) {
+        $total = $this->despesaGastaTotal() - $this->despesaPagaTotal();
         
         if($format){
             return Number::format(round($total, 2));
@@ -100,6 +184,78 @@ class PeriodoRecord {
         $this->data['meta']['aberto'] = false;
         
         $this->salvar();
+    }
+    
+    public function calculaSaldoAnterior(): void {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível calcular os saldo anterior para período fechado.');
+        }
+        
+        $anterior = new PeriodoRecord(Periodo::anterior($this->periodo));
+        $saldoAnterior = $anterior->saldoAcumulado();
+        
+        $this->data['saldos']['anterior'] = $saldoAnterior;
+        
+        $this->salvar();
+    }
+    
+    public function calculaSaldoPeriodo(): void {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível calcular os saldo do período para período fechado.');
+        }
+        
+        $receitaTotal = $this->receitaPrevistaTotal();
+        $despesaTotal = $this->despesaPrevistaTotal();
+        
+        $saldoPeriodo = $receitaTotal - $despesaTotal;
+        
+        $this->data['saldos']['periodo'] = $saldoPeriodo;
+        
+        $this->salvar();
+    }
+    
+    public function calculaSaldoAcumulado(): void {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível calcular os saldo acumulado para período fechado.');
+        }
+        
+        $saldoPeriodo = $this->saldoPeriodo();
+        $saldoAnterior = $this->saldoAnterior();
+        $saldoAcumulado = $saldoPeriodo + $saldoAnterior;
+        
+        $this->data['saldos']['acumulado'] = $saldoAcumulado;
+        
+        $this->salvar();
+    }
+    
+    public function saldoAcumulado(bool $format = false) {
+        $total = $this->data['saldos']['acumulado'];
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function saldoAnterior(bool $format = false) {
+        $total = $this->data['saldos']['anterior'];
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
+    }
+    
+    public function saldoPeriodo(bool $format = false) {
+        $total = $this->data['saldos']['periodo'];
+        
+        if($format){
+            return Number::format(round($total, 2));
+        }
+        
+        return round($total, 2);
     }
     
     public function aberto(): bool {
