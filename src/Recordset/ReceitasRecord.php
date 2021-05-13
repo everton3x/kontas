@@ -6,6 +6,6 @@ namespace Kontas\Recordset;
  *
  * @author Everton
  */
-class Despesas {
+class ReceitasRecord {
     //put your code here
 }

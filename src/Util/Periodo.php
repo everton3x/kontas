@@ -2,6 +2,13 @@
 
 namespace Kontas\Util;
 
+use DateInterval;
+use Exception;
+use Kontas\Config\Config;
+use Kontas\Exception\FailException;
+use Kontas\Json\Json;
+use Kontas\Recordset\PeriodoRecord;
+
 /**
  *
  * @author Everton
@@ -9,7 +16,7 @@ namespace Kontas\Util;
 class Periodo {
     
     public static function format(string $periodo): string {
-        $obj = date_create_from_format('Y-m', $period);
+        $obj = date_create_from_format('Y-m', $periodo);
         return $obj->format('m/Y');
     }
     
@@ -40,5 +47,47 @@ class Periodo {
         } catch (Exception $ex) {
             throw new Exception("Período [$periodo] não origina uma data válida.");
         }
+    }
+    
+    public static function criar(string $periodo, ?string $copiar = null): PeriodoRecord {
+        
+        self::testar($periodo);
+        
+        $anterior = self::anterior($periodo);
+        $anteriorJsonFile = Config::periodosJsonDir().$anterior.'.json';
+        if(file_exists($anteriorJsonFile) === false){
+            $anterior = self::format($anterior);
+            $periodo = self::format($periodo);
+            throw new FailException("Período anterior [$anterior] é requerido para criar [$periodo]: $anteriorJsonFile");
+        }
+        
+        $periodoJsonFile = Config::periodosJsonDir().$periodo.'.json';
+        
+        if(file_exists($periodoJsonFile)){
+            $periodo = self::format($periodo);
+            throw new FailException("Período [$periodo] já existe em [$periodoJsonFile]");
+        }
+        
+        $data = [
+            'periodo' => $periodo,
+            'receitas' => [],
+            'despesas' => [],
+            'saldos' => [
+                'periodo' => 0,
+                'anterior' => 0,
+                'final' => 0
+            ],
+            'meta' => [
+                'aberto' => true
+            ]
+        ];
+        
+        if($copiar !== null){
+            //@todo
+        }
+        
+        Json::write($data, $periodoJsonFile);
+        
+        return new PeriodoRecord($periodo);
     }
 }
