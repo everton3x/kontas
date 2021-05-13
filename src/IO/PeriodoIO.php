@@ -3,6 +3,7 @@
 namespace Kontas\IO;
 
 use Kontas\Recordset\PeriodoRecord;
+use Kontas\Util\Periodo;
 use League\CLImate\CLImate;
 
 /**
@@ -27,6 +28,14 @@ class PeriodoIO {
         //saldos
         //aberto/fechado
         
+    }
+    
+    public static function lista(array $periodos): void {
+        $cli = new CLImate();
+        $cli->inline('Período')->tab()->out('Aberto');
+        foreach ($periodos as $periodo => $instancia){
+            $cli->inline(Periodo::format($periodo))->tab()->out($instancia->aberto());
+        }
     }
     
 //    public function select(?bool $status = null): int {
