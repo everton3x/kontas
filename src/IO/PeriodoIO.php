@@ -72,27 +72,9 @@ class PeriodoIO {
         //@todo Mostra detalhadamente todas as receitas, despesas e saldos
     }
     
-//    public function select(?bool $status = null): int {
-//        $options = [];
-//
-//        if($status == null){
-//            foreach($this->repo->list() as $index => $item){
-//                $options[$index] = $item['nome'];
-//            }
-//        }
-//        
-//        if($status == true){
-//            foreach($this->repo->listAtivos() as $index => $item){
-//                $options[$index] = $item['nome'];
-//            }
-//        }
-//        
-//        if($status == false){
-//            foreach($this->repo->listInativos() as $index => $item){
-//                $options[$index] = $item['nome'];
-//            }
-//        }
-//        
-//        return IO::choice($options);
-//    }
+    public static function select(): string {
+        $cli = new CLImate();
+        
+        return Periodo::parseInput(IO::input('Período:'));
+    }
 }

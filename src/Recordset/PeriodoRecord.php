@@ -145,7 +145,11 @@ class PeriodoRecord {
         //@todo
         $total = 0.0;
         
-        $total = rand(0,10000);
+        foreach ($this->data['receitas'] as $item){
+            foreach ($item['recebimento'] as $subitem){
+                $total += $subitem['valor'];
+            }
+        }
         
         if($format){
             return Number::format(round($total, 2));
@@ -320,5 +324,16 @@ class PeriodoRecord {
         $this->data['receitas'][$index]['previsao'][] = $data;
         
         $this->salvar();
+    }
+    
+    public function adicionaRecebimento(int $index, array $data): void {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível adicionar recebimento de receita em período já fechado.');
+        }
+        
+        $this->data['receitas'][$index]['recebimento'][] = $data;
+        
+        $this->salvar();
+        
     }
 }

@@ -22,7 +22,18 @@
                     "observacao": "teste"
                 }
             ],
-            "recebimento": []
+            "recebimento": [
+                {
+                    "data": "2021-05-14",
+                    "valor": 6899.5,
+                    "observacao": "teste de recebimento"
+                },
+                {
+                    "data": "2021-05-14",
+                    "valor": 0.4,
+                    "observacao": ""
+                }
+            ]
         }
     },
     "despesas": [],

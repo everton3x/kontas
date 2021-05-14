@@ -50,4 +50,12 @@ class ReceitaRecord {
         ];
     }
     
+    public function novoRecebimento(string $data, float $valor, string $observacao = ''): array {
+        return [
+            'data' => $data,
+            'valor' => $valor,
+            'observacao' => $observacao
+        ];
+    }
+    
 }

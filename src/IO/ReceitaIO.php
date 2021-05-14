@@ -46,7 +46,22 @@ class ReceitaIO {
             $padding->label('Valor:')->result(Number::format($item['valor']));
             $cli->tab()->inline('Observação:')->tab()->bold()->out($item['observacao']);
         }
-        $padding->label('Total:')->result($this->rs->receitaPrevistaTotal(true));
+        $padding->label('Total Previsto:')->result($this->rs->receitaPrevistaTotal(true));
+        
+        $cli->bold()->out('Recebimentos:');
+        foreach ($data['recebimento'] as $key => $item){
+            $cli->inline('Id:')->tab()->bold()->out($key);
+            $cli->tab()->inline('Data:')->tab(2)->bold()->out(Date::format($item['data']));
+            $cli->tab();
+            $padding->label('Valor:')->result(Number::format($item['valor']));
+            $cli->tab()->inline('Observação:')->tab()->bold()->out($item['observacao']);
+        }
+        $padding->label('Total Recebido:')->result($this->rs->receitaRecebidaTotal(true));
+        
+        $cli->br();
+        
+        $padding->label('A Receber:')->result($this->rs->receitaAReceberTotal(true));
+        
         
     }
     
@@ -71,7 +86,7 @@ class ReceitaIO {
             
             $cli->bold()->inline($index)->tab()->out($item['descricao']);
             $cli->tab()->out("{$item['origem']}/{$item['devedor']}/{$item['cc']}");
-            $cli->tab()->out("{$item['agrupador']}/{$item['parcela']}/{$item['totalParcelas']}");
+            $cli->tab()->out("{$item['agrupador']} ({$item['parcela']}/{$item['totalParcelas']})");
             $cli->tab()->out("$previsto (-) $recebido (=) $saldo");
         }
         
