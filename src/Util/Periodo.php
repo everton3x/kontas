@@ -75,7 +75,7 @@ class Periodo {
             'saldos' => [
                 'periodo' => 0,
                 'anterior' => 0,
-                'final' => 0
+                'acumulado' => 0
             ],
             'meta' => [
                 'aberto' => true

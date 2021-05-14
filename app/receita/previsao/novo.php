@@ -15,62 +15,58 @@ use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
 
-try{
+try {
     $cli = new CLImate();
-    
+
     $cli->info('Cria uma nova previsão de receita...');
-    
+
     $periodo = Periodo::parseInput(IO::input('Período [MMAAAA]:'));
-    
+
     $descricao = IO::input('Descrição:');
-    
+
     $origensRepo = new OrigensRepo();
     $origemIO = new OrigemIO($origensRepo);
     $origem = $origensRepo->record($origemIO->select(true))['nome'];
-    
+
     $devedor = IO::input('Devedor:');
-    
+
     $ccRepo = new CcRepo();
     $ccIO = new CcIO($ccRepo);
     $cc = $ccRepo->record($ccIO->select(true))['nome'];
-    
+
     $vencimento = IO::input('Vencimento (opcional) [ddmmaaaa]:');
-    if(mb_strlen($vencimento) > 0){
+    if (mb_strlen($vencimento) > 0) {
         $vencimento = Date::parseInput($vencimento);
-    }else{
+    } else {
         $vencimento = Date::ultimoDiaDoMes($periodo);
     }
-    
+
     $agrupador = IO::input('Agrupador (opcional):');
-    
+
     $valor = (float) IO::input('Valor [0000.00]:');
-    
+
     $autoreceber = IO::confirm('Lançar o recebimento?');
-    
+
     $recebidoEm = null;
-    if($autoreceber){
-        throw new FailException('naõ implementado');
-        $recebidoEm = Date::parseInput(IO::input('Recebidso em [ddmmaaaa]:'));
+    if ($autoreceber) {
+        $recebidoEm = Date::parseInput(IO::input('Recebido em [ddmmaaaa]:'));
     }
-    
+
     $rsPeriodo = new PeriodoRecord($periodo);
     $rsReceita = new ReceitaRecord($rsPeriodo);
     $ioReceita = new ReceitaIO($rsPeriodo);
-    
+
     $data = $rsReceita->novaPrevisaoInicial($periodo, $descricao, $origem, $devedor, $cc, $vencimento, $agrupador, $valor, 1, 1);
-    
+
     $indexReceita = $rsPeriodo->adicionaPrevisaoReceita($data);
-    
-    if($autoreceber){
-        //@todo
+
+    if ($autoreceber) {
+        $recebimento = $rsReceita->novoRecebimento($recebidoEm, $valor, 'Recebimento automático.');
+        $rsPeriodo->adicionaRecebimento($indexReceita, $recebimento);
     }
-    
+
     $cli->info('Registro salvo:');
     $ioReceita->detalhes($indexReceita);
-    
-    
-    
-    
 } catch (FailException $ex) {
     $cli->error($ex->getMessage());
     exit($ex->getCode());

@@ -1,8 +1,12 @@
 <?php
 
 use Kontas\Exception\FailException;
+use Kontas\IO\IO;
 use Kontas\IO\PeriodoIO;
+use Kontas\IO\ReceitaIO;
 use Kontas\Recordset\PeriodoRecord;
+use Kontas\Recordset\ReceitaRecord;
+use Kontas\Util\Date;
 use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
@@ -15,17 +19,17 @@ try{
     $periodo = PeriodoIO::select();
     $rsPeriodo = new PeriodoRecord($periodo);
     
-    $ioReceita = new Kontas\IO\ReceitaIO($rsPeriodo);
+    $ioReceita = new ReceitaIO($rsPeriodo);
     $indexReceita = $ioReceita->select();
     
-    $data = \Kontas\IO\IO::input('Data [ddmmaaaa]:');
-    $data = Kontas\Util\Date::parseInput($data);
+    $data = IO::input('Data [ddmmaaaa]:');
+    $data = Date::parseInput($data);
     
-    $valor = \Kontas\IO\IO::input('Valor [0000.00]:');
+    $valor = IO::input('Valor [0000.00]:');
     
-    $observacao = \Kontas\IO\IO::input('Observação (opcional):');
+    $observacao = IO::input('Observação (opcional):');
     
-    $rsReceita = new \Kontas\Recordset\ReceitaRecord();
+    $rsReceita = new ReceitaRecord();
     
     $recebimento = $rsReceita->novoRecebimento($data, $valor, $observacao);
     
