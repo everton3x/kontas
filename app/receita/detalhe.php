@@ -1,18 +1,23 @@
 <?php
 
 use Kontas\Exception\FailException;
+use Kontas\IO\IO;
 use Kontas\IO\ReceitaIO;
 use Kontas\Recordset\PeriodoRecord;
 use Kontas\Recordset\ReceitaRecord;
+use Kontas\Util\Periodo;
+use League\CLImate\CLImate;
 
 require 'vendor/autoload.php';
 
 try{
-    $rsPeriodo = new PeriodoRecord('2021-06');
+    $cli = new CLImate();
+    $periodo = IO::input('Período:');
+    $rsPeriodo = new PeriodoRecord(Periodo::parseInput($periodo));
     $rsReceita = new ReceitaRecord($rsPeriodo);
     $ioReceita = new ReceitaIO($rsPeriodo);
     
-    $ioReceita->detalhes(1);
+    $ioReceita->detalhes($ioReceita->select());
     
     
     
