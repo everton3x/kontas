@@ -288,4 +288,23 @@ class PeriodoRecord {
         
         $this->salvar();
     }
+    
+    public function adicionaPrevisaoReceita(array $data): int {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível adicionar previsão de receita em período já fechado.');
+        }
+        
+        $index = array_key_last($this->data['receitas']);
+        $index++;
+        
+        $this->data['receitas'][$index] = $data;
+        
+        $this->salvar();
+        
+        return $index;
+    }
+    
+    public function receitas(): array {
+        return $this->data['receitas'];
+    }
 }

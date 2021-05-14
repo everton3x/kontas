@@ -1,6 +1,24 @@
 {
     "periodo": "2021-06",
-    "receitas": [],
+    "receitas": {
+        "1": {
+            "descricao": "testes",
+            "origem": "Salario",
+            "devedor": "pm",
+            "cc": "Everton",
+            "vencimento": "2021-06-30",
+            "agrupador": "afaafa",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 7000,
+                    "data": "2021-05-14",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ]
+        }
+    },
     "despesas": [],
     "saldos": {
         "periodo": "0.00",
