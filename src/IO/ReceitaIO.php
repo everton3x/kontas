@@ -50,5 +50,39 @@ class ReceitaIO {
         
     }
     
+    public function select(): int {
+        $receitas = $this->rs->receitas();
+        $cli = new CLImate();
+        
+        foreach ($receitas as $index => $item){
+            $previsto = 0;
+            foreach ($item['previsao'] as $previsao){
+                $previsto += $previsao['valor'];
+            }
+            
+            $recebido = 0;
+            foreach ($item['recebimento'] as $recebimento){
+                $recebido += $recebimento['valor'];
+            }
+            
+            $saldo = Number::format($previsto - $recebido);
+            $previsto = Number::format($previsto);
+            $recebido = Number::format($recebido);
+            
+            $cli->bold()->inline($index)->tab()->out($item['descricao']);
+            $cli->tab()->out("{$item['origem']}/{$item['devedor']}/{$item['cc']}");
+            $cli->tab()->out("{$item['agrupador']}/{$item['parcela']}/{$item['totalParcelas']}");
+            $cli->tab()->out("$previsto (-) $recebido (=) $saldo");
+        }
+        
+        $index = IO::input('Escolha uma receita:');
+        
+        if(key_exists($index, $receitas) === false){
+            throw new FailException("Índice [$index] não encontrado.");
+        }
+        
+        return $index;
+    }
+    
     
 }

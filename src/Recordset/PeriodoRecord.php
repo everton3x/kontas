@@ -307,4 +307,18 @@ class PeriodoRecord {
     public function receitas(): array {
         return $this->data['receitas'];
     }
+    
+    public function atualizaPrevisaoReceita(int $index, array $data): void {
+        if($this->aberto() === false){
+            throw new FailException('Não é possível modificar previsão de receita em período já fechado.');
+        }
+        
+        if(key_exists($index, $this->data['receitas']) === false){
+            throw new FailException("Índice de receita [$index] não encontrado.");
+        }
+        
+        $this->data['receitas'][$index]['previsao'][] = $data;
+        
+        $this->salvar();
+    }
 }

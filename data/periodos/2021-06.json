@@ -15,8 +15,14 @@
                     "valor": 7000,
                     "data": "2021-05-14",
                     "observacao": "Previs\u00e3o inicial"
+                },
+                {
+                    "data": "2021-05-14",
+                    "valor": -100,
+                    "observacao": "teste"
                 }
-            ]
+            ],
+            "recebimento": []
         }
     },
     "despesas": [],

@@ -35,10 +35,19 @@ class ReceitaRecord {
                 'valor' => $valor,
                 'data' => date('Y-m-d'),
                 'observacao' => 'Previsão inicial'
-            ]]
+            ]],
+            'recebimento' => []
         ];
         
         return $data;
+    }
+    
+    public function novaAlteracaoPrevisao(float $valor, string $observacao = ''): array {
+        return [
+            'data' => date('Y-m-d'),
+            'valor' => $valor,
+            'observacao' => $observacao
+        ];
     }
     
 }
