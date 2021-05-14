@@ -32,8 +32,31 @@
                     "data": "2021-05-14",
                     "valor": 0.4,
                     "observacao": ""
+                },
+                {
+                    "data": "2021-05-14",
+                    "valor": -100.4,
+                    "observacao": ""
                 }
             ]
+        },
+        "2": {
+            "descricao": "teste de valida\u0000\u0000o",
+            "origem": "Diarias",
+            "devedor": "everton",
+            "cc": "Familia",
+            "vencimento": "2021-06-30",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 12456.68,
+                    "data": "2021-05-14",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": []
         }
     },
     "despesas": [],
