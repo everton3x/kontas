@@ -19,7 +19,7 @@ class PeriodoIO {
     
     public function resume(): void {
         $cli = new CLImate();
-        $padding = $cli->padding(50);
+        $padding = $cli->padding(40);
         
         $cli->inline('Periodo:')
                 ->tab()->bold()->green()
