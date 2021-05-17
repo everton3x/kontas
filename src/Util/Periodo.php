@@ -90,4 +90,9 @@ class Periodo {
         
         return new PeriodoRecord($periodo);
     }
+    
+    public static function existe(string $periodo): bool {
+        $periodoJsonFile = Config::periodosJsonDir().$periodo.'.json';
+        return file_exists($periodoJsonFile);
+    }
 }

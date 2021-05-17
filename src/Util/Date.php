@@ -2,6 +2,8 @@
 
 namespace Kontas\Util;
 
+use DateInterval;
+
 /**
  *
  * @author Everton
@@ -22,8 +24,8 @@ class Date {
     }
     
     public static function proximoVencimento(string $date): string {
-        $obj = date_create_from_format('y-m-d', $date);
-        $obj->add(new \DateInterval('P1M'));
+        $obj = date_create_from_format('Y-m-d', $date);
+        $obj->add(new DateInterval('P1M'));
         return $obj->format('Y-m-d');
     }
     

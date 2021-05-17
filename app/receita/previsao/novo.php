@@ -67,6 +67,38 @@ try {
 
     $cli->info('Registro salvo:');
     $ioReceita->detalhes($indexReceita);
+
+    $repetir = IO::confirm("Deseja repetir para a próxima competência?");
+    if ($repetir) {
+        $loop = IO::input('Quantos meses mais?');
+        if (is_numeric($loop) === false) {
+            throw new FailException("Deves fornecer um número: $loop");
+        }
+        if ($loop <= 0) {
+            throw new FailException("Deves fornecer um número maior que zero: $loop");
+        }
+
+        for ($i = 0; $i < $loop; $i++) {
+            $periodo = Periodo::posterior($periodo);
+            $vencimento = Date::proximoVencimento($vencimento);
+
+            if (Periodo::existe($periodo)) {
+                $rsPeriodo = new PeriodoRecord($periodo);
+            } else {
+                $rsPeriodo = Periodo::criar($periodo);
+            }
+
+            $rsReceita = new ReceitaRecord($rsPeriodo);
+            $ioReceita = new ReceitaIO($rsPeriodo);
+
+            $data = $rsReceita->novaPrevisaoInicial($periodo, $descricao, $origem, $devedor, $cc, $vencimento, $agrupador, $valor, 1, 1);
+
+            $indexReceita = $rsPeriodo->adicionaPrevisaoReceita($data);
+
+            $cli->info('Registro salvo:');
+            $ioReceita->detalhes($indexReceita);
+        }
+    }
 } catch (FailException $ex) {
     $cli->error($ex->getMessage());
     exit($ex->getCode());
