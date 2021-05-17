@@ -19,6 +19,10 @@ class Config {
         return 'data/auxiliar/aplicacao.json';
     }
     
+    public static function projetoJsonFile(): string {
+        return 'data/auxiliar/projeto.json';
+    }
+    
     public static function mpJsonFile(): string {
         return 'data/auxiliar/mp.json';
     }

@@ -29,7 +29,8 @@
     "despesas": [
         {
             "descricao": "Descrição da despesa",
-            "aplicacao": "aplicação da receita",
+            "aplicacao": "aplicação da despesa",
+            "projeto": "projeto da despesa",
             "agrupador": "",
             "parcela": "1",
             "totalParcelas": "1",
