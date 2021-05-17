@@ -14,12 +14,13 @@ class DespesaRecord {
         $this->periodo = $periodo;
     }
 
-    public function novaPrevisaoInicial(string $periodo, string $descricao, string $aplicacao, string $agrupador, float $valor, int $parcela, int $totalParcelas): array {
+    public function novaPrevisaoInicial(string $periodo, string $descricao, string $aplicacao, string $projeto, string $agrupador, float $valor, int $parcela, int $totalParcelas): array {
         
         return  [
             'descricao' => $descricao,
             'aplicacao' => $aplicacao,
             'agrupador' => $agrupador,
+            'projeto' => $projeto,
             'parcela' => $parcela,
             'totalParcelas' => $totalParcelas,
             'previsao' => [[

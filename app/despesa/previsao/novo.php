@@ -24,6 +24,10 @@ try {
     $aplicacoesRepo = new AplicacoesRepo();
     $aplicacoesIO = new AplicacaoIO($aplicacoesRepo);
     $aplicacao = $aplicacoesRepo->record($aplicacoesIO->select(true))['nome'];
+    
+    $projetosRepo = new Kontas\Repo\ProjetosRepo();
+    $projetoIO = new Kontas\IO\ProjetoIO($projetosRepo);
+    $projeto = $projetosRepo->record($projetoIO->select(true))['nome'];
 
     $agrupador = IO::input('Agrupador (opcional):');
 
@@ -33,7 +37,7 @@ try {
     $rsDespesa = new DespesaRecord($rsPeriodo);
     $ioDespesa = new DespesaIO($rsPeriodo);
 
-    $data = $rsDespesa->novaPrevisaoInicial($periodo, $descricao, $aplicacao, $agrupador, $valor, 1, 1);
+    $data = $rsDespesa->novaPrevisaoInicial($periodo, $descricao, $aplicacao, $projeto, $agrupador, $valor, 1, 1);
 
     $indexDespesa = $rsPeriodo->adicionaPrevisaoDespesa($data);
 

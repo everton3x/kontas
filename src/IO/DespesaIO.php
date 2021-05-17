@@ -33,6 +33,7 @@ class DespesaIO {
         $cli->inline('Período:')->tab(2)->bold()->out($this->rs->format());
         $cli->inline('Descrição:')->tab(2)->bold()->out($data['descricao']);
         $cli->inline('Aplicação:')->tab(3)->bold()->out($data['aplicacao']);
+        $cli->inline('Projeto:')->tab(3)->bold()->out($data['projeto']);
         $cli->inline('Agrupador:')->tab(2)->bold()->out($data['agrupador']);
         $cli->inline('Parcela:')->tab(2)->bold()->out("{$data['parcela']}/{$data['totalParcelas']}");
         
