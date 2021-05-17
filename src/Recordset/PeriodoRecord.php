@@ -475,6 +475,10 @@ class PeriodoRecord {
     public function receitas(): array {
         return $this->data['receitas'];
     }
+    
+    public function despesas(): array {
+        return $this->data['despesas'];
+    }
 
     public function atualizaPrevisaoReceita(int $index, array $data): void {
         if ($this->aberto() === false) {

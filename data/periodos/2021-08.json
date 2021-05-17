@@ -18,6 +18,24 @@
                 }
             ],
             "recebimento": []
+        },
+        "2": {
+            "descricao": "teste de parcelas",
+            "origem": "Indenizacoes e restituicoes",
+            "devedor": "evaldi",
+            "cc": "Evaldi e Marina",
+            "vencimento": "2021-08-30",
+            "agrupador": "teste",
+            "parcela": 3,
+            "totalParcelas": 3,
+            "previsao": [
+                {
+                    "valor": 100,
+                    "data": "2021-05-17",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": []
         }
     },
     "despesas": [],

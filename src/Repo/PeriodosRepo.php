@@ -48,4 +48,30 @@ class PeriodosRepo {
         
         return $fechados;
     }
+    
+    public function existeAgrupador(string $agrupador): bool {
+        $lista = $this->lista();
+        
+        foreach ($lista as $periodo => $instancia){
+            $receitas = $instancia->receitas();
+            if(sizeof($receitas) > 0){
+                foreach ($receitas as $index => $item){
+                    if($item['agrupador'] === $agrupador){
+                        return true;
+                    }
+                }
+            }
+            
+            $despesas = $instancia->despesas();
+            if(sizeof($despesas) > 0){
+                foreach ($despesas as $index => $item){
+                    if($item['agrupador'] === $agrupador){
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
 }
