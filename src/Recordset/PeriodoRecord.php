@@ -96,7 +96,68 @@ class PeriodoRecord {
     }
 
     protected function validaDespesa(): void {
-        
+        foreach ($this->data['despesas'] as $index => $item){
+            
+            if (key_exists('descricao', $item) === false) {
+                throw new FailException('Campo [despesas.descricao] está faltando: ' . $index);
+            }
+            if (key_exists('aplicacao', $item) === false) {
+                throw new FailException('Campo [despesas.aplciacao] está faltando: ' . $index);
+            }
+            if (key_exists('projeto', $item) === false) {
+                throw new FailException('Campo [despesas.projeto] está faltando: ' . $index);
+            }
+            if (key_exists('agrupador', $item) === false) {
+                throw new FailException('Campo [despesas.agrupador] está faltando: ' . $index);
+            }
+            if (key_exists('parcela', $item) === false) {
+                throw new FailException('Campo [despesas.parcela] está faltando: ' . $index);
+            }
+            if (key_exists('totalParcelas', $item) === false) {
+                throw new FailException('Campo [despesas.totalParcelas] está faltando: ' . $index);
+            }
+            if (key_exists('previsao', $item) === false) {
+                throw new FailException('Campo [despesas.previsao] está faltando: ' . $index);
+            }
+            if (key_exists('gasto', $item) === false) {
+                throw new FailException('Campo [despesas.gasto] está faltando: ' . $index);
+            }
+            
+            if (mb_strlen($item['descricao']) === 0) {
+                throw new FailException('Campo [despesas.descricao] está vazio: ' . $index);
+            }
+            if (mb_strlen($item['aplicacao']) === 0) {
+                throw new FailException('Campo [despesas.aplicacao] está vazio: ' . $index);
+            }
+            if (mb_strlen($item['projeto']) === 0) {
+                throw new FailException('Campo [despesas.projeto] está vazio: ' . $index);
+            }
+            
+            if (sizeof($item['previsao']) > 0) {
+                foreach ($item['previsao'] as $subindex => $subitem) {
+                    if (key_exists('valor', $subitem) === false) {
+                        throw new FailException('Campo [despesas.previsao.valor] está faltando: ' . $subindex);
+                    }
+                    if (key_exists('data', $subitem) === false) {
+                        throw new FailException('Campo [despesas.previsao.data] está faltando: ' . $subindex);
+                    }
+                    if (key_exists('observacao', $subitem) === false) {
+                        throw new FailException('Campo [despesas.previsao.observacao] está faltando: ' . $subindex);
+                    }
+
+                    if (is_numeric($subitem['valor']) === false) {
+                        throw new FailException('Campo [despesas.previsao.valor] tem valor não numérico: ' . $subindex);
+                    }
+
+                    try {
+                        $date = date_create_from_format('Y-m-d', $subitem['data']);
+                    } catch (Exception $ex) {
+                        throw new FailException('Campo [despesas.previsao.data] tem valor inválido: ' . $index);
+                    }
+                }
+            }
+            
+        }
     }
 
     protected function validaReceita(): void {
