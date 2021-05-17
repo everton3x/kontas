@@ -471,6 +471,21 @@ class PeriodoRecord {
 
         return $index;
     }
+    
+    public function adicionaPrevisaoDespesa(array $data): int {
+        if ($this->aberto() === false) {
+            throw new FailException('Não é possível adicionar previsão de despesa em período já fechado.');
+        }
+
+        $index = array_key_last($this->data['despesas']);
+        $index++;
+
+        $this->data['despesas'][$index] = $data;
+
+        $this->salvar();
+
+        return $index;
+    }
 
     public function receitas(): array {
         return $this->data['receitas'];
