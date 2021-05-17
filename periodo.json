@@ -24,10 +24,42 @@
                     "observacao": "observação opcional"
                 }
             ]
-            
         }
     ],
-    "despesas": [],
+    "despesas": [
+        {
+            "descricao": "Descrição da despesa",
+            "aplicacao": "aplicação da receita",
+            "agrupador": "",
+            "parcela": "1",
+            "totalParcelas": "1",
+            "previsao": [
+                {
+                    "valor": "0.00",
+                    "data": "aaaammdd",
+                    "observacao": "Uma observação opcional"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Nome para quem se deve",
+                    "mp": "Meio de pagamento",
+                    "vencimento": "aaaammdd",
+                    "cc": "Centro de custo",
+                    "valor": "0.00",
+                    "data": "aaaa-mm-dd",
+                    "observacao": "observação opcional",
+                    "pagamento": [
+                        {
+                            "valor": "0.00",
+                            "data": "aaaa-mm-dd",
+                            "observacao": "observação opcional"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "saldos": {
         "periodo": "0.00",
         "anterior": "0.00",
