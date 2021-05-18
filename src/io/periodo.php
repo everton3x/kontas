@@ -44,7 +44,7 @@ class periodo {
         }
     }
     
-    public static function choiceStatus(string $msg = 'Selecione o período:'): int {
+    public static function choiceStatus(string $msg = 'Selecione o status:'): int {
         $climate = new \League\CLImate\CLImate();
         $climate->out($msg);
         $input = $climate->input('>');

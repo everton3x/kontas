@@ -50,10 +50,6 @@ class origem {
         return true;
     }
     
-    public static function changeStatus(bool $status): bool {
-        
-    }
-    
     public static function exists(string $nome): bool {
         foreach (self::load() as $item){
             if($item['nome'] === $nome){
@@ -102,6 +98,21 @@ class origem {
             }
         }
         return $list;
+    }
+    
+    protected static function keyExists(int $key): bool {
+        return key_exists($key, self::load());
+    }
+    public static function changeStatus(int $key, bool $status): bool {
+        if(self::keyExists($key) === false){
+            trigger_error("Chave $key não encontrada.", E_USER_ERROR);
+        }
+        
+        $data = self::load();
+        
+        $data[$key]['ativo'] = $status;
+        
+        return self::save($data);
     }
     
 }
