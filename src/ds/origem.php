@@ -79,10 +79,8 @@ class origem {
     public static function listActive(): array {
         $list = [];
         foreach (self::listAll() as $item){
-            switch ($item['ativo']){
-                case true:
-                case 'true':
-                    $list[] = $item;
+            if ($item['ativo'] === true){
+                $list[] = $item;
             }
         }
         return $list;
@@ -91,10 +89,8 @@ class origem {
     public static function listInactive(): array {
         $list = [];
         foreach (self::listAll() as $item){
-            switch ($item['ativo']){
-                case false:
-                case 'false':
-                    $list[] = $item;
+            if ($item['ativo'] === false){
+                $list[] = $item;
             }
         }
         return $list;

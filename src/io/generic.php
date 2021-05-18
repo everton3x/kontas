@@ -38,4 +38,24 @@ class generic {
                 return false;
         }
     }
+    
+    public static function choiceStatusOrAll(string $msg = 'Selecione o status:'): int {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        $input->accept(['a', 'i', 't'], true);
+        $input->strict();
+        $input->defaultTo('t');
+        
+        $choice = $input->prompt();
+        
+        switch ($choice){
+            case 'a':
+                return 1;
+            case 'i':
+                return 0;
+            case 't':
+                return -1;
+        }
+    }
 }
