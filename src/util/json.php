@@ -35,17 +35,15 @@ class json {
     
     /**
      * 
-     * @param string $periodo aaaa-mm
+     * @param string $filename
      * @return array
      */
-    public static function load(string $periodo): array {
+    public static function load(string $filename): array {
         $data = [];
         
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
-            trigger_error("Perído $periodo não existe.");
+        if(file_exists($filename) === false){
+            trigger_error("Arquivo $filename não existe.");
         }
-        
-        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
         
         $json = file_get_contents($filename);
         if($json === false){

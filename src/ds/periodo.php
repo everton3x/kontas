@@ -131,5 +131,58 @@ class periodo {
                 trigger_error("Chave meta.aberto tem valor inválido.");
         }
     }
+    
+    public static function close(string $periodo): bool {
+        if(\kontas\util\periodo::periodoExists($periodo) === false){
+            trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
+        }
+        
+        $anterior = \kontas\util\periodo::periodoAnterior($periodo);
+        if(self::isOpened($anterior) === true){
+            trigger_error(sprintf(
+                    "Não é possível encerrar %s se %s estiver aberto.",
+                    \kontas\util\periodo::format($periodo),
+                    \kontas\util\periodo::format($anterior)
+            ), E_USER_ERROR);
+        }
+        
+        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+        $data = \kontas\util\json::load($filename);
+        $data = self::calcResultadosFor($data);
+        $data['meta']['aberto'] = false;
+        
+        return \kontas\util\json::write($filename, $data);
+        
+    }
+    
+    /**
+     * 
+     * @param array $data
+     * @return array
+     * @todo Implementar!
+     */
+    public static function calcResultadosFor(array $data): array {
+        return $data;
+    }
+    
+    public static function isOpened(string $periodo): bool {
+        if(\kontas\util\periodo::periodoExists($periodo) === false){
+            trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
+        }
+        
+        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+        $data = \kontas\util\json::load($filename);
+        
+        switch($data['meta']['aberto']){
+            case true:
+            case 'true':
+                return true;
+            case false:
+            case 'false':
+                return false;
+            default:
+                trigger_error("Chave meta.aberto tem valor inválido.");
+        }
+    }
 
 }

@@ -31,8 +31,7 @@ class periodo {
      * @return string mm/aaaa
      */
     public static function format(string $periodo): string {
-        $dt = new \DateTime();
-        $dt->createFromFormat('Y-m', $periodo);
+        $dt = \DateTime::createFromFormat('Y-m', $periodo);
         return $dt->format('m/Y');
     }
     

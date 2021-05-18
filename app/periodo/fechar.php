@@ -5,11 +5,11 @@ require_once 'vendor/autoload.php';
 $climate = new \League\CLImate\CLImate();
 
 try{
-    $climate->info('Criando novo período...');
+    $climate->info('Fecha um período...');
     
     $periodo = kontas\util\periodo::parseInput(kontas\io\periodo::askPeriodo());
 
-    kontas\ds\periodo::criar($periodo);
+    \kontas\ds\periodo::close($periodo);
     
     $climate->info('Registro salvo:');
     
