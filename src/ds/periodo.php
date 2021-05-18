@@ -205,5 +205,38 @@ class periodo {
         
         return \kontas\util\json::write($filename, $data);
     }
-
+    
+    public static function listAll(): array {
+        $list = [];
+        foreach (scandir(\kontas\config::PERIODOS_DIR) as $item){
+            if($item === '.' || $item === '..'){
+                continue;
+            }
+            $periodo = basename($item, '.json');
+            $list[$periodo] = self::isOpened($periodo);
+        }
+        return $list;
+    }
+    
+    public static function listOpened(): array {
+        $list = [];
+        foreach (self::listAll() as $key => $item){
+            if($item === true){
+                $list[$key] = $item;
+            }
+        }
+            
+        return $list;
+    }
+    
+    public static function listClosed(): array {
+        $list = [];
+        foreach (self::listAll() as $key => $item){
+            if($item === false){
+                $list[$key] = $item;
+            }
+        }
+            
+        return $list;
+    }
 }
