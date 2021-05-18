@@ -25,9 +25,18 @@ class periodo {
         }
 
         $data = self::periodoDataStructure($periodo);
+//        $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
+//        $save = \kontas\util\json::write($filename, $data);
+        $save = self::save($data);
+
+        return $save;
+    }
+    
+    public static function save(array $data): bool {
+        $periodo = $data['periodo'];
+        self::validate($data);
         $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
         $save = \kontas\util\json::write($filename, $data);
-
         return $save;
     }
 
@@ -163,6 +172,15 @@ class periodo {
             default:
                 trigger_error("Chave meta.aberto tem valor inválido.");
         }
+    }
+    
+    public static function load(string $periodo): array {
+        if(\kontas\util\periodo::periodoExists($periodo) === false){
+            trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
+        }
+        
+        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+        return \kontas\util\json::load($filename);
     }
     
     public static function reopen(string $periodo): bool {
