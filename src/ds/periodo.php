@@ -48,28 +48,28 @@ class periodo {
     }
 
     public static function validate(array $data): bool {
-        $key = self::testIfKeyExists(['periodo', 'receitas', 'despesas', 'resultados', 'meta'], $data);
+        $key = \kontas\util\check::testIfKeyExists(['periodo', 'receitas', 'despesas', 'resultados', 'meta'], $data);
         if ($key !== '') {
             trigger_error("Chave $key não encontrada no período.");
         }
 
-        $key = self::testIfKeyExists(['periodo', 'anterior', 'acumulado'], $data['resultados']);
+        $key = \kontas\util\check::testIfKeyExists(['periodo', 'anterior', 'acumulado'], $data['resultados']);
         if ($key !== '') {
             trigger_error("Chave resultados.$key não encontrada no período.");
         }
 
-        $key = self::testIfKeyExists(['aberto'], $data['meta']);
+        $key = \kontas\util\check::testIfKeyExists(['aberto'], $data['meta']);
         if ($key !== '') {
             trigger_error("Chave meta.$key não encontrada no período.");
         }
 
         if (sizeof($data['receitas']) > 0) {
             foreach ($data['receitas'] as $index => $item) {
-                $key = self::testIfKeyExists(['descricao', 'origem', 'devedor', 'cc', 'vencimento', 'agrupador', 'parcela', 'totalParcelas', 'previsao', 'recebimento'], $item);
+                $key = \kontas\util\check::testIfKeyExists(['descricao', 'origem', 'devedor', 'cc', 'vencimento', 'agrupador', 'parcela', 'totalParcelas', 'previsao', 'recebimento'], $item);
                 if ($key !== '') {
                     trigger_error("Chave receitas.$index.$key não encontrada no período.");
                 }
-                $key = self::testIfValueNotIsEmpty(['descricao', 'origem', 'devedor', 'cc', 'vencimento'], $item);
+                $key = \kontas\util\check::testIfValueNotIsEmpty(['descricao', 'origem', 'devedor', 'cc', 'vencimento'], $item);
                 if ($key !== '') {
                     trigger_error("Chave receitas.$index.$key está vazia.");
                 }
@@ -78,18 +78,18 @@ class periodo {
 
         if (sizeof($data['despesas']) > 0) {
             foreach ($data['despesas'] as $index => $item) {
-                $key = self::testIfKeyExists(['descricao', 'aplicacao', 'projeto', 'agrupador', 'parcela', 'totalParcelas', 'previsao', 'gasto'], $item);
+                $key = \kontas\util\check::testIfKeyExists(['descricao', 'aplicacao', 'projeto', 'agrupador', 'parcela', 'totalParcelas', 'previsao', 'gasto'], $item);
                 if ($key !== '') {
                     trigger_error("Chave despesas.$index.$key não encontrada no período.");
                 }
-                $key = self::testIfValueNotIsEmpty(['descricao', 'aplicacao'], $item);
+                $key = \kontas\util\check::testIfValueNotIsEmpty(['descricao', 'aplicacao'], $item);
                 if ($key !== '') {
                     trigger_error("Chave despesas.$index.$key está vazia.");
                 }
             }
         }
 
-        $key = self::testIfValueNotIsEmpty(['periodo'], $data);
+        $key = \kontas\util\check::testIfValueNotIsEmpty(['periodo'], $data);
         if ($key !== '') {
             trigger_error("Chave $key está vazia.");
         }
@@ -97,26 +97,6 @@ class periodo {
         return true;
     }
 
-    protected static function testIfKeyExists(array $keys, array $data): string {
-        foreach ($keys as $key) {
-            if (key_exists($key, $data) === false) {
-                return $key;
-            }
-        }
-
-        return '';
-    }
-
-    protected static function testIfValueNotIsEmpty(array $keys, array $data): string {
-        foreach ($keys as $key) {
-            if (mb_strlen($data[$key]) === 0) {
-                return $key;
-            }
-        }
-
-        return '';
-    }
-    
     public static function periodoIsOpen(string $periodo): bool {
         $data = \kontas\util\json::load($periodo);
         

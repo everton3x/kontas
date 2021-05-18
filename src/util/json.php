@@ -16,7 +16,6 @@ class json {
      * @return bool
      */
     public static function write(string $filename, array $data): bool {
-        \kontas\ds\periodo::validate($data);
         $json = json_encode($data);
         if($json === false){
             trigger_error(json_last_error_msg(), E_USER_ERROR);
