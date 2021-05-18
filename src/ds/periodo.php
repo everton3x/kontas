@@ -31,7 +31,7 @@ class periodo {
 
         return $save;
     }
-    
+
     public static function save(array $data): bool {
         $periodo = $data['periodo'];
         self::validate($data);
@@ -108,8 +108,8 @@ class periodo {
 
     public static function periodoIsOpen(string $periodo): bool {
         $data = \kontas\util\json::load($periodo);
-        
-        switch ($data['meta']['aberto']){
+
+        switch ($data['meta']['aberto']) {
             case true:
             case 'true':
                 return true;
@@ -120,30 +120,29 @@ class periodo {
                 trigger_error("Chave meta.aberto tem valor inválido.");
         }
     }
-    
+
     public static function close(string $periodo): bool {
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
+        if (\kontas\util\periodo::periodoExists($periodo) === false) {
             trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
         }
-        
+
         $anterior = \kontas\util\periodo::periodoAnterior($periodo);
-        if(self::isOpened($anterior) === true){
+        if (self::isOpened($anterior) === true) {
             trigger_error(sprintf(
-                    "Não é possível encerrar %s se %s estiver aberto.",
-                    \kontas\util\periodo::format($periodo),
-                    \kontas\util\periodo::format($anterior)
-            ), E_USER_ERROR);
+                            "Não é possível encerrar %s se %s estiver aberto.",
+                            \kontas\util\periodo::format($periodo),
+                            \kontas\util\periodo::format($anterior)
+                    ), E_USER_ERROR);
         }
-        
-        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+
+        $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
         $data = \kontas\util\json::load($filename);
         $data = self::calcResultadosFor($data);
         $data['meta']['aberto'] = false;
-        
+
         return \kontas\util\json::write($filename, $data);
-        
     }
-    
+
     /**
      * 
      * @param array $data
@@ -153,16 +152,16 @@ class periodo {
     public static function calcResultadosFor(array $data): array {
         return $data;
     }
-    
+
     public static function isOpened(string $periodo): bool {
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
+        if (\kontas\util\periodo::periodoExists($periodo) === false) {
             trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
         }
-        
-        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+
+        $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
         $data = \kontas\util\json::load($filename);
-        
-        switch($data['meta']['aberto']){
+
+        switch ($data['meta']['aberto']) {
             case true:
             case 'true':
                 return true;
@@ -173,41 +172,43 @@ class periodo {
                 trigger_error("Chave meta.aberto tem valor inválido.");
         }
     }
-    
+
     public static function load(string $periodo): array {
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
+        if (\kontas\util\periodo::periodoExists($periodo) === false) {
             trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
         }
-        
-        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+
+        $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
         return \kontas\util\json::load($filename);
     }
-    
+
     public static function reopen(string $periodo): bool {
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
+        if (\kontas\util\periodo::periodoExists($periodo) === false) {
             trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
         }
-        
+
         $posterior = \kontas\util\periodo::periodoPosterior($periodo);
-        if(self::isOpened($posterior) === false){
-            trigger_error(sprintf(
-                    "Não é possível reabrir %s se %s estiver fechado.",
-                    \kontas\util\periodo::format($periodo),
-                    \kontas\util\periodo::format($posterior)
-            ), E_USER_ERROR);
+        if (\kontas\util\periodo::periodoExists($posterior) === true) {
+            if (self::isOpened($posterior) === false) {
+                trigger_error(sprintf(
+                                "Não é possível reabrir %s se %s estiver fechado.",
+                                \kontas\util\periodo::format($periodo),
+                                \kontas\util\periodo::format($posterior)
+                        ), E_USER_ERROR);
+            }
         }
-        
-        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+
+        $filename = \kontas\config::PERIODOS_DIR . $periodo . '.json';
         $data = \kontas\util\json::load($filename);
         $data['meta']['aberto'] = true;
-        
+
         return \kontas\util\json::write($filename, $data);
     }
-    
+
     public static function listAll(): array {
         $list = [];
-        foreach (scandir(\kontas\config::PERIODOS_DIR) as $item){
-            if($item === '.' || $item === '..'){
+        foreach (scandir(\kontas\config::PERIODOS_DIR) as $item) {
+            if ($item === '.' || $item === '..') {
                 continue;
             }
             $periodo = basename($item, '.json');
@@ -215,26 +216,27 @@ class periodo {
         }
         return $list;
     }
-    
+
     public static function listOpened(): array {
         $list = [];
-        foreach (self::listAll() as $key => $item){
-            if($item === true){
+        foreach (self::listAll() as $key => $item) {
+            if ($item === true) {
                 $list[$key] = $item;
             }
         }
-            
+
         return $list;
     }
-    
+
     public static function listClosed(): array {
         $list = [];
-        foreach (self::listAll() as $key => $item){
-            if($item === false){
+        foreach (self::listAll() as $key => $item) {
+            if ($item === false) {
                 $list[$key] = $item;
             }
         }
-            
+
         return $list;
     }
+
 }

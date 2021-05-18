@@ -77,15 +77,31 @@ class origem {
     }
     
     public static function listAll(): array {
-        
+        return self::load();
     }
     
     public static function listActive(): array {
-        
+        $list = [];
+        foreach (self::listAll() as $item){
+            switch ($item['ativo']){
+                case true:
+                case 'true':
+                    $list[] = $item;
+            }
+        }
+        return $list;
     }
     
     public static function listInactive(): array {
-        
+        $list = [];
+        foreach (self::listAll() as $item){
+            switch ($item['ativo']){
+                case false:
+                case 'false':
+                    $list[] = $item;
+            }
+        }
+        return $list;
     }
     
 }

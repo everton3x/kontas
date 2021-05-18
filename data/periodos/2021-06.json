@@ -1,5 +1,5 @@
 {
-    "periodo": "2021-05",
+    "periodo": "2021-06",
     "receitas": [],
     "despesas": [],
     "resultados": {
@@ -8,6 +8,6 @@
         "acumulado": 0
     },
     "meta": {
-        "aberto": false
+        "aberto": true
     }
 }

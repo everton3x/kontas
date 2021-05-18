@@ -10,10 +10,10 @@ try{
     $nome = \kontas\io\generic::askNome();
     $descricao = \kontas\io\generic::askDescricao('Descrição (opcional):');
     
-    kontas\ds\origem::add($nome, $descricao);
+    $key = kontas\ds\origem::add($nome, $descricao);
     
     $climate->info('Registro criado:');
-    
+    kontas\io\origem::detail($key);
     
     
 } catch (Exception $ex) {

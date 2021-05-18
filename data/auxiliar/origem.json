@@ -8,5 +8,15 @@
         "nome": "Di\u0000rias",
         "descricao": "",
         "ativo": true
+    },
+    {
+        "nome": "Indeniza\u0000\u0000es e Restitui\u0000\u0000es",
+        "descricao": "Valores devolvidos",
+        "ativo": true
+    },
+    {
+        "nome": "Vendas",
+        "descricao": "testes",
+        "ativo": true
     }
 ]
