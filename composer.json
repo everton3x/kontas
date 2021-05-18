@@ -17,7 +17,17 @@
     },
     "autoload": {
         "psr-4": {
-            "Kontas\\": "src"
-        }
+            "kontas\\": "src"
+        },
+        "files": [
+            "error_handler.php"
+        ]
+    },
+    "scripts": {
+        "push": [
+            "git add .",
+            "git commit",
+            "git push"
+        ]
     }
 }
