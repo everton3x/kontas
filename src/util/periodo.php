@@ -63,7 +63,7 @@ class periodo {
      * @return string aaaa-mm
      */
     public static function periodoPosterior(string $periodo): string {
-        $dt = \DateTime()::createFromFormat('Y-m', $periodo);
+        $dt = \DateTime::createFromFormat('Y-m', $periodo);
         $dti = new \DateInterval('P1M');
         $dt->add($dti);
         return $dt->format('Y-m');

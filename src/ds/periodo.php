@@ -184,5 +184,26 @@ class periodo {
                 trigger_error("Chave meta.aberto tem valor inválido.");
         }
     }
+    
+    public static function reopen(string $periodo): bool {
+        if(\kontas\util\periodo::periodoExists($periodo) === false){
+            trigger_error(sprintf("Período %s não existe", \kontas\util\periodo::format($periodo)), E_USER_ERROR);
+        }
+        
+        $posterior = \kontas\util\periodo::periodoPosterior($periodo);
+        if(self::isOpened($posterior) === false){
+            trigger_error(sprintf(
+                    "Não é possível reabrir %s se %s estiver fechado.",
+                    \kontas\util\periodo::format($periodo),
+                    \kontas\util\periodo::format($posterior)
+            ), E_USER_ERROR);
+        }
+        
+        $filename = \kontas\config::PERIODOS_DIR.$periodo.'.json';
+        $data = \kontas\util\json::load($filename);
+        $data['meta']['aberto'] = true;
+        
+        return \kontas\util\json::write($filename, $data);
+    }
 
 }

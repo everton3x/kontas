@@ -11,7 +11,7 @@ try{
 
     kontas\ds\periodo::criar($periodo);
     
-    $climate->info('Registro salvo:');
+    $climate->info('Registro criado:');
     
     $filename = kontas\config::PERIODOS_DIR."$periodo".'.json';
     \kontas\io\periodo::resume(
