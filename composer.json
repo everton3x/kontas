@@ -20,7 +20,7 @@
             "kontas\\": "src"
         },
         "files": [
-            "error_handler.php"
+            "init.php"
         ]
     },
     "scripts": {

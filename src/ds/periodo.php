@@ -116,5 +116,20 @@ class periodo {
 
         return '';
     }
+    
+    public static function periodoIsOpen(string $periodo): bool {
+        $data = \kontas\util\json::load($periodo);
+        
+        switch ($data['meta']['aberto']){
+            case true:
+            case 'true':
+                return true;
+            case false:
+            case 'false':
+                return false;
+            default:
+                trigger_error("Chave meta.aberto tem valor inválido.");
+        }
+    }
 
 }
