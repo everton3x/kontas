@@ -15,6 +15,13 @@ class generic {
         return $input->prompt();
     }
     
+    public static function askParcelas(string $msg = 'Total de parcelas:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
     public static function askDevedor(string $msg = 'Devedor:'): string {
         $climate = new \League\CLImate\CLImate();
         $climate->out($msg);
