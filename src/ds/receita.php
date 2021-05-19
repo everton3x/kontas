@@ -42,8 +42,8 @@ class receita {
         if(mb_strlen($data) === 0){
             trigger_error('$data não pode ser vazio.', E_USER_ERROR);
         }
-        if($valor <= 0){
-            trigger_error('$valor deve ser maior que zero.', E_USER_ERROR);
+        if($valor === 0){
+            trigger_error('$valor deve ser diferente de zero.', E_USER_ERROR);
         }
         if($parcela <= 0){
             trigger_error('$parcela deve ser maior que zero.', E_USER_ERROR);
@@ -60,8 +60,8 @@ class receita {
             \kontas\ds\periodo::criar($periodo);
         }
         
-        $data = \kontas\ds\periodo::load($periodo);
-        $data['receitas'][] = [
+        $periodoData = \kontas\ds\periodo::load($periodo);
+        $periodoData['receitas'][] = [
             'descricao' => $descricao,
             'origem' => $origem,
             'devedor' => $devedor,
@@ -77,8 +77,28 @@ class receita {
             ]],
             'recebimento' => []
         ];
-        \kontas\ds\periodo::save($data);
-        return array_key_last($data['receitas']);
+        \kontas\ds\periodo::save($periodoData);
+        return array_key_last($periodoData['receitas']);
+    }
+    
+    public static function receber(string $periodo, int $key, string $data, float $valor, string $observacao): int {
+        $periodoData = \kontas\ds\periodo::load($periodo);
+        
+        if(key_exists($key, $periodoData['receitas']) === false){
+            trigger_error("Chave $key não encontrada.", E_USER_ERROR);
+        }
+        
+        $periodoData['receitas'][$key]['recebimento'][] = [
+            'valor' => $valor,
+            'data' => $data,
+            'observacao' => $observacao
+        ];
+        
+        $saved = array_key_last($periodoData['receitas'][$key]['recebimento']);
+        
+        \kontas\ds\periodo::save($periodoData);
+        
+        return $saved;
     }
 
 }

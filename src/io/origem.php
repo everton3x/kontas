@@ -44,6 +44,8 @@ class origem {
         
         $climate->info('Selecione uma chave:');
         $input = $climate->input('>');
+        $input->accept(array_keys($list));
+        $input->strict();
         
         return $input->prompt();
     }
@@ -63,6 +65,8 @@ class origem {
         
         $climate->info('Selecione uma chave:');
         $input = $climate->input('>');
+        $input->accept(array_keys($list));
+        $input->strict();
         
         $key = $input->prompt();
         

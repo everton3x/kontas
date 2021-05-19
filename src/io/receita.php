@@ -32,6 +32,23 @@ class receita {
         return $input->confirmed();
     }
     
+    public static function confirmRecebimento(string $data, float $valor, string $observacao): bool {
+        $climate = new \League\CLImate\CLImate();
+        $climate->inline('Data:')->tab()->bold()->green()->out(
+                \kontas\util\date::format($data)
+        );
+        $climate->inline('Valor:')->tab(2)->bold()->green()->out(
+                \kontas\util\number::format($valor)
+        );
+        $climate->inline('Observação:')->tab()->bold()->green()->out($observacao);
+        
+        $climate->br();
+        
+        $input = $climate->confirm('Confirma o recebimento?');
+        
+        return $input->confirmed();
+    }
+    
     public static function resume(string $periodo, array $data): void {
         $previsto = 0;
         $recebido = 0;
@@ -66,5 +83,42 @@ class receita {
         );
         
         
+    }
+    
+    public static function choice(string $periodo): int {
+        $climate = new \League\CLImate\CLImate();
+        $climate->info("Escolha uma receita:");
+        
+        $data = \kontas\ds\periodo::load($periodo);
+        
+        $list = $data['receitas'];
+        
+        foreach ($list as $key => $item){
+            $previsto = 0;
+            $recebido = 0;
+            foreach($item['previsao'] as $prevItem){
+                $previsto += $prevItem['valor'];
+            }
+            foreach($item['recebimento'] as $recItem){
+                $recebido += $recItem['valor'];
+            }
+            
+            $climate->bold()->green()->inline($key)->tab()->bold()->green()->out($item['descricao']);
+            $climate->inline('Origem:')->tab()->out($item['origem']);
+            $climate->inline('Devedor:')->tab()->out($item['devedor']);
+            $climate->inline('CC:')->tab()->out($item['cc']);
+            $climate->inline($item['agrupador'])->tab()->out("({$item['parcela']}/{$item['totalParcelas']})");
+            $climate->inline(\kontas\util\number::format($previsto))
+                    ->tab()->inline(\kontas\util\number::format($recebido))
+                    ->tab()->inline(\kontas\util\number::format($previsto - $recebido));
+            $climate->br();
+        }
+        
+        $climate->bold()->out('Escolha uma receita:');
+        $input = $climate->input('>');
+        $input->accept(array_keys($list));
+        $input->strict();
+        
+        return $input->prompt();
     }
 }

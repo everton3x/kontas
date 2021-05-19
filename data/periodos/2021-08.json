@@ -2,91 +2,18 @@
     "periodo": "2021-08",
     "receitas": [
         {
-            "descricao": "teste de loop",
+            "descricao": "outro teste",
             "origem": "Sal\u0000rio",
-            "devedor": "teste",
+            "devedor": "beltrano",
             "cc": "Familia",
             "vencimento": "2021-08-21",
-            "agrupador": "",
+            "agrupador": "loop",
             "parcela": 1,
             "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 499,
-                    "data": {
-                        "periodo": "2021-08",
-                        "receitas": [],
-                        "despesas": [],
-                        "resultados": {
-                            "periodo": 0,
-                            "anterior": 0,
-                            "acumulado": 0
-                        },
-                        "meta": {
-                            "aberto": true
-                        }
-                    },
-                    "observacao": "Previs\u00e3o inicial"
-                }
-            ],
-            "recebimento": []
-        },
-        {
-            "descricao": "novo este de loop",
-            "origem": "Vendas",
-            "devedor": "fulano",
-            "cc": "Familia",
-            "vencimento": "2021-08-31",
-            "agrupador": "",
-            "parcela": 1,
-            "totalParcelas": 1,
-            "previsao": [
-                {
-                    "valor": 200,
-                    "data": {
-                        "periodo": "2021-08",
-                        "receitas": [
-                            {
-                                "descricao": "teste de loop",
-                                "origem": "Sal\u0000rio",
-                                "devedor": "teste",
-                                "cc": "Familia",
-                                "vencimento": "2021-08-21",
-                                "agrupador": "",
-                                "parcela": 1,
-                                "totalParcelas": 1,
-                                "previsao": [
-                                    {
-                                        "valor": 499,
-                                        "data": {
-                                            "periodo": "2021-08",
-                                            "receitas": [],
-                                            "despesas": [],
-                                            "resultados": {
-                                                "periodo": 0,
-                                                "anterior": 0,
-                                                "acumulado": 0
-                                            },
-                                            "meta": {
-                                                "aberto": true
-                                            }
-                                        },
-                                        "observacao": "Previs\u00e3o inicial"
-                                    }
-                                ],
-                                "recebimento": []
-                            }
-                        ],
-                        "despesas": [],
-                        "resultados": {
-                            "periodo": 0,
-                            "anterior": 0,
-                            "acumulado": 0
-                        },
-                        "meta": {
-                            "aberto": true
-                        }
-                    },
+                    "valor": 599,
+                    "data": "2021-05-19",
                     "observacao": "Previs\u00e3o inicial"
                 }
             ],
