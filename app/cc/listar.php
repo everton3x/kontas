@@ -5,19 +5,19 @@ require_once 'vendor/autoload.php';
 $climate = new \League\CLImate\CLImate();
 
 try{
-    $climate->info('Lista as origens da receita...');
+    $climate->info('Lista os centros de custos...');
         
     $show = kontas\io\generic::choiceStatusOrAll();
     
     switch ($show){
         case 1:
-            $list = \kontas\ds\origem::listActive();
+            $list = \kontas\ds\cc::listActive();
             break;
         case 0:
-            $list = \kontas\ds\origem::listInactive();
+            $list = \kontas\ds\cc::listInactive();
             break;
         case -1:
-            $list = \kontas\ds\origem::listAll();
+            $list = \kontas\ds\cc::listAll();
             break;
     }
     

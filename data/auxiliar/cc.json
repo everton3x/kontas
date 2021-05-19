@@ -1,57 +1,7 @@
-{
-    "1": {
+[
+    {
         "nome": "Familia",
         "descricao": "Everton, Marlise e filhos",
         "ativo": true
-    },
-    "2": {
-        "nome": "Everton",
-        "descricao": "",
-        "ativo": true
-    },
-    "3": {
-        "nome": "Marlise",
-        "descricao": "",
-        "ativo": true
-    },
-    "4": {
-        "nome": "Filhos",
-        "descricao": "",
-        "ativo": true
-    },
-    "5": {
-        "nome": "HB20S 2014",
-        "descricao": "",
-        "ativo": true
-    },
-    "6": {
-        "nome": "YBR Factor 2014",
-        "descricao": "",
-        "ativo": true
-    },
-    "7": {
-        "nome": "Casa",
-        "descricao": "",
-        "ativo": true
-    },
-    "8": {
-        "nome": "Arthur",
-        "descricao": "",
-        "ativo": true
-    },
-    "9": {
-        "nome": "Pedro Henrique",
-        "descricao": "",
-        "ativo": true
-    },
-    "10": {
-        "nome": "Evaldi e Marina",
-        "descricao": "",
-        "ativo": true
-    },
-    "11": {
-        "nome": "Flavio",
-        "descricao": "",
-        "ativo": true
     }
-}
+]
