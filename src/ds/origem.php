@@ -99,6 +99,7 @@ class origem {
     protected static function keyExists(int $key): bool {
         return key_exists($key, self::load());
     }
+    
     public static function changeStatus(int $key, bool $status): bool {
         if(self::keyExists($key) === false){
             trigger_error("Chave $key não encontrada.", E_USER_ERROR);

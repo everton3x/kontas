@@ -15,7 +15,42 @@ class generic {
         return $input->prompt();
     }
     
+    public static function askDevedor(string $msg = 'Devedor:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
+    public static function askCredor(string $msg = 'Credor:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
     public static function askNome(string $msg = 'Nome:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
+    public static function askVencimento(string $msg = 'Vencimento [ddmmaaaa]:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
+    public static function askAgrupador(string $msg = 'Agrupador (opcional):'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
+    }
+    
+    public static function askValor(string $msg = 'Valor [####.##]:'): string {
         $climate = new \League\CLImate\CLImate();
         $climate->out($msg);
         $input = $climate->input('>');

@@ -47,4 +47,29 @@ class cc {
         
         return $input->prompt();
     }
+    
+    public static function select(): string {
+        
+        $list = \kontas\ds\cc::listActive();
+        
+        $climate = new \League\CLImate\CLImate();
+        
+        $climate->info('Itens disponíveis:');
+        foreach($list as $key => $item){
+            $climate->inline($key)->tab()->out($item['nome']);
+        }
+        
+        $climate->br();
+        
+        $climate->info('Selecione uma chave:');
+        $input = $climate->input('>');
+        
+        $key = $input->prompt();
+        
+        if(key_exists($key, $list) === false){
+            trigger_error("Chave $key não existente.", E_USER_ERROR);
+        }
+        
+        return $list[$key]['nome'];
+    }
 }
