@@ -18,6 +18,30 @@
                 }
             ],
             "recebimento": []
+        },
+        {
+            "descricao": "teste de autorecebimet",
+            "origem": "Vendas",
+            "devedor": "fulano",
+            "cc": "Familia",
+            "vencimento": "2021-07-20",
+            "agrupador": "dgasga",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 250,
+                    "data": "2021-05-19",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": [
+                {
+                    "valor": 200,
+                    "data": "2021-05-19",
+                    "observacao": "testando"
+                }
+            ]
         }
     ],
     "despesas": [],

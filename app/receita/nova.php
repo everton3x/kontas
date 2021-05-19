@@ -50,6 +50,28 @@ try {
     $data = $data['receitas'][$key];
 
     \kontas\io\receita::resume($periodo, $data);
+    
+    $confirm = $climate->confirm('Deseja lançar o recebimento?');
+    if($confirm->confirmed()){
+        $climate->out("Valor [####.##] ou ENTER para receber $valor:");
+        $input = $climate->input('>');
+        $confirmarValor = $input->prompt();
+        if($confirmarValor !== ''){
+            $valor = $confirmarValor;
+        }
+        
+        $recebidoEm = \kontas\io\generic::askVencimento('Data do recebimento [ddmmaaaaa] ou ENTER para a data atual:');
+        if($recebidoEm === ''){
+            $recebidoEm = date('Y-m-d');
+        }else{
+            $recebidoEm = \kontas\util\date::parseInput($recebidoEm);
+        }
+        
+        $observacao = \kontas\io\generic::askDescricao('Observação (opcional):');
+        
+        \kontas\ds\receita::receber($periodo, $key, $recebidoEm, $valor, $observacao);
+        $climate->info('Recebimento salvo.');
+    }
 
     $input = $climate->confirm("Deseja repetir no próximo período?");
     while ($input->confirmed()) {

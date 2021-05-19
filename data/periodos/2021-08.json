@@ -18,6 +18,30 @@
                 }
             ],
             "recebimento": []
+        },
+        {
+            "descricao": "teste de autorecebimento",
+            "origem": "Sal\u0000rio",
+            "devedor": "teste",
+            "cc": "Familia",
+            "vencimento": "2021-08-31",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 200,
+                    "data": "2021-05-19",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": [
+                {
+                    "valor": 200,
+                    "data": "2021-05-19",
+                    "observacao": ""
+                }
+            ]
         }
     ],
     "despesas": [],
