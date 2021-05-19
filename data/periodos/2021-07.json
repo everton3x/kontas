@@ -33,6 +33,11 @@
                     "valor": 250,
                     "data": "2021-05-19",
                     "observacao": "Previs\u00e3o inicial"
+                },
+                {
+                    "valor": -50,
+                    "data": "2021-05-19",
+                    "observacao": ""
                 }
             ],
             "recebimento": [

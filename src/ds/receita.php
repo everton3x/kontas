@@ -100,5 +100,25 @@ class receita {
         
         return $saved;
     }
+    
+    public static function alterarPrevisao(string $periodo, int $key, string $data, float $valor, string $observacao): int {
+        $periodoData = \kontas\ds\periodo::load($periodo);
+        
+        if(key_exists($key, $periodoData['receitas']) === false){
+            trigger_error("Chave $key não encontrada.", E_USER_ERROR);
+        }
+        
+        $periodoData['receitas'][$key]['previsao'][] = [
+            'valor' => $valor,
+            'data' => $data,
+            'observacao' => $observacao
+        ];
+        
+        $saved = array_key_last($periodoData['receitas'][$key]['previsao']);
+        
+        \kontas\ds\periodo::save($periodoData);
+        
+        return $saved;
+    }
 
 }
