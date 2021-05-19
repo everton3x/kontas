@@ -45,11 +45,12 @@ try {
                         \kontas\util\number::format($recebido),
                         \kontas\util\number::format($previsto)
         ));
-        $climate->bold()->out();
         $confirm = $climate->confirm('Deseja complementar a previsão?');
         
         if($confirm->confirmed()){
-            //@todo
+            $diferenca = $recebido - $previsto;
+            \kontas\ds\receita::alterarPrevisao($periodo, $keyReceita, $data, $diferenca, 'Atualização automática');
+            $climate->info('Previsão atualizada.');
         }
     }
     
