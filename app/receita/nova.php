@@ -50,6 +50,49 @@ try {
     $data = $data['receitas'][$key];
 
     \kontas\io\receita::resume($periodo, $data);
+
+    $input = $climate->confirm("Deseja repetir no próximo período?");
+    while ($input->confirmed()) {
+        $periodo = \kontas\util\periodo::periodoPosterior($periodo);
+        $proximoVencimento = \kontas\util\date::proximoVencimento($vencimento);
+
+        $vencimento = \kontas\io\generic::askVencimento("Vencimento [ddmmaaaa] ou ENTER para $proximoVencimento:");
+        if ($vencimento === '') {
+            $vencimento = $proximoVencimento;
+        } else {
+            $vencimento = \kontas\util\date::parseInput($vencimento);
+        }
+
+        $proximoValor = \kontas\io\generic::askValor("Valor [####.##] ou ENTER para $valor:");
+        if ($proximoValor !== '') {
+            $valor = $proximoValor;
+        }
+
+        $salvar = \kontas\io\receita::confirm([
+                    'periodo' => $periodo,
+                    'descricao' => $descricao,
+                    'origem' => $origem,
+                    'devedor' => $devedor,
+                    'cc' => $cc,
+                    'vencimento' => $vencimento,
+                    'agrupador' => $agrupador,
+                    'valor' => $valor
+        ]);
+        if ($salvar === false) {
+            $climate->error('Abortando...');
+            exit(0);
+        }
+
+        $key = \kontas\ds\receita::addReceita($periodo, $descricao, $origem, $devedor, $cc, $vencimento, $agrupador, 1, 1, $valor, date('Y-m-d'), 'Previsão inicial');
+
+        $climate->info('Registro criado:');
+        $data = \kontas\ds\periodo::load($periodo);
+        $data = $data['receitas'][$key];
+
+        \kontas\io\receita::resume($periodo, $data);
+        
+        $input = $climate->confirm("Deseja repetir no próximo período?");
+    }
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->yellow()->out($ex->getTraceAsString());

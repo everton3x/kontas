@@ -38,4 +38,16 @@ class date {
         return $dt->format('Y-m-t');
     }
     
+    /**
+     * 
+     * @param string $vencimento aaaa-mm-dd
+     * @return string aaaa-mm-dd
+     */
+    public static function proximoVencimento(string $vencimento): string {
+        $dt = \DateTime::createFromFormat('Y-m-d', $vencimento);
+        $dti = new \DateInterval('P1M');
+        $dt->add($dti);
+        return $dt->format('Y-m-d');
+    }
+    
 }
