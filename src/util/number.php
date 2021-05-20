@@ -9,6 +9,13 @@ namespace kontas\util;
  */
 class number {
     public static function format(float|int $number): string {
-        return number_format($number, 2, ',', '.');
+        
+        if($number < 0){
+            $num = number_format($number*-1, 2, ',', '.');
+            return "<red>($num)</red>";
+        }
+        
+        $num = number_format($number, 2, ',', '.');
+        return "<green>$num</green>";
     }
 }

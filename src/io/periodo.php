@@ -17,11 +17,35 @@ class periodo {
     }
 
     public static function resume(array $data): void {
+        $previsto = 0;
+        $recebido = 0;
+        foreach ($data['receitas'] as $receita){
+            foreach ($receita['previsao'] as $item){
+                $previsto += $item['valor'];
+            }
+            foreach ($receita['recebimento'] as $item){
+                $recebido += $item['valor'];
+            }
+        }
+        
+        
         $climate = new \League\CLImate\CLImate();
         $climate->bold()->green()->out(
                 \kontas\util\periodo::format($data['periodo'])
         );
         $climate->padding(KPADDING_LEN)->label('Aberto:')->result($data['meta']['aberto']);
+        $climate->bold()->out('Resumo da Receita:');
+        $climate->padding(KPADDING_LEN)->label('Prevista')->result(
+                \kontas\util\number::format($previsto)
+        );
+        $climate->padding(KPADDING_LEN)->label('Recebida')->result(
+                \kontas\util\number::format($recebido)
+        );
+        $climate->padding(KPADDING_LEN)->label('A Receber')->result(
+                \kontas\util\number::format($previsto - $recebido)
+        );
+        
+        
     }
     
     public static function list(int $status = -1): void {
