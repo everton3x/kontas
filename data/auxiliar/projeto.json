@@ -1,12 +1,12 @@
-{
-    "0": {
+[
+    {
         "nome": "Nenhum",
-        "descricao": "Nenhum projeto",
+        "descricao": "projeto para despesas n\u0000o vinculadas a projetos",
         "ativo": true
     },
-    "1": {
+    {
         "nome": "Quiosque",
-        "descricao": "Constru\u0000\u0000o da casinha nos fundos",
-        "ativo": true
+        "descricao": "Cosntru\u0000\u0000o de quiosque e piso para piscina",
+        "ativo": false
     }
-}
+]
