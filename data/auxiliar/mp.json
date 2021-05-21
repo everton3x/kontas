@@ -15,6 +15,6 @@
         "nome": "Americanas - cart\u0000o de cr\u0000dito",
         "descricao": "",
         "autopagar": false,
-        "ativo": false
+        "ativo": true
     }
 ]
