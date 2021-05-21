@@ -125,4 +125,16 @@ class mp {
         return self::save($data);
     }
     
+    public static function isAutopagar(string $mp): bool {
+        $data = self::load();
+        
+        foreach ($data as $item){
+            if($mp === $item['nome']){
+                return $item['autopagar'];
+            }
+        }
+        
+        trigger_error("Meio de pagamento $mp não eoncontrado.", E_USER_ERROR);
+    }
+    
 }

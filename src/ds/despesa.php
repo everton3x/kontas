@@ -35,23 +35,23 @@ class despesa {
             string $data,
             string $observacao
     ): int {
-        
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
+
+        if (\kontas\util\periodo::periodoExists($periodo) === false) {
             \kontas\ds\periodo::criar($periodo);
         }
-        
-        if(mb_strlen($descricao) === 0){
+
+        if (mb_strlen($descricao) === 0) {
             trigger_error('$descricao não pode ser vazio.', E_USER_ERROR);
         }
-        if(mb_strlen($aplicacao) === 0){
+        if (mb_strlen($aplicacao) === 0) {
             trigger_error('$aplicacao não pode ser vazio.', E_USER_ERROR);
         }
-        if(mb_strlen($projeto) === 0){
+        if (mb_strlen($projeto) === 0) {
             trigger_error('$aplicacao não pode ser vazio.', E_USER_ERROR);
         }
-        
+
         $periodoData = \kontas\ds\periodo::load($periodo);
-        
+
         $periodoData['despesas'][] = [
             'descricao' => $descricao,
             'aplicacao' => $aplicacao,
@@ -60,21 +60,21 @@ class despesa {
             'parcela' => $parcela,
             'totalParcelas' => $totalParcelas,
             'previsao' => [[
-                'valor' => $valor,
-                'data' => $data,
-                'observacao' => $observacao,
-            ]],
+            'valor' => $valor,
+            'data' => $data,
+            'observacao' => $observacao,
+                ]],
             'gasto' => [],
         ];
-        
+
         $key = array_key_last($periodoData['despesas']);
-        
+
         \kontas\ds\periodo::save($periodoData);
-        
+
         return $key;
     }
-    
-    public static function addGasto(
+
+    public static function gastar(
             string $periodo,
             int $despesa,
             string $credor,
@@ -85,26 +85,23 @@ class despesa {
             string $data,
             string $observacao
     ): int {
-        if(\kontas\util\periodo::periodoExists($periodo) === false){
-            \kontas\ds\periodo::criar($periodo);
-        }
         
-        if(mb_strlen($credor) === 0){
+        if (mb_strlen($credor) === 0) {
             trigger_error('$credor não pode ser vazio.', E_USER_ERROR);
         }
-        if(mb_strlen($mp) === 0){
+        if (mb_strlen($mp) === 0) {
             trigger_error('$mp não pode ser vazio.', E_USER_ERROR);
         }
-        if(mb_strlen($cc) === 0){
+        if (mb_strlen($cc) === 0) {
             trigger_error('$cc não pode ser vazio.', E_USER_ERROR);
         }
-        
+
         $periodoData = \kontas\ds\periodo::load($periodo);
-        
-        if(key_exists($despesa, $periodoData['despesas']) === false){
+
+        if (key_exists($despesa, $periodoData['despesas']) === false) {
             trigger_error("Chave $despesa não encontrada.", E_USER_ERROR);
         }
-        
+
         $periodoData['despesas'][$despesa]['gasto'][] = [
             'credor' => $credor,
             'mp' => $mp,
@@ -114,11 +111,42 @@ class despesa {
             'data' => $data,
             'pagamento' => []
         ];
-        
+
         $key = array_key_last($periodoData['despesas'][$despesa]['gasto']);
-        
+
         \kontas\ds\periodo::save($periodoData);
+
+        return $key;
+    }
+
+    public static function pagar(
+            string $periodo,
+            int $despesa,
+            int $gasto,
+            float $valor,
+            string $data,
+            string $observacao
+    ): int {
+        $periodoData = \kontas\ds\periodo::load($periodo);
+
+        if (key_exists($despesa, $periodoData['despesas']) === false) {
+            trigger_error("Chave $despesa não encontrada.", E_USER_ERROR);
+        }
         
+        if (key_exists($gasto, $periodoData['despesas'][$despesa]['gasto']) === false) {
+            trigger_error("Chave $gasto não encontrada.", E_USER_ERROR);
+        }
+
+        $periodoData['despesas'][$despesa]['gasto'][$gasto]['pagamento'][] = [
+            'valor' => $valor,
+            'data' => $data,
+            'observacao' => $observacao
+        ];
+
+        $key = array_key_last($periodoData['despesas'][$despesa]['gasto'][$gasto]['pagamento']);
+
+        \kontas\ds\periodo::save($periodoData);
+
         return $key;
     }
 

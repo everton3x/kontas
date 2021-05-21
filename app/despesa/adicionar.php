@@ -29,11 +29,15 @@ try{
         $vencimento = \kontas\io\generic::askVencimento();
         $cc = \kontas\io\cc::select();
         $valor = \kontas\io\generic::askValor('Valor do gasto [####.##]:');
-        $data = \kontas\io\generic::askVencimento('Data do gasto [ddmmaaaa]:');
+        $data = \kontas\util\date::parseInput(\kontas\io\generic::askVencimento('Data do gasto [ddmmaaaa]:'));
         $observacao = \kontas\io\generic::askDescricao('Observação do gasto (opcional):');
         
-        \kontas\ds\despesa::addGasto($periodo, $key, $credor, $mp, $vencimento, $cc, $valor, $data, $observacao);
+        $gasto = \kontas\ds\despesa::gastar($periodo, $key, $credor, $mp, $vencimento, $cc, $valor, $data, $observacao);
+        if (\kontas\ds\mp::isAutopagar($mp) === true) {
+            \kontas\ds\despesa::pagar($periodo, $key, $gasto, $valor, $data, 'Autopagamento');
+        }
     }
+    
     
     
     $climate->info("Despesa criada:");
