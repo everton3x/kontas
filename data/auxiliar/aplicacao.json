@@ -1,17 +1,12 @@
-{
-    "1": {
+[
+    {
         "nome": "Mercado",
-        "descricao": "Despesas com produtos de mercado, padarias, etc.",
-        "ativo": true
-    },
-    "2": {
-        "nome": "Farmacia",
-        "descricao": "Despesas com medicamentos e outros itens de farmacia",
-        "ativo": true
-    },
-    "3": {
-        "nome": "Combustivel",
         "descricao": "",
         "ativo": true
+    },
+    {
+        "nome": "Educa\u0000\u0000o",
+        "descricao": "tstese",
+        "ativo": false
     }
-}
+]
