@@ -27,7 +27,8 @@ class despesa {
         
         $climate->bold()->green()->out($despesa['descricao']);
         $climate->inline('Aplicação:')->tab()->green()->out($despesa['aplicacao']);
-        $climate->inline('Projeto:')->tab()->green()->out($despesa['porjeto']);
+        $climate->inline('Projeto:')->tab()->green()->out($despesa['projeto']);
+        $climate->inline('Agrupador/Parcelas:')->tab()->green()->out("{$despesa['agrupador']}({$despesa['parcela']}/{$despesa['totalParcelas']})");
         
         $previsto = 0;
         foreach($despesa['previsao'] as $item){
@@ -57,5 +58,12 @@ class despesa {
         $climate->padding(KPADDING_LEN)->label('A Pagar')->result(
                 \kontas\util\number::format($gasto - $pago)
         );
+    }
+    
+    public static function askCredor(string $msg = 'Credor:'): string {
+        $climate = new \League\CLImate\CLImate();
+        $climate->out($msg);
+        $input = $climate->input('>');
+        return $input->prompt();
     }
 }

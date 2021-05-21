@@ -3,20 +3,30 @@
     "receitas": [],
     "despesas": [
         {
-            "descricao": "teste de despesa",
-            "aplicacao": "teste de despesa",
-            "projeto": "teste de despesa",
-            "agrupador": "teste de despesa",
-            "parcela": "teste de despesa",
-            "totalParcelas": "teste de despesa",
+            "descricao": "testes",
+            "aplicacao": "Mercado",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 1000.99,
+                    "valor": 1000,
                     "data": "2021-05-21",
                     "observacao": "Previs\u00e3o inicial"
                 }
             ],
-            "gasto": []
+            "gasto": [
+                {
+                    "credor": "fulano",
+                    "mp": "Dinheiro",
+                    "vencimento": "21052021",
+                    "cc": "Familia",
+                    "valor": 900,
+                    "data": "21052021",
+                    "pagamento": []
+                }
+            ]
         }
     ],
     "resultados": {

@@ -21,8 +21,22 @@ try{
     
     $key = \kontas\ds\despesa::addDespesa($periodo, $descricao, $aplicacao, $projeto, '', 1, 1, $valor, date('Y-m-d'), 'Previsão inicial');
     
-    $climate->info("Despesa criada:");
     
+    $gastar = $climate->confirm('Deseja cadastrar como despesa gasta?');
+    if($gastar->confirmed() === true){
+        $credor = \kontas\io\despesa::askCredor();
+        $mp = \kontas\io\mp::select();
+        $vencimento = \kontas\io\generic::askVencimento();
+        $cc = \kontas\io\cc::select();
+        $valor = \kontas\io\generic::askValor('Valor do gasto [####.##]:');
+        $data = \kontas\io\generic::askVencimento('Data do gasto [ddmmaaaa]:');
+        $observacao = \kontas\io\generic::askDescricao('Observação do gasto (opcional):');
+        
+        \kontas\ds\despesa::addGasto($periodo, $key, $credor, $mp, $vencimento, $cc, $valor, $data, $observacao);
+    }
+    
+    
+    $climate->info("Despesa criada:");
     \kontas\io\despesa::resume($periodo, $key);
     
 } catch (Exception $ex) {
