@@ -1,68 +1,20 @@
-{
-    "1": {
+[
+    {
         "nome": "Dinheiro",
-        "descricao": "Valor em especie",
-        "autopagar": true,
-        "ativo": true
-    },
-    "2": {
-        "nome": "Cartao de Debito",
         "descricao": "",
         "autopagar": true,
         "ativo": true
     },
-    "3": {
-        "nome": "Americanas (Credito)",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    "4": {
-        "nome": "Inter (Credito)",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    "5": {
-        "nome": "Banricompras",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    "6": {
-        "nome": "PIX",
-        "descricao": "",
+    {
+        "nome": "Cart\u0000o de d\u0000bito",
+        "descricao": "testes",
         "autopagar": true,
         "ativo": true
     },
-    "7": {
-        "nome": "Cheque",
+    {
+        "nome": "Americanas - cart\u0000o de cr\u0000dito",
         "descricao": "",
         "autopagar": false,
-        "ativo": true
-    },
-    "8": {
-        "nome": "TED",
-        "descricao": "",
-        "autopagar": true,
-        "ativo": true
-    },
-    "9": {
-        "nome": "Agendamento Banrisul",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    "10": {
-        "nome": "Agendamento Inter",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
-    },
-    "11": {
-        "nome": "Agendamento CEF",
-        "descricao": "",
-        "autopagar": false,
-        "ativo": true
+        "ativo": false
     }
-}
+]
