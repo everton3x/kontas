@@ -103,9 +103,9 @@ class receita {
             }
 
             $climate->bold()->green()->inline($key)->tab()->bold()->green()->out($item['descricao']);
-            $climate->inline('Origem:')->tab()->out($item['origem']);
+            $climate->inline('Origem:')->tab(2)->out($item['origem']);
             $climate->inline('Devedor:')->tab()->out($item['devedor']);
-            $climate->inline('CC:')->tab()->out($item['cc']);
+            $climate->inline('CC:')->tab(2)->out($item['cc']);
             $climate->inline($item['agrupador'])->tab()->out("({$item['parcela']}/{$item['totalParcelas']})");
             $climate->inline(\kontas\util\number::format($previsto))
                     ->tab()->inline(\kontas\util\number::format($recebido))
