@@ -40,6 +40,11 @@
                     "valor": 100,
                     "data": "2021-05-24",
                     "observacao": "Previs\u00e3o inicial"
+                },
+                {
+                    "valor": 5,
+                    "data": "2021-05-24",
+                    "observacao": "Auto suplementa\u00e7\u00e3o"
                 }
             ],
             "gasto": [
@@ -64,6 +69,15 @@
                     "vencimento": "09072021",
                     "cc": "Familia",
                     "valor": 30,
+                    "data": "2021-05-24",
+                    "pagamento": []
+                },
+                {
+                    "credor": "ciclano",
+                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
+                    "vencimento": "09072021",
+                    "cc": "Familia",
+                    "valor": 50,
                     "data": "2021-05-24",
                     "pagamento": []
                 }

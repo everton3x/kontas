@@ -32,6 +32,29 @@ try {
         }
     }
 
+    $despesa = (\kontas\ds\despesa::listar($periodo))[$key];
+    $previsto = 0;
+    foreach ($despesa['previsao'] as $item) {
+        $previsto += $item['valor'];
+    }
+    $gasto = 0;
+    foreach ($despesa['gasto'] as $item) {
+        $gasto += $item['valor'];
+    }
+    if ($previsto < $gasto) {
+        $diferenca = round($gasto - $previsto, 2);
+        $atualizar = $climate->confirm(sprintf(
+                        'O valor previsto %s é menor que o valor gasto %s (%s). Deseja suplementar?',
+                        \kontas\util\number::format($previsto),
+                        \kontas\util\number::format($gasto),
+                        \kontas\util\number::format($diferenca),
+        ));
+        if($atualizar->confirmed()){
+            \kontas\ds\despesa::alteraPrevisaoDespesa($periodo, $key, $diferenca, date('Y-m-d'), 'Auto suplementação');
+            $climate->info('Previsão suplementada...');
+        }
+    }
+
     $climate->info("Despesa gasta:");
     \kontas\io\despesa::resume($periodo, $key);
 } catch (Exception $ex) {
