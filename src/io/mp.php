@@ -36,7 +36,7 @@ class mp {
         
         $climate = new \League\CLImate\CLImate();
         
-        $climate->info('Itens disponíveis:');
+        $climate->info('Meios de Pagamento:');
         foreach($list as $key => $item){
             $climate->inline($key)->tab()->out($item['nome']);
         }
@@ -57,7 +57,7 @@ class mp {
         
         $climate = new \League\CLImate\CLImate();
         
-        $climate->info('Itens disponíveis:');
+        $climate->info('Meios de Pagamento:');
         foreach($list as $key => $item){
             $climate->inline($key)->tab()->out($item['nome']);
         }

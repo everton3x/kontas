@@ -35,7 +35,7 @@ class aplicacao {
         
         $climate = new \League\CLImate\CLImate();
         
-        $climate->info('Itens disponíveis:');
+        $climate->info('Aplicações:');
         foreach($list as $key => $item){
             $climate->inline($key)->tab()->out($item['nome']);
         }
@@ -56,7 +56,7 @@ class aplicacao {
         
         $climate = new \League\CLImate\CLImate();
         
-        $climate->info('Itens disponíveis:');
+        $climate->info('Aplicações:');
         foreach($list as $key => $item){
             $climate->inline($key)->tab()->out($item['nome']);
         }
