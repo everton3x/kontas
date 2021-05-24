@@ -27,6 +27,47 @@
                     "pagamento": []
                 }
             ]
+        },
+        {
+            "descricao": "teste de gasto",
+            "aplicacao": "Mercado",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 100,
+                    "data": "2021-05-24",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "fulano",
+                    "mp": "Dinheiro",
+                    "vencimento": "",
+                    "cc": "Familia",
+                    "valor": 25,
+                    "data": "2021-05-24",
+                    "pagamento": [
+                        {
+                            "valor": 25,
+                            "data": "2021-05-24",
+                            "observacao": "Autopagamento"
+                        }
+                    ]
+                },
+                {
+                    "credor": "beltrano",
+                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
+                    "vencimento": "09072021",
+                    "cc": "Familia",
+                    "valor": 30,
+                    "data": "2021-05-24",
+                    "pagamento": []
+                }
+            ]
         }
     ],
     "resultados": {
