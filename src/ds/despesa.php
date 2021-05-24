@@ -149,5 +149,43 @@ class despesa {
 
         return $key;
     }
+    
+    /**
+     * 
+     * @param string $periodo aaaa-mm
+     * @return array
+     */
+    public static function listar(string $periodo): array {
+        $data = \kontas\ds\periodo::load($periodo);
+        
+        return $data['despesas'];
+    }
+
+    /**
+     * 
+     * @param string $periodo aaaa-mm
+     * @param int $despesa
+     * @param float $valor
+     * @param string $data aaaa-mm-dd
+     * @param string $observacao
+     * @return int
+     */
+    public static function alteraPrevisaoDespesa(string $periodo, int $despesa, float $valor, string $data, string $observacao): int {
+        $periodoData = \kontas\ds\periodo::load($periodo);
+        
+        if(key_exists($despesa, $periodoData['despesas']) === false){
+            trigger_error("Chave $despesa não encontrada.", E_USER_ERROR);
+        }
+        
+        $periodoData['despesas'][$despesa]['previsao'][] = [
+            'valor' => $valor,
+            'data' => $data,
+            'observacao' => $observacao
+        ];
+        
+        \kontas\ds\periodo::save($periodoData);
+        
+        return array_key_last($periodoData['despesas'][$despesa]['previsao']);
+    }
 
 }
