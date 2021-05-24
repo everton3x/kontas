@@ -1,12 +1,12 @@
 {
-    "periodo": "2021-06",
+    "periodo": "2021-08",
     "receitas": [
         {
             "descricao": "teste",
             "origem": "Sal\u0000rio",
             "devedor": "pm",
             "cc": "Familia",
-            "vencimento": "2021-06-30",
+            "vencimento": "2021-08-30",
             "agrupador": "",
             "parcela": 1,
             "totalParcelas": 1,
@@ -22,7 +22,7 @@
     ],
     "despesas": [
         {
-            "descricao": "teste",
+            "descricao": "testes",
             "aplicacao": "Mercado",
             "projeto": "Nenhum",
             "agrupador": "",
@@ -30,7 +30,7 @@
             "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 900,
+                    "valor": 700,
                     "data": "2021-05-24",
                     "observacao": "Previs\u00e3o inicial"
                 }
@@ -39,11 +39,11 @@
         }
     ],
     "resultados": {
-        "periodo": 100,
-        "anterior": 0,
-        "acumulado": 100
+        "periodo": 300,
+        "anterior": -100,
+        "acumulado": 200
     },
     "meta": {
-        "aberto": false
+        "aberto": true
     }
 }

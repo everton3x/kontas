@@ -147,9 +147,32 @@ class periodo {
      * 
      * @param array $data
      * @return array
-     * @todo Implementar!
      */
     public static function calcResultadosFor(array $data): array {
+        $receitas = 0;
+        foreach ($data['receitas'] as $receita){
+            foreach ($receita['previsao'] as $item){
+                $receitas += $item['valor'];
+            }
+        }
+        
+        $despesas = 0;
+        foreach ($data['despesas'] as $despesa){
+            foreach ($despesa['previsao'] as $item){
+                $despesas += $item['valor'];
+            }
+        }
+        
+        $resultado = $receitas - $despesas;
+        
+        $periodoAnterior = self::load(\kontas\util\periodo::periodoAnterior($data['periodo']));
+        $anterior = $periodoAnterior['resultados']['acumulado'];
+        
+        
+        $data['resultados']['periodo'] = $resultado;
+        $data['resultados']['anterior'] = $anterior;
+        $data['resultados']['acumulado'] = $anterior + $resultado;
+        
         return $data;
     }
 
