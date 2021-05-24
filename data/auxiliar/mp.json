@@ -6,13 +6,37 @@
         "ativo": true
     },
     {
-        "nome": "Cart\u0000o de d\u0000bito",
-        "descricao": "testes",
+        "nome": "Cartao de Debito",
+        "descricao": "",
         "autopagar": true,
         "ativo": true
     },
     {
-        "nome": "Americanas - cart\u0000o de cr\u0000dito",
+        "nome": "Cartao Americanas",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    {
+        "nome": "Cartao Inter Everton",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    {
+        "nome": "Banricompras",
+        "descricao": "",
+        "autopagar": false,
+        "ativo": true
+    },
+    {
+        "nome": "Debito em conta",
+        "descricao": "",
+        "autopagar": true,
+        "ativo": true
+    },
+    {
+        "nome": "Cheque",
         "descricao": "",
         "autopagar": false,
         "ativo": true

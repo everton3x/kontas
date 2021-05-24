@@ -1,11 +1,11 @@
 {
-    "periodo": "2021-05",
+    "periodo": "2021-04",
     "receitas": [],
     "despesas": [],
     "resultados": {
         "periodo": 0,
         "anterior": 0,
-        "acumulado": 0
+        "acumulado": -98.75
     },
     "meta": {
         "aberto": false

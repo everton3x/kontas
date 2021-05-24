@@ -1,12 +1,57 @@
 [
     {
         "nome": "Mercado",
+        "descricao": "Despesas com mercado",
+        "ativo": true
+    },
+    {
+        "nome": "Farmacia",
+        "descricao": "Despesa com medicamentos e outros produtos de farmacia",
+        "ativo": true
+    },
+    {
+        "nome": "Financiamento",
         "descricao": "",
         "ativo": true
     },
     {
-        "nome": "Educa\u0000\u0000o",
-        "descricao": "tstese",
-        "ativo": false
+        "nome": "Educacao",
+        "descricao": "Despesas com mensalidade, material escolar, livros, etc",
+        "ativo": true
+    },
+    {
+        "nome": "Internet",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Telefone",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Bens duraveis",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Saude",
+        "descricao": "Planos de saude, consultas, exames (exceto medicamentos e itens de farmacia)",
+        "ativo": true
+    },
+    {
+        "nome": "Combustivel",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Manutencao",
+        "descricao": "Gastos com manutencao de veiculos, equipamentos, casa, etc",
+        "ativo": true
+    },
+    {
+        "nome": "Despesas Financeiras",
+        "descricao": "Tarifas bancarias, juros, multas, IOF, etc",
+        "ativo": true
     }
 ]

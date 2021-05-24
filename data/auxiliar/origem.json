@@ -1,22 +1,17 @@
 [
     {
-        "nome": "Sal\u0000rio",
+        "nome": "Salario",
         "descricao": "",
         "ativo": true
     },
     {
-        "nome": "Di\u0000rias",
-        "descricao": "",
-        "ativo": false
-    },
-    {
-        "nome": "Indeniza\u0000\u0000es e Restitui\u0000\u0000es",
-        "descricao": "Valores devolvidos",
+        "nome": "Indenizacao e restituicao",
+        "descricao": "Devolucao de recursos emprestados, de despesas feitas em nome de terceiros, etc.",
         "ativo": true
     },
     {
-        "nome": "Vendas",
-        "descricao": "testes",
+        "nome": "Poupanca",
+        "descricao": "Retirada de recursos da poupanca",
         "ativo": true
     }
 ]
