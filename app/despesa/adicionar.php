@@ -46,6 +46,19 @@ try {
 
     $climate->info("Despesa criada:");
     \kontas\io\despesa::resume($periodo, $key);
+
+    $repetir = $climate->confirm('Deseja repetir a previsão da despesa?');
+
+    while ($repetir->confirmed()) {
+        $periodo = \kontas\util\periodo::periodoPosterior($periodo);
+        $key = \kontas\ds\despesa::addDespesa($periodo, $descricao, $aplicacao, $projeto, '', 1, 1, $valor, date('Y-m-d'), 'Previsão inicial');
+        $climate->info(sprintf(
+                        "Despesa criada em %s:",
+                        \kontas\util\periodo::format($periodo)
+        ));
+        \kontas\io\despesa::resume($periodo, $key);
+        $repetir = $climate->confirm('Deseja repetir a previsão da despesa?');
+    }
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->yellow()->out($ex->getTraceAsString());
