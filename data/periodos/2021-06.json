@@ -3,33 +3,7 @@
     "receitas": [],
     "despesas": [
         {
-            "descricao": "teste de parcelamento",
-            "aplicacao": "Mercado",
-            "projeto": "Nenhum",
-            "agrupador": "agrupador",
-            "parcela": 1,
-            "totalParcelas": 3,
-            "previsao": [
-                {
-                    "valor": 1000,
-                    "data": "2021-05-24",
-                    "observacao": "Previs\u00e3o inicial"
-                }
-            ],
-            "gasto": [
-                {
-                    "credor": "fulano",
-                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
-                    "vencimento": "2021-06-09",
-                    "cc": "Familia",
-                    "valor": 1000,
-                    "data": "2021-05-24",
-                    "pagamento": []
-                }
-            ]
-        },
-        {
-            "descricao": "teste de gasto",
+            "descricao": "teste de pagamento",
             "aplicacao": "Mercado",
             "projeto": "Nenhum",
             "agrupador": "",
@@ -37,49 +11,32 @@
             "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 100,
+                    "valor": 1000,
                     "data": "2021-05-24",
                     "observacao": "Previs\u00e3o inicial"
-                },
-                {
-                    "valor": 5,
-                    "data": "2021-05-24",
-                    "observacao": "Auto suplementa\u00e7\u00e3o"
                 }
             ],
             "gasto": [
                 {
                     "credor": "fulano",
-                    "mp": "Dinheiro",
-                    "vencimento": "",
+                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
+                    "vencimento": "2021-06-30",
                     "cc": "Familia",
-                    "valor": 25,
+                    "valor": 700,
                     "data": "2021-05-24",
+                    "observacao": "",
                     "pagamento": [
                         {
-                            "valor": 25,
+                            "valor": 500,
                             "data": "2021-05-24",
-                            "observacao": "Autopagamento"
+                            "observacao": "teste"
+                        },
+                        {
+                            "valor": 200,
+                            "data": "2021-05-24",
+                            "observacao": ""
                         }
                     ]
-                },
-                {
-                    "credor": "beltrano",
-                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
-                    "vencimento": "09072021",
-                    "cc": "Familia",
-                    "valor": 30,
-                    "data": "2021-05-24",
-                    "pagamento": []
-                },
-                {
-                    "credor": "ciclano",
-                    "mp": "Americanas - cart\u0000o de cr\u0000dito",
-                    "vencimento": "09072021",
-                    "cc": "Familia",
-                    "valor": 50,
-                    "data": "2021-05-24",
-                    "pagamento": []
                 }
             ]
         }

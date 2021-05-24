@@ -151,5 +151,55 @@ class despesa {
         
         return $key;
     }
+    
+    public static function choiceGasto(string $periodo, int $despesa): int {
+        $despesas = \kontas\ds\despesa::listar($periodo);
+
+        $climate = new \League\CLImate\CLImate();
+
+        if (sizeof($despesas) === 0) {
+            $climate->error(sprintf(
+                            "Sem despesas para mostra no período %s",
+                            \kontas\util\periodo::format($periodo)
+            ));
+            exit(0);
+        }
+        
+        $climate->info('Selecionando gastos:');
+        foreach ($despesas[$despesa]['gasto'] as $key => $item){
+            $pago = 0;
+            foreach ($item['pagamento'] as $subitem){
+                $pago += $subitem['valor'];
+            }
+            
+            $climate->inline($key)->tab(2)->bold()->green()->out($despesas[$despesa]['descricao']);
+            $climate->tab()->inline('Credor:')->tab(2)->out($item['credor']);
+            $climate->tab()->inline('MP:')->tab(2)->out($item['mp']);
+            $climate->tab()->inline('Vencimento:')->tab()->out(
+                    sprintf('%s', \kontas\util\date::format($item['vencimento']))
+            );
+            $climate->tab()->inline('CC:')->tab(2)->out($item['cc']);
+            $climate->tab()->inline('Valor:')->tab(2)->out(
+                    sprintf('%s', \kontas\util\number::format($item['valor']))
+            );
+            $climate->tab()->inline('Data:')->tab(2)->out(
+                    sprintf('%s', \kontas\util\date::format($item['data']))
+            );
+            $climate->tab()->inline('Observação:')->tab()->out($item['observacao']);
+            $climate->tab()->inline('Pago:')->tab(2)->out(
+                    sprintf('%s', \kontas\util\number::format($pago))
+            );
+            $climate->tab()->inline('A Pagar:')->tab()->out(
+                    sprintf('%s', \kontas\util\number::format($item['valor'] - $pago))
+            );
+            $climate->br();
+        }
+        
+        $input = $climate->input('Selecione um gasto:');
+        $input->accept(array_keys($despesas[$despesa]['gasto']));
+        $input->strict();
+        
+        return $input->prompt();
+    }
 
 }

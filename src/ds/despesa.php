@@ -95,6 +95,10 @@ class despesa {
         if (mb_strlen($cc) === 0) {
             trigger_error('$cc não pode ser vazio.', E_USER_ERROR);
         }
+        
+        if($vencimento === ''){
+            $vencimento = \kontas\util\date::lastDayOfMonth($periodo);
+        }
 
         $periodoData = \kontas\ds\periodo::load($periodo);
 
@@ -109,6 +113,7 @@ class despesa {
             'cc' => $cc,
             'valor' => $valor,
             'data' => $data,
+            'observacao' => $observacao,
             'pagamento' => []
         ];
 
@@ -135,6 +140,24 @@ class despesa {
         
         if (key_exists($gasto, $periodoData['despesas'][$despesa]['gasto']) === false) {
             trigger_error("Chave $gasto não encontrada.", E_USER_ERROR);
+        }
+        
+        $valorGasto = 0;
+        foreach ($periodoData['despesas'][$despesa]['gasto'] as $item){
+            $valorGasto += $item['valor'];
+        }
+        $valorPago = $valor;
+        foreach ($periodoData['despesas'][$despesa]['gasto'][$gasto]['pagamento'] as $item){
+            $valorPago += $item['valor'];
+        }
+        
+        if($valorGasto < $valorPago){
+            trigger_error(sprintf(
+                    'Valor gasto %s ficará menor que o valor pago %s: %s',
+                    \kontas\util\number::format($valorGasto),
+                    \kontas\util\number::format($valorPago),
+                    \kontas\util\number::format($valorGasto - $valorPago)
+            ), E_USER_ERROR);
         }
 
         $periodoData['despesas'][$despesa]['gasto'][$gasto]['pagamento'][] = [
@@ -188,4 +211,7 @@ class despesa {
         return array_key_last($periodoData['despesas'][$despesa]['previsao']);
     }
 
+    
 }
+
+
