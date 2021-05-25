@@ -150,6 +150,24 @@ try {
             $data['total']['receitas']['recebido'] += $data['receitas'][$k]['total']['recebido'];
             $data['total']['receitas']['saldo'] += $data['receitas'][$k]['total']['saldo'];
         }
+        
+        foreach ($data['despesas'] as $k => $v){
+            $data['despesas'][$k]['total']['previsto'] = 0;
+            foreach ($v['previsao'] as $i){
+                $data['despesas'][$k]['total']['previsto'] += $i['valor'];
+            }
+            
+            $data['despesas'][$k]['total']['gasto'] = 0;
+            foreach ($v['gasto'] as $i){
+                $data['despesas'][$k]['total']['gasto'] += $i['valor'];
+            }
+            
+            $data['despesas'][$k]['total']['saldo'] = $data['despesas'][$k]['total']['previsto'] - $data['despesas'][$k]['total']['gasto'];
+            
+            $data['total']['despesas']['previsto'] += $data['despesas'][$k]['total']['previsto'];
+            $data['total']['despesas']['gasto'] += $data['despesas'][$k]['total']['gasto'];
+            $data['total']['despesas']['saldo'] += $data['despesas'][$k]['total']['saldo'];
+        }
 
 //        print_r($data);
         kontas\util\template::write('aaaa-mm', "$key", $data);

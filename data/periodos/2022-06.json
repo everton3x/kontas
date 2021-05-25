@@ -23,8 +23,8 @@
     "despesas": [],
     "resultados": {
         "periodo": 500,
-        "anterior": 13400,
-        "acumulado": 13900
+        "anterior": 12400,
+        "acumulado": 12900
     },
     "meta": {
         "aberto": true

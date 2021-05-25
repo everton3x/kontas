@@ -26,11 +26,45 @@
             ]
         }
     ],
-    "despesas": [],
+    "despesas": [
+        {
+            "descricao": "testes",
+            "aplicacao": "Mercado",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 1000,
+                    "data": "2021-05-25",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "fulano",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-01-31",
+                    "cc": "Familia",
+                    "valor": 750,
+                    "data": "2021-05-25",
+                    "observacao": "dgag",
+                    "pagamento": [
+                        {
+                            "valor": 700,
+                            "data": "2021-05-25",
+                            "observacao": "sdgteq"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "resultados": {
-        "periodo": 500,
+        "periodo": -500,
         "anterior": 10900,
-        "acumulado": 11400
+        "acumulado": 10400
     },
     "meta": {
         "aberto": true
