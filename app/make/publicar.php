@@ -49,7 +49,6 @@ try {
 
     kontas\util\template::write('index', 'index', $data);
     //fim index.html
-    
     //aaaa.html
     $climate->info('Criando aaaa.html...');
     $periodos = \kontas\ds\periodo::listAll();
@@ -64,27 +63,27 @@ try {
         $data = [];
         $data['ano'] = $ano;
         $data['periodos'] = [];
-        
-        foreach ($periodos as $key => $periodo){
+
+        foreach ($periodos as $key => $periodo) {
             $dados = \kontas\ds\periodo::load($periodo);
-            
+
             $receitas = 0;
-            foreach ($dados['receitas'] as $item){
-                foreach ($item['previsao'] as $subitem){
+            foreach ($dados['receitas'] as $item) {
+                foreach ($item['previsao'] as $subitem) {
                     $receitas += $subitem['valor'];
                 }
             }
-            
+
             $despesas = 0;
-            foreach ($dados['receitas'] as $item){
-                foreach ($item['previsao'] as $subitem){
+            foreach ($dados['receitas'] as $item) {
+                foreach ($item['previsao'] as $subitem) {
                     $despesas += $subitem['valor'];
                 }
             }
-            
+
             $resultado = $dados['resultados']['periodo'];
             $acumulado = $dados['resultados']['acumulado'];
-            
+
             $dt = DateTime::createFromFormat('Y-m', $periodo);
             $data['periodos'][$key] = [
                 'nome' => $dt->format('M'),
@@ -99,6 +98,64 @@ try {
     }
 
     //fim aaaa.html
+    $climate->info('Criando aaaa-mm.html...');
+    $periodos = \kontas\ds\periodo::listAll();
+    foreach ($periodos as $key => $status) {
+        $data = [];
+        $climate->tab()->out("...$key.html");
+        $dt = DateTime::createFromFormat('Y-m', $key);
+        $data['ano'] = $dt->format('Y');
+        $data['mes'] = $dt->format('M');
+        $data['voltar'] = \kontas\util\periodo::periodoAnterior($key);
+        $dt = DateTime::createFromFormat('Y-m', $data['voltar']);
+        $data['anterior'] = $dt->format('M/Y');
+        $data['avancar'] = \kontas\util\periodo::periodoPosterior($key);
+        $dt = DateTime::createFromFormat('Y-m', $data['avancar']);
+        $data['posterior'] = $dt->format('M/Y');
+        $data['aberto'] = $status;
+
+        $dados = \kontas\ds\periodo::load($key);
+        $data['receitas'] = $dados['receitas'];
+        $data['despesas'] = $dados['despesas'];
+        $data['resultados'] = $dados['resultados'];
+        $data['total'] = [
+            'receitas' => [
+                'previsto' => 0,
+                'recebido' => 0,
+                'saldo' => 0
+            ],
+            'despesas' => [
+                'previsto' => 0,
+                'gasto' => 0,
+                'agastar' => 0,
+                'pago' => 0,
+                'apagar' => 0
+            ]
+        ];
+        
+        foreach ($data['receitas'] as $k => $v){
+            $data['receitas'][$k]['total']['previsto'] = 0;
+            foreach ($v['previsao'] as $i){
+                $data['receitas'][$k]['total']['previsto'] += $i['valor'];
+            }
+            
+            $data['receitas'][$k]['total']['recebido'] = 0;
+            foreach ($v['recebimento'] as $i){
+                $data['receitas'][$k]['total']['recebido'] += $i['valor'];
+            }
+            
+            $data['receitas'][$k]['total']['saldo'] = $data['receitas'][$k]['total']['previsto'] - $data['receitas'][$k]['total']['recebido'];
+            
+            $data['total']['receitas']['previsto'] += $data['receitas'][$k]['total']['previsto'];
+            $data['total']['receitas']['recebido'] += $data['receitas'][$k]['total']['recebido'];
+            $data['total']['receitas']['saldo'] += $data['receitas'][$k]['total']['saldo'];
+        }
+
+//        print_r($data);
+        kontas\util\template::write('aaaa-mm', "$key", $data);
+    }
+    //aaaa-mm.html
+    //fim aaaa-mm.html
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->yellow()->out($ex->getTraceAsString());

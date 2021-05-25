@@ -17,7 +17,13 @@
                     "observacao": "Previs\u00e3o inicial"
                 }
             ],
-            "recebimento": []
+            "recebimento": [
+                {
+                    "valor": 432.19,
+                    "data": "2021-05-25",
+                    "observacao": "testese"
+                }
+            ]
         }
     ],
     "despesas": [],
