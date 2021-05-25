@@ -24,13 +24,31 @@
                     "observacao": ""
                 }
             ]
+        },
+        {
+            "descricao": "testes",
+            "origem": "Salario",
+            "devedor": "fulano",
+            "cc": "Familia",
+            "vencimento": "2021-05-25",
+            "agrupador": "testando",
+            "parcela": 1,
+            "totalParcelas": 24,
+            "previsao": [
+                {
+                    "valor": 500,
+                    "data": "2021-05-25",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": []
         }
     ],
     "despesas": [],
     "resultados": {
-        "periodo": 0,
+        "periodo": 6900,
         "anterior": 0,
-        "acumulado": 0
+        "acumulado": 6900
     },
     "meta": {
         "aberto": true

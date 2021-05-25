@@ -13,7 +13,8 @@
     "require": {
         "php": ">=8.0.3",
         "league/climate": "@dev",
-        "ergebnis/json-printer": "dev-main"
+        "ergebnis/json-printer": "dev-main",
+        "twig/twig": "3.x-dev"
     },
     "autoload": {
         "psr-4": {
