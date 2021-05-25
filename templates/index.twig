@@ -1,7 +1,7 @@
 {% extends "_base.twig" %}
 
 {% block content %}
-    <div class="ui red one item inverted menu">
+    <div class="ui violet one item inverted menu">
         <h1 class="item">Períodos</h1>
     </div>
 
@@ -11,6 +11,14 @@
             {% for ano in anos %}
                 <a class="ui label" href="#{{ ano }}">{{ ano }}</a>
             {% endfor %}
+        </div>
+    </div>
+    
+        <div class="ui left aligned segment">
+        <div class="ui medium labels">
+                <span class="ui green label">Aberto</span>
+                <span class="ui blue label">Fechado</span>
+                <span class="ui red label">Faltando</span>
         </div>
     </div>
 
@@ -44,223 +52,5 @@
             </div>
         </div>
     {% endfor %}
-
-
-
-    {#{% for ano, item in periodos %}
-        <div class="ui horizontal segment">
-            <div class="content>"
-                <a class="item" href="#{{ ano }}">{{ ano }}</a>
-            </div>
-        </div>
-    {% endfor %}
-
-    {% for ano, item in periodos %}
-
-        <div class="ui red segment">
-            <div class="icon red inverted header">
-                <a href="{{ ano }}.html">{{ ano }}</a>
-                <a id="{{ano}}" href="#">
-                    <i class="angle double up icon"></i>
-                </a>
-            </div>
-            <div class="content">
-                {%  for mes, status in item %}
-                    {% if mes == '01' %}
-                        {% set nome = 'jan' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '02' %}
-                        {% set nome = 'fev' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '03' %}
-                        {% set nome = 'mar' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '04' %}
-                        {% set nome = 'abr' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '05' %}
-                        {% set nome = 'mai' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '06' %}
-                        {% set nome = 'jun' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '07' %}
-                        {% set nome = 'jul' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '08' %}
-                        {% set nome = 'ago' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '09' %}
-                        {% set nome = 'set' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '10' %}
-                        {% set nome = 'out' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '11' %}
-                        {% set nome = 'nov' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                    {% if mes == '12' %}
-                        {% set nome = 'dez' %}
-                        {% if status == 1 %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% else %}
-                            <a class="ui green label" href="{{ ano }}-{{ mes }}.html">
-                                {{ nome }}
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <span class="ui grey label">
-                            {{ nome }}
-                        </span>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    {% endfor %}#}
 
 {%  endblock %}

@@ -22,9 +22,9 @@
     ],
     "despesas": [],
     "resultados": {
-        "periodo": 0,
-        "anterior": 0,
-        "acumulado": 0
+        "periodo": 500,
+        "anterior": 11400,
+        "acumulado": 11900
     },
     "meta": {
         "aberto": true

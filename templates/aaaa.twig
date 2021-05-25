@@ -1,0 +1,47 @@
+{% extends "_base.twig" %}
+
+{% block content %}
+    {% set anterior = ano-1 %}
+    {% set posterior = ano+1 %}
+    <div class="ui purple three item inverted menu">
+        <a href="{{ anterior }}.html" class="item">{{ anterior }}</a>
+        <h1 class="item">{{ ano }}</h1>
+        <a href="{{ posterior }}.html" class="item">{{ posterior }}</a>
+    </div>
+
+    <table class="ui purple striped table">
+        <thead>
+            <tr>
+                <th>Mês</th>
+                <th class="right aligned">Receita</th>
+                <th class="right aligned">Despesa</th>
+                <th class="right aligned">Resultado</th>
+                <th class="right aligned">Acumulado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, mes in periodos %}
+                {% if mes.resultado < 0 %}
+                    {% set resultadoCls = 'negative' %}
+                {% else %}
+                    {% set resultadoCls = 'positive' %}
+                {% endif %}
+                {% if mes.acumulado < 0 %}
+                    {% set acumuladoCls = 'negative' %}
+                {% else %}
+                    {% set acumuladoCls = 'positive' %}
+                {% endif %}
+
+                <tr>
+                    <td>
+                        <a href="{{ ano }}-{{ key }}.html">{{ mes.nome }}</a>
+                    </td>
+                    <td class="right aligned">{{ mes.receitas|number_format(2, ',', '.') }}</td>
+                    <td class="right aligned">{{ mes.despesas|number_format(2, ',', '.') }}</td>
+                    <td class="right aligned {{ resultadoCls }}">{{ mes.resultado|number_format(2, ',', '.') }}</td>
+                    <td class="right aligned {{ acumuladoCls }}">{{ mes.acumulado|number_format(2, ',', '.') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{%  endblock %}
