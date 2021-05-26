@@ -1,0 +1,44 @@
+{% extends "_base.twig" %}
+
+{% block content %}
+    <h1 class="ui header">Aplicações da Despesa</h1>
+    <div class="ui breadcrumb">
+        <a class="section" href="index.html">Início</a>
+        <div class="divider"> / </div>
+        <div class="active section">Aplicações</div>
+    </div>
+
+    <table class="ui striped table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                {% if item.ativo == true %}
+                    {% set status = 'thumbs up outline' %}
+                {% else %}
+                    {% set status = 'thumbs down outline' %}
+                {% endif %}
+                <tr>
+                    <td>
+                        <a href="aplicacao-{{ item.nome }}.html">{{ item.nome }}</a>
+                    </td>
+                    <td>{{ item.descricao }}</td>
+                    <td>
+                        <i class="{{ status }} icon"></i>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="2">Total</th>
+                <th>{{ total }}</th>
+            </tr>
+        </tfoot>
+    </table>
+{%  endblock %}
