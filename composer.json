@@ -14,7 +14,8 @@
         "php": ">=8.0.3",
         "league/climate": "@dev",
         "ergebnis/json-printer": "dev-main",
-        "twig/twig": "3.x-dev"
+        "twig/twig": "3.x-dev",
+        "phpoffice/phpspreadsheet": "dev-master"
     },
     "autoload": {
         "psr-4": {
