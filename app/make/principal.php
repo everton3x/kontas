@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 $climate = new \League\CLImate\CLImate();
 
 try {
-    $climate->info('Cria o html para publicar no Github Pages...');
+    $climate->info('Cria o html principal...');
 
     $pularCalculoResultados = $climate->confirm('Deseja pular o cálculo dos resultados?');
     if ($pularCalculoResultados->confirmed() === false) {
