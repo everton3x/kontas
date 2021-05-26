@@ -167,6 +167,14 @@ class periodo {
         
         $periodoAnterior = self::load(\kontas\util\periodo::periodoAnterior($data['periodo']));
         $anterior = $periodoAnterior['resultados']['acumulado'];
+        if(\kontas\config::PRUDENCE === true){
+            if($periodoAnterior['meta']['aberto'] === true){
+                if($anterior > 0){
+                    $anterior = 0;
+                }
+            }
+        }
+        
         
         
         $data['resultados']['periodo'] = $resultado;

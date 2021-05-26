@@ -10,4 +10,6 @@ namespace kontas;
 class config {
     
     public const PERIODOS_DIR = 'data/periodos/';
+    
+    public const PRUDENCE = true;
 }
