@@ -7,6 +7,14 @@
         <a href="{{ avancar }}.html" class="item">{{ posterior }}</a>
     </div>
 
+    <div class="ui breadcrumb">
+        <a class="section" href="index.html">Início</a>
+        <div class="divider"> / </div>
+        <a class="section" href="{{ ano }}.html">{{ ano }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ mes }}</div>
+    </div>
+
     <table class="ui green striped table">
         <thead>
             <tr>
@@ -20,83 +28,12 @@
             {% for item in receitas %}
                 <tr>
                     <td>
-                        <div class="ui accordion">
-                            <div class="title">
-                                <i class="dropdown icon"></i>
-                                {{ item.descricao }}
-                            </div>
-                            <div class="content">
-                                <div class="ui selection list">
-                                    <a href="" class="item">
-                                        <div class="ui red horizontal label">Origem</div>
-                                        {{ item.origem }}
-                                    </a>
-                                    <a href="" class="item">
-                                        <div class="ui purple horizontal label">Devedor</div>
-                                        {{ item.devedor }}
-                                    </a>
-                                    <a href="" class="item">
-                                        <div class="ui blue horizontal label">CC</div>
-                                        {{ item.cc }}
-                                    </a>
-                                    <a href="" class="item">
-                                        <div class="ui orange horizontal label">Agrupador/Parcelas</div>
-                                        {{ item.agrupador }} ({{ item.parcela }}/{{ item.totalParcelas }})
-                                    </a>
+                        <div class="ui list">
+                            <div class="item">
+                                <div class="header">
+                                    <a href="{{ item.detalhe }}.html">{{ item.descricao }}</a>
                                 </div>
-                                <div class="item">
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <i class="dropdown icon"></i>
-                                            Previsão
-                                        </div>
-                                        <div class="content">
-                                            <table class="ui striped table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Data</th>
-                                                        <th class="right aligned">Valor</th>
-                                                        <th>Observação</th>
-                                                    </tr>
-                                                </thead>
-                                                {% for previsao in item.previsao %}
-                                                    <tr>
-                                                        <td>{{ previsao.data|date('d/m/Y') }}</td>
-                                                        <td class="right aligned">{{ previsao.valor|number_format(2, ',', '.') }}</td>
-                                                        <td>{{ previsao.observacao }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <i class="dropdown icon"></i>
-                                            Recebimento
-                                        </div>
-                                        <div class="content">
-                                            <table class="ui striped table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Data</th>
-                                                        <th class="right aligned">Valor</th>
-                                                        <th>Observação</th>
-                                                    </tr>
-                                                </thead>
-                                                {% for recebimento in item.recebimento %}
-                                                    <tr>
-                                                        <td>{{ recebimento.data|date('d/m/Y') }}</td>
-                                                        <td class="right aligned">{{ recebimento.valor|number_format(2, ',', '.') }}</td>
-                                                        <td>{{ recebimento.observacao }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="description">{{ item.devedor }}</div>
                             </div>
                         </div>
                     </td>
@@ -133,93 +70,13 @@
             {% for item in despesas %}
                 <tr>
                     <td>
-                        <div class="ui accordion">
-                            <div class="title">
-                                <i class="dropdown icon"></i>
-                                {{ item.descricao }}
+                        <div class="ui list">
+                            <div class="item">
+                                <div class="header">
+                                    <a href="{{ item.detalhe }}.html">{{ item.descricao }}</a>
+                                </div>
+                                <div class="description">{{ item.projeto }}</div>
                             </div>
-                            <div class="content">
-                                <div class="ui selection list">
-                                    <a href="" class="item">
-                                        <div class="ui red horizontal label">Aplicação</div>
-                                        {{ item.aplicacao }}
-                                    </a>
-                                    <a href="" class="item">
-                                        <div class="ui purple horizontal label">Projeto</div>
-                                        {{ item.projeto }}
-                                    </a>
-                                    <a href="" class="item">
-                                        <div class="ui orange horizontal label">Agrupador/Parcelas</div>
-                                        {{ item.agrupador }} ({{ item.parcela }}/{{ item.totalParcelas }})
-                                    </a>
-                                </div>
-                                <div class="item">
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <i class="dropdown icon"></i>
-                                            Previsão
-                                        </div>
-                                        <div class="content">
-                                            <table class="ui striped table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Data</th>
-                                                        <th class="right aligned">Valor</th>
-                                                        <th>Observação</th>
-                                                    </tr>
-                                                </thead>
-                                                {% for previsao in item.previsao %}
-                                                    <tr>
-                                                        <td>{{ previsao.data|date('d/m/Y') }}</td>
-                                                        <td class="right aligned">{{ previsao.valor|number_format(2, ',', '.') }}</td>
-                                                        <td>{{ previsao.observacao }}</td>
-                                                    </tr>
-                                                {% endfor %}
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <i class="dropdown icon"></i>
-                                            Gasto
-                                        </div>
-                                        <div class="content">
-                                            {% for gasto in item.gasto %}
-                                                <div class="ui selection list">
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">Credor</div>
-                                                        {{ gasto.credor }}
-                                                    </a>
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">MP</div>
-                                                        {{ gasto.mp }}
-                                                    </a>
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">Vencimento</div>
-                                                        {{ gasto.vencimento|date('d/m/Y') }}
-                                                    </a>
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">Valor</div>
-                                                        {{ gasto.valor|number_format(2, ',', '.') }}
-                                                    </a>
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">Data</div>
-                                                        {{ gasto.data|date('d/m/Y') }}
-                                                    </a>
-                                                    <a href="" class="item">
-                                                        <div class="ui red horizontal label">Observação</div>
-                                                        {{ gasto.observacao }}
-                                                    </a>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </td>
                     <td class="right aligned">{{ item.total.previsto|number_format(2, ',', '.') }}</td>
                     <td class="right aligned">{{ item.total.gasto|number_format(2, ',', '.') }}</td>
@@ -237,5 +94,44 @@
         </tfoot>
     </table>
 
+
+
+    <table class="ui blue table">
+        <thead>
+            <tr>
+                <th>Resultado</th>
+                <th class="right aligned">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if resultados.periodo < 0 %}
+                    {% set cls = 'negative' %}
+                {% else %}
+                    {% set cls = 'positive' %}    
+                {% endif %}
+                <td>Do Período</td>
+                <td class="right aligned {{ cls }}">{{ resultados.periodo|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                {% if resultados.anterior < 0 %}
+                    {% set cls = 'negative' %}
+                {% else %}
+                    {% set cls = 'positive' %}    
+                {% endif %}
+                <td>Anterior</td>
+                <td class="right aligned {{ cls }}">{{ resultados.anterior|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                {% if resultados.acumulado < 0 %}
+                    {% set cls = 'negative' %}
+                {% else %}
+                    {% set cls = 'positive' %}    
+                {% endif %}
+                <td>Acumulado</td>
+                <td class="right aligned {{ cls }}">{{ resultados.acumulado|number_format(2, ',', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
 
 {%  endblock %}

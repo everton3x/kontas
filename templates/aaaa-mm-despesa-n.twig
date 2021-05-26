@@ -1,0 +1,192 @@
+{% extends "_base.twig" %}
+
+{% block content %}
+    <h1 class="ui header">Detalhes da Despesa</h1>
+    <div class="ui breadcrumb">
+        <a class="section" href="index.html">Início</a>
+        <div class="divider"> / </div>
+        <a class="section" href="{{ ano }}.html">{{ ano }}</a>
+        <div class="divider"> / </div>
+        <a class="section" href="{{ periodo }}.html">{{ mes }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">Detalhes da despesa</div>
+    </div>
+
+    <div class="ui red segment">
+        <div class="ui list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">Descrição</div>
+                    <div class="description">{{ despesa.descricao }}</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">Aplicação</div>
+                    <div class="description">{{ despesa.aplicacao }}</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">Projeto</div>
+                    <div class="description">{{ despesa.projeto }}</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">Agrupador</div>
+                    <div class="description">{{ despesa.agrupador }}</div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">Parcelas</div>
+                    <div class="description">{{ despesa.parcela }} de {{ despesa.totalParcelas }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="ui orange table">
+        <thead>
+            <tr>
+                <th>Resumo</th>
+                <th class="right aligned">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Previsto Atualizado</td>
+                <td class="right aligned">{{ despesa.total.previsto|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                <td>Gasto</td>
+                <td class="right aligned">{{ despesa.total.gasto|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                <td>A Gastar</td>
+                <td class="right aligned">{{ despesa.total.saldo|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                <td>Pago</td>
+                <td class="right aligned">{{ despesa.total.pago|number_format(2, ',', '.') }}</td>
+            </tr>
+            <tr>
+                <td>A Pagar</td>
+                <td class="right aligned">{{ despesa.total.apagar|number_format(2, ',', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="ui header">Previsão da despesa</h2>
+
+    <div class="ui purple segment">
+        <table class="ui striped table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th class="right aligned">Valor</th>
+                    <th>Observação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in despesa.previsao %}
+                    <tr>
+                        <td>{{ item.data|date('d/m/Y') }}</td>
+                        <td class="right aligned">{{ item.valor|number_format(2, ',', '.') }}</td>
+                        <td>{{ item.observacao }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">Total</th>
+                    <th class="right aligned">{{ despesa.total.previsto|number_format(2, ',', '.') }}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <h2 class="ui header">Gastos e Pagamentos</h2>
+
+    <div class="ui segments">
+        {% for gasto in despesa.gasto %}
+            <div class="ui segments">
+                <div class="ui violet segment">
+                    <div class="ui list">
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Credor</div>
+                                <div class="description">{{ gasto.credor }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Meio de Pagamento</div>
+                                <div class="description">{{ gasto.mp }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Vencimento</div>
+                                <div class="description">{{ gasto.vencimento|date('d/m/Y') }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Centro de Custo</div>
+                                <div class="description">{{ gasto.cc }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Valor</div>
+                                <div class="description">{{ gasto.valor|number_format(2, ',', '.') }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Data</div>
+                                <div class="description">{{ gasto.data|date('d/m/Y') }}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">Observação</div>
+                                <div class="description">{{ gasto.observacao }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui violet segment">
+                    <h4 class="header">Pagamentos</h4>
+                    <table class="ui striped table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th class="right aligned">Valor</th>
+                                <th>Observação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pagamento in gasto.pagamento %}
+                                <tr>
+                                    <td>{{ pagamento.data|date('d/m/Y') }}</td>
+                                    <td class="right aligned">{{ pagamento.valor|number_format(2, ',', '.') }}</td>
+                                    <td>{{ pagamento.observacao }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">Total</th>
+                                <th class="right aligned">{{ gasto.pago|number_format(2, ',', '.') }}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{%  endblock %}

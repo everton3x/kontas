@@ -98,12 +98,14 @@ try {
     }
 
     //fim aaaa.html
+    //aaaa-mm.html
     $climate->info('Criando aaaa-mm.html...');
     $periodos = \kontas\ds\periodo::listAll();
     foreach ($periodos as $key => $status) {
         $data = [];
         $climate->tab()->out("...$key.html");
         $dt = DateTime::createFromFormat('Y-m', $key);
+        $data['periodo'] = $key;
         $data['ano'] = $dt->format('Y');
         $data['mes'] = $dt->format('M');
         $data['voltar'] = \kontas\util\periodo::periodoAnterior($key);
@@ -132,47 +134,92 @@ try {
                 'apagar' => 0
             ]
         ];
-        
-        foreach ($data['receitas'] as $k => $v){
+
+        foreach ($data['receitas'] as $k => $v) {
+            $data['receitas'][$k]['detalhe'] = "{$data['periodo']}-receita-$k";
             $data['receitas'][$k]['total']['previsto'] = 0;
-            foreach ($v['previsao'] as $i){
+            foreach ($v['previsao'] as $i) {
                 $data['receitas'][$k]['total']['previsto'] += $i['valor'];
             }
-            
+
             $data['receitas'][$k]['total']['recebido'] = 0;
-            foreach ($v['recebimento'] as $i){
+            foreach ($v['recebimento'] as $i) {
                 $data['receitas'][$k]['total']['recebido'] += $i['valor'];
             }
-            
+
             $data['receitas'][$k]['total']['saldo'] = $data['receitas'][$k]['total']['previsto'] - $data['receitas'][$k]['total']['recebido'];
-            
+
             $data['total']['receitas']['previsto'] += $data['receitas'][$k]['total']['previsto'];
             $data['total']['receitas']['recebido'] += $data['receitas'][$k]['total']['recebido'];
             $data['total']['receitas']['saldo'] += $data['receitas'][$k]['total']['saldo'];
         }
-        
-        foreach ($data['despesas'] as $k => $v){
+
+        foreach ($data['despesas'] as $k => $v) {
+            $data['despesas'][$k]['detalhe'] = "{$data['periodo']}-despesa-$k";
             $data['despesas'][$k]['total']['previsto'] = 0;
-            foreach ($v['previsao'] as $i){
+            foreach ($v['previsao'] as $i) {
                 $data['despesas'][$k]['total']['previsto'] += $i['valor'];
             }
-            
+
             $data['despesas'][$k]['total']['gasto'] = 0;
-            foreach ($v['gasto'] as $i){
+            $data['despesas'][$k]['total']['pago'] = 0;
+            foreach ($v['gasto'] as $l => $i) {
                 $data['despesas'][$k]['total']['gasto'] += $i['valor'];
+                $data['despesas'][$k]['gasto'][$l]['pago'] = 0;
+                foreach ($i['pagamento'] as $p){
+                    $data['despesas'][$k]['gasto'][$l]['pago'] += $p['valor'];
+                    $data['despesas'][$k]['total']['pago'] += $p['valor'];
+                }
+                $data['despesas'][$k]['gasto'][$l]['apagar'] = $i['valor'] - $data['despesas'][$k]['gasto'][$l]['pago'];
             }
-            
+
             $data['despesas'][$k]['total']['saldo'] = $data['despesas'][$k]['total']['previsto'] - $data['despesas'][$k]['total']['gasto'];
-            
+            $data['despesas'][$k]['total']['apagar'] = $data['despesas'][$k]['total']['gasto'] - $data['despesas'][$k]['total']['pago'];
+
             $data['total']['despesas']['previsto'] += $data['despesas'][$k]['total']['previsto'];
             $data['total']['despesas']['gasto'] += $data['despesas'][$k]['total']['gasto'];
             $data['total']['despesas']['saldo'] += $data['despesas'][$k]['total']['saldo'];
         }
+        
+        
 
 //        print_r($data);
         kontas\util\template::write('aaaa-mm', "$key", $data);
+
+        //aaaa-mm-receita-n.html
+        //usa so dados $data de aaaa-mm
+        $climate->tab()->info('Criando aaaa-mm-receita-n.html...');
+        foreach ($data['receitas'] as $seq => $item) {
+            $dados = [];
+            $dados['periodo'] = $data['periodo'];
+            $dados['ano'] = $data['ano'];
+            $dados['mes'] = $data['mes'];
+            $dados['receita'] = $item;
+            $filename = "{$data['periodo']}-receita-$seq";
+            $climate->tab(2)->out("...$filename.html");
+
+//            print_r($data);
+            kontas\util\template::write('aaaa-mm-receita-n', "$filename", $dados);
+        }
+        //fim aaaa-mm-receita-n.html
+        
+        ////aaaa-mm-despesa-n.html
+        //usa so dados $data de aaaa-mm
+        $climate->tab()->info('Criando aaaa-mm-despesa-n.html...');
+        foreach ($data['despesas'] as $seq => $item) {
+            $dados = [];
+            $dados['periodo'] = $data['periodo'];
+            $dados['ano'] = $data['ano'];
+            $dados['mes'] = $data['mes'];
+            $dados['despesa'] = $item;
+            $filename = "{$data['periodo']}-despesa-$seq";
+            $climate->tab(2)->out("...$filename.html");
+
+//            print_r($data);
+            kontas\util\template::write('aaaa-mm-despesa-n', "$filename", $dados);
+        }
+        //fim aaaa-mm-despesa-n.html
     }
-    //aaaa-mm.html
     //fim aaaa-mm.html
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
