@@ -7,8 +7,8 @@ $climate = new \League\CLImate\CLImate();
 try {
     $climate->info('Cria o html para publicar no Github Pages...');
 
-    $calcular = $climate->confirm('É aconselhável recalcular tudo antes. Deseja recalcular?');
-    if ($calcular->confirmed()) {
+    $pularCalculoResultados = $climate->confirm('Deseja pular o cálculo dos resultados?');
+    if ($pularCalculoResultados->confirmed() === false) {
         require 'app/calc/resultados.php';
     }
 
