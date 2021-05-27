@@ -887,9 +887,9 @@
         }
     ],
     "resultados": {
-        "periodo": 0,
-        "anterior": 0,
-        "acumulado": 0
+        "periodo": 149.72999999999956,
+        "anterior": -461.38,
+        "acumulado": -311.65000000000043
     },
     "meta": {
         "aberto": true

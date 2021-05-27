@@ -31,9 +31,9 @@
         }
     ],
     "resultados": {
-        "periodo": 0,
-        "anterior": 0,
-        "acumulado": 0
+        "periodo": -6.33,
+        "anterior": -169.9,
+        "acumulado": -176.23000000000002
     },
     "meta": {
         "aberto": true

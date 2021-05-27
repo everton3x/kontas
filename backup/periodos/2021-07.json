@@ -601,12 +601,55 @@
                     "pagamento": []
                 }
             ]
+        },
+        {
+            "descricao": "Farmacia",
+            "aplicacao": "Farmacia",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 137.41,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Farmacia Sao Joao",
+                    "mp": "Banricompras",
+                    "vencimento": "22072021",
+                    "cc": "Familia",
+                    "valor": 137.41,
+                    "data": "2021-05-23",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Poupanca",
+            "aplicacao": "Poupanca",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 1700,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
         }
     ],
     "resultados": {
-        "periodo": 0,
-        "anterior": 0,
-        "acumulado": 0
+        "periodo": 453.41999999999916,
+        "anterior": -311.65000000000043,
+        "acumulado": 141.76999999999873
     },
     "meta": {
         "aberto": true

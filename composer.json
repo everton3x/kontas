@@ -30,6 +30,18 @@
             "git add .",
             "git commit",
             "git push"
+        ],
+        "backup": [
+            "del /f backup\\auxiliar\\*.json",
+            "del /f backup\\periodos\\*.json",
+            "copy /v /y data\\auxiliar\\*.json backup\\auxiliar\\",
+            "copy /v /y data\\periodos\\*.json backup\\periodos\\"
+        ],
+        "restore": [
+            "del /f data\\auxiliar\\*.json",
+            "del /f data\\periodos\\*.json",
+            "copy /v /y backup\\auxiliar\\*.json data\\auxiliar\\",
+            "copy /v /y backup\\periodos\\*.json data\\periodos\\"
         ]
     }
 }

@@ -547,12 +547,28 @@
                     "pagamento": []
                 }
             ]
+        },
+        {
+            "descricao": "Poupanca",
+            "aplicacao": "Poupanca",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 1700,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
         }
     ],
     "resultados": {
-        "periodo": 0,
+        "periodo": 629.9199999999992,
         "anterior": 0,
-        "acumulado": 0
+        "acumulado": 629.9199999999992
     },
     "meta": {
         "aberto": true

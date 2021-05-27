@@ -112,9 +112,9 @@
         }
     ],
     "resultados": {
-        "periodo": 0,
+        "periodo": -44.06,
         "anterior": 0,
-        "acumulado": 0
+        "acumulado": -44.06
     },
     "meta": {
         "aberto": true
