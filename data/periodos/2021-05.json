@@ -1,119 +1,13 @@
 {
     "periodo": "2021-05",
-    "receitas": [
-        {
-            "descricao": "testes da receita",
-            "origem": "Salario",
-            "devedor": "prefeitura",
-            "cc": "Everton",
-            "vencimento": "2021-05-31",
-            "agrupador": "",
-            "parcela": 1,
-            "totalParcelas": 1,
-            "previsao": [
-                {
-                    "valor": 6900,
-                    "data": "2021-05-24",
-                    "observacao": "Previs\u00e3o inicial"
-                }
-            ],
-            "recebimento": [
-                {
-                    "valor": 6900,
-                    "data": "2021-05-29",
-                    "observacao": ""
-                }
-            ]
-        },
-        {
-            "descricao": "testes",
-            "origem": "Salario",
-            "devedor": "fulano",
-            "cc": "Familia",
-            "vencimento": "2021-05-25",
-            "agrupador": "testando",
-            "parcela": 1,
-            "totalParcelas": 24,
-            "previsao": [
-                {
-                    "valor": 500,
-                    "data": "2021-05-25",
-                    "observacao": "Previs\u00e3o inicial"
-                }
-            ],
-            "recebimento": []
-        },
-        {
-            "descricao": "Ajuste autom\u00e1tico por concilia\u00e7\u00e3o em 27\/05\/2021",
-            "origem": "Ajuste",
-            "devedor": "Ajuste",
-            "cc": "Ajuste",
-            "vencimento": "2021-05-27",
-            "agrupador": "",
-            "parcela": 1,
-            "totalParcelas": 1,
-            "previsao": [
-                {
-                    "valor": 4600,
-                    "data": "2021-05-27",
-                    "observacao": "Ajuste autom\u00e1tico por concilia\u00e7\u00e3o em 27\/05\/2021"
-                }
-            ],
-            "recebimento": [
-                {
-                    "valor": 4600,
-                    "data": "2021-05-27",
-                    "observacao": "Ajuste autom\u00e1tico por concilia\u00e7\u00e3o em 27\/05\/2021"
-                }
-            ]
-        }
-    ],
-    "despesas": [
-        {
-            "descricao": "testste",
-            "aplicacao": "Mercado",
-            "projeto": "Nenhum",
-            "agrupador": "",
-            "parcela": 1,
-            "totalParcelas": 1,
-            "previsao": [
-                {
-                    "valor": 1000,
-                    "data": "2021-05-27",
-                    "observacao": "Previs\u00e3o inicial"
-                }
-            ],
-            "gasto": [
-                {
-                    "credor": "gsdgsd",
-                    "mp": "Cartao Americanas",
-                    "vencimento": "2021-05-31",
-                    "cc": "Familia",
-                    "valor": 900,
-                    "data": "2021-05-25",
-                    "observacao": "",
-                    "pagamento": [
-                        {
-                            "valor": 500,
-                            "data": "2021-05-27",
-                            "observacao": ""
-                        },
-                        {
-                            "valor": 400,
-                            "data": "2021-05-27",
-                            "observacao": ""
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
+    "receitas": [],
+    "despesas": [],
     "resultados": {
-        "periodo": 11000,
-        "anterior": 0,
-        "acumulado": 11000
+        "periodo": "0.00",
+        "anterior": "-461.38",
+        "acumulado": "0.00"
     },
     "meta": {
-        "aberto": true
+        "aberto": "false"
     }
 }

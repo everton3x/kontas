@@ -2,18 +2,36 @@
     "periodo": "2021-08",
     "receitas": [
         {
-            "descricao": "testes",
+            "descricao": "Sal\u0000rio",
             "origem": "Salario",
-            "devedor": "fulano",
-            "cc": "Familia",
-            "vencimento": "2021-08-25",
-            "agrupador": "testando",
-            "parcela": 4,
-            "totalParcelas": 24,
+            "devedor": "Prefeitura",
+            "cc": "Everton",
+            "vencimento": "2021-08-30",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 500,
-                    "data": "2021-05-25",
+                    "valor": 6895,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "recebimento": []
+        },
+        {
+            "descricao": "Netflix",
+            "origem": "Indenizacao e restituicao",
+            "devedor": "Marcos Neuhaus",
+            "cc": "Familia",
+            "vencimento": "2021-08-30",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 22.95,
+                    "data": "2021-05-27",
                     "observacao": "Previs\u00e3o inicial"
                 }
             ],
@@ -22,9 +40,9 @@
     ],
     "despesas": [],
     "resultados": {
-        "periodo": 500,
+        "periodo": 0,
         "anterior": 0,
-        "acumulado": 500
+        "acumulado": 0
     },
     "meta": {
         "aberto": true

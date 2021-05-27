@@ -17,6 +17,8 @@ try {
             \kontas\util\periodo::format($data['periodo'])
     );
 
+    $totalPrevisto = 0;
+    $totalRecebido = 0;
     foreach ($data['receitas'] as $receita) {
         $previsto = 0;
         $recebido = 0;
@@ -26,6 +28,10 @@ try {
         foreach ($receita['recebimento'] as $item) {
             $recebido += $item['valor'];
         }
+
+        $totalPrevisto += $previsto;
+        $totalRecebido += $recebido;
+
         $climate->bold()->green()->out($receita['descricao']);
         $climate->inline('Origem:')->tab(2)->out($receita['origem']);
         $climate->inline('Devedor:')->tab()->out($receita['devedor']);
@@ -45,6 +51,16 @@ try {
         );
         $climate->br();
     }
+
+    $climate->padding(KPADDING_LEN)->label('Total Previsto')->result(
+            \kontas\util\number::format($totalPrevisto)
+    );
+    $climate->padding(KPADDING_LEN)->label('Total Recebido')->result(
+            \kontas\util\number::format($totalRecebido)
+    );
+    $climate->padding(KPADDING_LEN)->label('Total A Receber')->result(
+            \kontas\util\number::format($totalPrevisto - $totalRecebido)
+    );
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->yellow()->out($ex->getTraceAsString());
