@@ -14,7 +14,9 @@ class template {
 
     public static function engine(string $templates): \Twig\Environment {
         $loader = new \Twig\Loader\FilesystemLoader($templates);
-        return new \Twig\Environment($loader);
+        return new \Twig\Environment($loader, [
+//            'cache' => false
+        ]);
     }
 
     public static function write(string $tpl, string $target, array $data = []): void {

@@ -178,7 +178,7 @@ try {
 
             $data['total']['despesas']['previsto'] += $data['despesas'][$k]['total']['previsto'];
             $data['total']['despesas']['gasto'] += $data['despesas'][$k]['total']['gasto'];
-            $data['total']['despesas']['saldo'] += $data['despesas'][$k]['total']['saldo'];
+            $data['total']['despesas']['agastar'] += $data['despesas'][$k]['total']['saldo'];
         }
         
         
@@ -221,6 +221,11 @@ try {
         //fim aaaa-mm-despesa-n.html
     }
     //fim aaaa-mm.html
+    
+    //mais.html
+    $climate->tab()->info('Criando mais.html...');
+    kontas\util\template::write('mais', 'mais', []);
+    //fim mais.html
 } catch (Exception $ex) {
     $climate->error($ex->getMessage());
     $climate->yellow()->out($ex->getTraceAsString());

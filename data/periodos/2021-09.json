@@ -300,7 +300,7 @@
             "descricao": "Mensalidade escolar",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "dh2021a",
+            "agrupador": "",
             "parcela": 9,
             "totalParcelas": 12,
             "previsao": [
@@ -327,7 +327,7 @@
             "descricao": "Mensalidade escolar",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "dh2021b",
+            "agrupador": "",
             "parcela": 9,
             "totalParcelas": 12,
             "previsao": [
@@ -552,7 +552,7 @@
             "descricao": "Mensalidade do ingles",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "ingles2021arthur",
+            "agrupador": "",
             "parcela": 10,
             "totalParcelas": 12,
             "previsao": [

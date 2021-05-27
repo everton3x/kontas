@@ -61,7 +61,7 @@
             "devedor": "Marina",
             "cc": "Familia Lara Lemes",
             "vencimento": "2021-06-30",
-            "agrupador": "",
+            "agrupador": "marina30042021",
             "parcela": 1,
             "totalParcelas": 1,
             "previsao": [
@@ -486,7 +486,7 @@
             "descricao": "Mensalidade escolar",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "dh2021a",
+            "agrupador": "",
             "parcela": 6,
             "totalParcelas": 12,
             "previsao": [
@@ -513,7 +513,7 @@
             "descricao": "Mensalidade escolar",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "dh2021b",
+            "agrupador": "",
             "parcela": 6,
             "totalParcelas": 12,
             "previsao": [
@@ -712,7 +712,7 @@
             "descricao": "Mercado da Marina",
             "aplicacao": "Despesas em nome de terceiros",
             "projeto": "Nenhum",
-            "agrupador": "",
+            "agrupador": "marina30042021",
             "parcela": 1,
             "totalParcelas": 1,
             "previsao": [
@@ -862,7 +862,7 @@
             "descricao": "Mensalidade do ingles",
             "aplicacao": "Educacao",
             "projeto": "Nenhum",
-            "agrupador": "ingles2021arthur",
+            "agrupador": "",
             "parcela": 7,
             "totalParcelas": 12,
             "previsao": [
