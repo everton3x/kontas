@@ -18,31 +18,476 @@
                 }
             ],
             "recebimento": []
+        }
+    ],
+    "despesas": [
+        {
+            "descricao": "Smartphone Everton Moto E6 Plus",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-756132950",
+            "parcela": 17,
+            "totalParcelas": 18,
+            "previsao": [
+                {
+                    "valor": 55.5,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Everton",
+                    "valor": 55.5,
+                    "data": "2020-07-07",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
         },
         {
-            "descricao": "Netflix",
-            "origem": "Indenizacao e restituicao",
-            "devedor": "Marcos Neuhaus",
-            "cc": "Familia",
-            "vencimento": "2021-11-30",
+            "descricao": "SmartTV 32 pol",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-768168831",
+            "parcela": 15,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 50.98,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Familia",
+                    "valor": 50.98,
+                    "data": "2020-09-18",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Smartpand Mi Band 5",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-809251540",
+            "parcela": 12,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 18.68,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Arthur",
+                    "valor": 18.68,
+                    "data": "2020-12-19",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Presente de casamento do Mauricio",
+            "aplicacao": "Presentes",
+            "projeto": "Nenhum",
+            "agrupador": "02-812476434",
+            "parcela": 11,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 12.67,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Familia",
+                    "valor": 12.67,
+                    "data": "2021-01-10",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Bau 45l da moto",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-818446240",
+            "parcela": 10,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 8.39,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Factor 125 IVD8I61",
+                    "valor": 8.39,
+                    "data": "2021-02-18",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Jogo de pratos",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-824427767",
+            "parcela": 8,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 6.33,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Familia",
+                    "valor": 6.33,
+                    "data": "2021-03-24",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Combustivel da moto",
+            "aplicacao": "Combustivel",
+            "projeto": "Nenhum",
             "agrupador": "",
             "parcela": 1,
             "totalParcelas": 1,
             "previsao": [
                 {
-                    "valor": 22.95,
+                    "valor": 150,
                     "data": "2021-05-27",
                     "observacao": "Previs\u00e3o inicial"
                 }
             ],
-            "recebimento": []
+            "gasto": []
+        },
+        {
+            "descricao": "Combustivel carro",
+            "aplicacao": "Combustivel",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 350,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Mensalidade escolar",
+            "aplicacao": "Educacao",
+            "projeto": "Nenhum",
+            "agrupador": "dh2021a",
+            "parcela": 11,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 452.86,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Dom Hermeto",
+                    "mp": "Debito Agendado",
+                    "vencimento": "2021-11-05",
+                    "cc": "Arthur",
+                    "valor": 452.86,
+                    "data": "2021-01-01",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Mensalidade escolar",
+            "aplicacao": "Educacao",
+            "projeto": "Nenhum",
+            "agrupador": "dh2021b",
+            "parcela": 11,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 670.53,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Dom Hermeto",
+                    "mp": "Debito Agendado",
+                    "vencimento": "2021-11-05",
+                    "cc": "Pedro Henrique",
+                    "valor": 670.53,
+                    "data": "2021-01-01",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Lencol",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "100958",
+            "parcela": 7,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 16.67,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Grazziotin",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Familia",
+                    "valor": 16.67,
+                    "data": "2021-05-09",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "INSS",
+            "aplicacao": "Previdencia",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 220,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "IPERGS",
+            "aplicacao": "Saude",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 485.26,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Luz",
+            "aplicacao": "Servicos Publicos",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 80,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Mercado",
+            "aplicacao": "Mercado",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 900,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Netflix",
+            "aplicacao": "Lazer",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 45.9,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Presta\u0000\u0000o da casa",
+            "aplicacao": "Financiamento",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 760,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Internet",
+            "aplicacao": "Internet",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 89,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Tarifas bancarias",
+            "aplicacao": "Despesas Financeiras",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 30,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Telefone",
+            "aplicacao": "Telefone",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 45,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
+        },
+        {
+            "descricao": "Mensalidade do ingles",
+            "aplicacao": "Educacao",
+            "projeto": "Nenhum",
+            "agrupador": "ingles2021arthur",
+            "parcela": 12,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 50.56,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Wizard",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2021-12-09",
+                    "cc": "Arthur",
+                    "valor": 50.56,
+                    "data": "2020-11-26",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Poupanca",
+            "aplicacao": "Poupanca",
+            "projeto": "Nenhum",
+            "agrupador": "",
+            "parcela": 1,
+            "totalParcelas": 1,
+            "previsao": [
+                {
+                    "valor": 1700,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": []
         }
     ],
-    "despesas": [],
     "resultados": {
-        "periodo": 0,
+        "periodo": 696.6699999999992,
         "anterior": 0,
-        "acumulado": 0
+        "acumulado": 696.6699999999992
     },
     "meta": {
         "aberto": true

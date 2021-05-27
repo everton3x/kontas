@@ -3,11 +3,11 @@
     "receitas": [],
     "despesas": [],
     "resultados": {
-        "periodo": "0.00",
+        "periodo": 0,
         "anterior": "-461.38",
-        "acumulado": "0.00"
+        "acumulado": -461.38
     },
     "meta": {
-        "aberto": "false"
+        "aberto": true
     }
 }

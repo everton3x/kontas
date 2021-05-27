@@ -1,0 +1,62 @@
+[
+    {
+        "nome": "Familia",
+        "descricao": "Everton, Marlise e Filhos",
+        "ativo": true
+    },
+    {
+        "nome": "Filhos",
+        "descricao": "Arthur e Pedro Henrique",
+        "ativo": true
+    },
+    {
+        "nome": "Arthur",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Pedro Henrique",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Casa",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "HB20S MLT7A35",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Factor 125 IVD8I61",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Familia Da Rosa",
+        "descricao": "Inacio, Beatriz, etc",
+        "ativo": true
+    },
+    {
+        "nome": "Familia Lara Lemes",
+        "descricao": "Evaldi, Marina e etc",
+        "ativo": true
+    },
+    {
+        "nome": "Flavio",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Everton",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Marlise",
+        "descricao": "",
+        "ativo": true
+    }
+]

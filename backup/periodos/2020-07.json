@@ -1,0 +1,95 @@
+{
+    "periodo": "2020-07",
+    "receitas": [],
+    "despesas": [
+        {
+            "descricao": "Notebook",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02739190996",
+            "parcela": 4,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 160.13,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2020-08-09",
+                    "cc": "Arthur",
+                    "valor": 160.13,
+                    "data": "2020-04-08",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Smartphone Everton Moto E6 Plus",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-756132950",
+            "parcela": 1,
+            "totalParcelas": 18,
+            "previsao": [
+                {
+                    "valor": 55.5,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2020-08-09",
+                    "cc": "Everton",
+                    "valor": 55.5,
+                    "data": "2020-07-07",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Cobertores",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-754347791",
+            "parcela": 1,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 27.72,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2020-08-09",
+                    "cc": "Familia",
+                    "valor": 27.72,
+                    "data": "2020-06-27",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        }
+    ],
+    "resultados": {
+        "periodo": 0,
+        "anterior": 0,
+        "acumulado": 0
+    },
+    "meta": {
+        "aberto": true
+    }
+}

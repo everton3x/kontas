@@ -1,0 +1,41 @@
+{
+    "periodo": "2022-06",
+    "receitas": [],
+    "despesas": [
+        {
+            "descricao": "Jogo de pratos",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-824427767",
+            "parcela": 15,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 6.33,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-07-09",
+                    "cc": "Familia",
+                    "valor": 6.33,
+                    "data": "2021-03-24",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        }
+    ],
+    "resultados": {
+        "periodo": -6.33,
+        "anterior": -169.9,
+        "acumulado": -176.23000000000002
+    },
+    "meta": {
+        "aberto": true
+    }
+}

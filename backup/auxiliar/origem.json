@@ -1,0 +1,17 @@
+[
+    {
+        "nome": "Salario",
+        "descricao": "",
+        "ativo": true
+    },
+    {
+        "nome": "Indenizacao e restituicao",
+        "descricao": "Devolucao de recursos emprestados, de despesas feitas em nome de terceiros, etc.",
+        "ativo": true
+    },
+    {
+        "nome": "Poupanca",
+        "descricao": "Retirada de recursos da poupanca",
+        "ativo": true
+    }
+]

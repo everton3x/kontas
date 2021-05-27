@@ -1,0 +1,122 @@
+{
+    "periodo": "2022-02",
+    "receitas": [],
+    "despesas": [
+        {
+            "descricao": "Presente de casamento do Mauricio",
+            "aplicacao": "Presentes",
+            "projeto": "Nenhum",
+            "agrupador": "02-812476434",
+            "parcela": 14,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 12.67,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-03-09",
+                    "cc": "Familia",
+                    "valor": 12.67,
+                    "data": "2021-01-10",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Bau 45l da moto",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-818446240",
+            "parcela": 13,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 8.39,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-03-09",
+                    "cc": "Factor 125 IVD8I61",
+                    "valor": 8.39,
+                    "data": "2021-02-18",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Jogo de pratos",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "02-824427767",
+            "parcela": 11,
+            "totalParcelas": 15,
+            "previsao": [
+                {
+                    "valor": 6.33,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Americanas",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-03-09",
+                    "cc": "Familia",
+                    "valor": 6.33,
+                    "data": "2021-03-24",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        },
+        {
+            "descricao": "Lencol",
+            "aplicacao": "Bens duraveis",
+            "projeto": "Nenhum",
+            "agrupador": "100958",
+            "parcela": 10,
+            "totalParcelas": 12,
+            "previsao": [
+                {
+                    "valor": 16.67,
+                    "data": "2021-05-27",
+                    "observacao": "Previs\u00e3o inicial"
+                }
+            ],
+            "gasto": [
+                {
+                    "credor": "Grazziotin",
+                    "mp": "Cartao Americanas",
+                    "vencimento": "2022-03-09",
+                    "cc": "Familia",
+                    "valor": 16.67,
+                    "data": "2021-05-09",
+                    "observacao": "",
+                    "pagamento": []
+                }
+            ]
+        }
+    ],
+    "resultados": {
+        "periodo": -44.06,
+        "anterior": -44.06,
+        "acumulado": -88.12
+    },
+    "meta": {
+        "aberto": true
+    }
+}
