@@ -1,0 +1,38 @@
+{% extends "_base.twig" %}
+
+{% block content %}
+    <div class="ui teal inverted menu">
+        <div class="header item">Meios de Pagamento</div>
+    </div>
+
+    <div class="ui breadcrumb">
+        <a class="section" href="index.html">Início</a>
+        <div class="divider"> / </div>
+        <a class="section" href="mais.html">Mais</a>
+        <div class="divider"> / </div>
+        <div class="active section">Meios de Pagamento</div>
+    </div>
+
+
+    <table class="ui striped table">
+        <thead>
+            <tr>
+                <th>Meio de Pagamento</th>
+                <th>Despesa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nome, mp in mps %}
+                <tr>
+                    <td>
+                        <a href="mp-{{ nome }}.html">{{ nome }}</a>
+                    </td>
+                    <td>
+                        {{ mp.despesa|number_format(2, ',', '.') }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{%  endblock %}
