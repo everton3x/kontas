@@ -42,6 +42,12 @@
             "del /f data\\periodos\\*.json",
             "copy /v /y backup\\auxiliar\\*.json data\\auxiliar\\",
             "copy /v /y backup\\periodos\\*.json data\\periodos\\"
-        ]
+        ],
+        "up": [
+            "git add .",
+            "git commit -m 'Auto-commit...'",
+            "git push"
+        ],
+        "down": "git pull"
     }
 }
