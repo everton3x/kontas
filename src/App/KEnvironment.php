@@ -10,7 +10,7 @@ namespace Kontas\App;
 class KEnvironment extends \PTK\Console\Flow\Environment\EnvironmentAbstract {
     
     protected \PDO $dbh;
-    protected string $dbDSN = 'sqlite:data/kontas.sqlite';
+    protected string $dbDSN = 'sqlite:data/kontas.db';
     protected null|string $dbUser = null;
     protected null|string $dbPassword = null;
 
