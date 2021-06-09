@@ -13,41 +13,21 @@
     "require": {
         "php": ">=8.0.3",
         "league/climate": "@dev",
-        "ergebnis/json-printer": "dev-main",
         "twig/twig": "3.x-dev",
-        "phpoffice/phpspreadsheet": "dev-master"
+        "phpoffice/phpspreadsheet": "dev-master",
+        "php-tool-kit/console-form": "dev-main",
+        "php-tool-kit/console-flow": "dev-main"
     },
     "autoload": {
         "psr-4": {
-            "kontas\\": "src"
-        },
-        "files": [
-            "init.php"
-        ]
+            "Kontas\\": "src"
+        }
     },
     "scripts": {
         "push": [
             "git add .",
             "git commit",
             "git push"
-        ],
-        "backup": [
-            "del /f backup\\auxiliar\\*.json",
-            "del /f backup\\periodos\\*.json",
-            "copy /v /y data\\auxiliar\\*.json backup\\auxiliar\\",
-            "copy /v /y data\\periodos\\*.json backup\\periodos\\"
-        ],
-        "restore": [
-            "del /f data\\auxiliar\\*.json",
-            "del /f data\\periodos\\*.json",
-            "copy /v /y backup\\auxiliar\\*.json data\\auxiliar\\",
-            "copy /v /y backup\\periodos\\*.json data\\periodos\\"
-        ],
-        "up": [
-            "git add .",
-            "git commit -m 'Auto-commit...'",
-            "git push"
-        ],
-        "down": "git pull"
+        ]
     }
 }
