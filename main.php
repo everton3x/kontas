@@ -14,15 +14,34 @@ try {
     $reabrirPeriodo = new \Kontas\Routine\Periodo\ReabrirPeriodo($program);
     $resumirPeriodo = new \Kontas\Routine\Periodo\ResumirPeriodo($program);
     $gerenciarPeriodos = new \Kontas\Routine\GerenciarPeriodos($program);
-    $gerenciarPeriodos->registerSubRoutine($abrirPeriodo)
+    $gerenciarPeriodos
+            ->registerSubRoutine($abrirPeriodo)
             ->registerSubRoutine($fecharPeriodo)
             ->registerSubRoutine($reabrirPeriodo)
             ->registerSubRoutine($listarPeriodos)
             ->registerSubRoutine($resumirPeriodo)
             ->registerSubRoutine($detalharPeriodo);
+    
+    $gerenciarOrigens = new \Kontas\Routine\GerenciarOrigens($program);
+    
+    $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);
+    
+    $gerenciarCentrosDeCustos = new Kontas\Routine\GerenciarCentrosDeCustos($program);
+    
+    $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
+    
+    
+    $gerenciarCadastros = new Kontas\Routine\GerenciarCadastros($program);
+    $gerenciarCadastros
+            ->registerSubRoutine($gerenciarOrigens)
+            ->registerSubRoutine($gerenciarAplicacoes)
+            ->registerSubRoutine($gerenciarCentrosDeCustos)
+            ->registerSubRoutine($gerenciarMeiosDePagamento);
 
     $mainMenu = new \Kontas\Routine\MainMenu($program);
-    $mainMenu->registerSubRoutine($gerenciarPeriodos);
+    $mainMenu
+            ->registerSubRoutine($gerenciarPeriodos)
+            ->registerSubRoutine($gerenciarCadastros);
 
     $program->entryPoint($mainMenu);
     $program->run();
