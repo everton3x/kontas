@@ -20,4 +20,9 @@ class KProgram extends \PTK\Console\Flow\Program\ProgramAbstract {
     public function dbh(): \PDO {
         return $this->environment->dbh;
     }
+    
+    public function pause(string $msg = 'Pressione ENTER para continuar...'): void {
+        $input = $this->console()->input($msg);
+        $input->prompt();
+    }
 }

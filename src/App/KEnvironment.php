@@ -21,6 +21,15 @@ class KEnvironment extends \PTK\Console\Flow\Environment\EnvironmentAbstract {
     
     protected function prepareDb(): void {
         $this->dbh = new \PDO($this->dbDSN, $this->dbUser, $this->dbPassword);
+        $this->dbh->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+    }
+    
+    public function __get(string $member): mixed {
+        if(property_exists($this, $member)){
+            return $this->{$member};
+        }
+        
+        throw new ResourceNotFoundException($member);
     }
     
 }
