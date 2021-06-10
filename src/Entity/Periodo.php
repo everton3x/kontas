@@ -193,6 +193,8 @@ class Periodo {
         }
         
         //o período anterior está fechado? só posso fechar se o anterior estiver fechado.
+        //não posso fechar se o anterior não estiver fechado por causa do cálculo dos resultados.
+        //não tem sentido fechar um se o anterior ainda estiver aberto
         $previous = $this->previous($periodo);
         if($this->isOpen($previous)){
             $this->program->console()->error("Período anterior ainda está aberto: $previous");
@@ -206,6 +208,43 @@ class Periodo {
         if(!$stmt->execute()){
             $this->program->console()->error(
                     sprintf('Falha ao fechar %s: %s', $periodo, $this->dbh->errorInfo())
+            );
+            return false;
+        }
+        
+        return $this;
+    }
+    
+    public function reopen(string $periodo = ''): Periodo|bool {
+        if($periodo === ''){
+            $periodo = $this->object->format('Y-m');
+        }
+        
+        //é um mês/ano válido?
+        if(!$this->isMonthAndYearValid($periodo)){
+            $this->program->console()->error("Período inválido: $periodo");
+            return false;
+        }
+        
+        //o período existe?
+        if(!$this->exists($periodo)){
+            $this->program->console()->error("Período não existe: $periodo");
+            return false;
+        }
+        
+        //o período está fechado?
+        if($this->isOpen($periodo)){
+            $this->program->console()->error("Período já está aberto: $periodo");
+            return false;
+        }
+        
+        //reabre
+        $stmt = $this->dbh->prepare('UPDATE periodos SET aberto = :aberto WHERE periodo LIKE :periodo');
+        $stmt->bindValue(':periodo', $periodo);
+        $stmt->bindValue(':aberto', 1);
+        if(!$stmt->execute()){
+            $this->program->console()->error(
+                    sprintf('Falha ao reabrir %s: %s', $periodo, $this->dbh->errorInfo())
             );
             return false;
         }
