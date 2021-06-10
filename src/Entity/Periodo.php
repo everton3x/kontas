@@ -70,7 +70,7 @@ class Periodo {
         }elseif ($rows === 1) {
             return true;
         }else{
-            throw new OutOfRangeException("Número de períodos encontrados para $periodo: $rows");
+            throw new \OutOfRangeException("Número de períodos encontrados para $periodo: $rows");
         }
     }
     
@@ -133,5 +133,83 @@ class Periodo {
     
     public function get(): \DateTime {
         return $this->object;
+    }
+    
+    /**
+     * 
+     * @param string $periodo aaaa-mm
+     * @return bool
+     * @throws InvalidPeriodo
+     * @throws \OutOfRangeException
+     */
+    public function isOpen(string $periodo): bool {
+        if(!$this->isMonthAndYearValid($periodo)){
+            throw new InvalidPeriodo("Período inválido: $periodo");
+        }
+        $stmt = $this->dbh->prepare('SELECT * FROM periodos WHERE periodo LIKE :periodo');
+        $stmt->bindValue(':periodo', $periodo);
+        $stmt->execute();
+        $rows = $stmt->fetchAll();
+        
+        if (sizeof($rows) === 1) {
+            if($rows[0]['aberto'] === "0"){
+                return false;
+            }elseif($rows[0]['aberto'] === "1"){
+                return true;
+            }else{
+                throw new \OutOfRangeException("Valor inválido para o campo [aberto]: {$rows[0]['aberto']}.");
+            }
+        }else{
+            throw new \OutOfRangeException("Número de períodos encontrados para $periodo.");
+        }
+    }
+    
+    /**
+     * 
+     * @param string $periodo aaaa-mm
+     * @return Periodo|bool
+     */
+    public function close(string $periodo = ''): Periodo|bool {
+        if($periodo === ''){
+            $periodo = $this->object->format('Y-m');
+        }
+        
+        //é um mês/ano válido?
+        if(!$this->isMonthAndYearValid($periodo)){
+            $this->program->console()->error("Período inválido: $periodo");
+            return false;
+        }
+        
+        //o período existe?
+        if(!$this->exists($periodo)){
+            $this->program->console()->error("Período não existe: $periodo");
+            return false;
+        }
+        
+        //o período está aberto?
+        if(!$this->isOpen($periodo)){
+            $this->program->console()->error("Período já está fechado: $periodo");
+            return false;
+        }
+        
+        //o período anterior está fechado? só posso fechar se o anterior estiver fechado.
+        $previous = $this->previous($periodo);
+        if($this->isOpen($previous)){
+            $this->program->console()->error("Período anterior ainda está aberto: $previous");
+            return false;
+        }
+        
+        //fecha
+        $stmt = $this->dbh->prepare('UPDATE periodos SET aberto = :aberto WHERE periodo LIKE :periodo');
+        $stmt->bindValue(':periodo', $periodo);
+        $stmt->bindValue(':aberto', 0);
+        if(!$stmt->execute()){
+            $this->program->console()->error(
+                    sprintf('Falha ao fechar %s: %s', $periodo, $this->dbh->errorInfo())
+            );
+            return false;
+        }
+        
+        return $this;
     }
 }
