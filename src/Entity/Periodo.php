@@ -79,7 +79,7 @@ class Periodo {
      * @param string $periodo aaaa-mm
      * @return Periodo
      */
-    public function create(string $periodo): Periodo|bool {
+    public function open(string $periodo): Periodo|bool {
         //é um mês/ano válido?
         if(!$this->isMonthAndYearValid($periodo)){
             $this->program->console()->error("Período inválido: $periodo");

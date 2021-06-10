@@ -25,7 +25,7 @@ class AbrirPeriodo extends \PTK\Console\Flow\Routine\RoutineAbstract {
         $periodo->ask();
 
         $ePeriodo = new \Kontas\Entity\Periodo($this->program);
-        if ($ePeriodo->create($periodo->object()->format('Y-m')) === false) {
+        if ($ePeriodo->open($periodo->object()->format('Y-m')) === false) {
             $this->program->console()->error("Período não criado: $periodo");
             $result = false;
         } else {
