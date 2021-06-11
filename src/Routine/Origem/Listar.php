@@ -16,7 +16,7 @@ class Listar extends \PTK\Console\Flow\Routine\RoutineAbstract {
         $entity = new \Kontas\Entity\Origem($this->program);
         
         $choice = new \PTK\Console\Form\Field\ChoiceField('ativo', 'Mostrar', ['t' => 'Todos', 'a' => 'Só ativos', 'i' => 'Só inativos']);
-        $choice->setDefault('t');
+        $choice->setDefault('t')->setListTitle('Escolha o que mostrar:');
         $choice->ask();
         
         switch (key($choice->answer())){
