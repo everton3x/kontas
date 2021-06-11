@@ -42,7 +42,7 @@ class Alterar extends \PTK\Console\Flow\Routine\RoutineAbstract {
         $ativo->ask();
 
         $novoNome = $nome->answer();
-        switch(key($ativo->answer())){
+        switch (key($ativo->answer())) {
             case 'a':
                 $novoAtivo = 1;
                 break;
@@ -50,24 +50,25 @@ class Alterar extends \PTK\Console\Flow\Routine\RoutineAbstract {
                 $novoAtivo = 0;
                 break;
         }
-        
+
         if ($novoNome === $entity->nome() && $novoAtivo == $entity->ativo()) {
             $result = true;
             $this->program->console()->info("Nenhuma alteração necessária.");
         } else {
-            
-            if($novoNome === $entity->nome()){
+
+            if ($novoNome === $entity->nome()) {
                 $novoNome = null;
             }
-            if($novoAtivo == $entity->ativo()){
+            if ($novoAtivo == $entity->ativo()) {
                 $novoAtivo = null;
             }
-            
+
             if ($entity->update($novoNome, $novoAtivo) !== false) {
                 $result = true;
                 $entity->load($id);
-                // @task Colocar uma tela com os detalhes da origem no lugar dessas mensagens
-                $this->program->console()->info("Registro {$entity->nome()} atualizado com id {$entity->id()}.");
+                $this->program->console()->info("Registro {$entity->nome()} atualizado com id {$entity->id()}.")->br();
+                $io = new \Kontas\IO\Origem($this->program);
+                $io->detalhar($entity->id());
             } else {
                 $result = false;
                 $this->program->console()->error("Registro {$nome->answer()} não foi atualizado.");

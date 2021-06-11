@@ -21,8 +21,9 @@ class Adicionar extends \PTK\Console\Flow\Routine\RoutineAbstract {
         if($id !== false){
             $result = true;
             $entity->load($id);
-            // @task Colocar uma tela com os detalhes da origem no lugar dessas mensagens
-            $this->program->console()->info("Registro {$entity->nome()} criado com id {$entity->id()}.");
+            $this->program->console()->info("Registro {$entity->nome()} criado com id {$entity->id()}.")->br();
+            $io = new \Kontas\IO\Origem($this->program);
+            $io->detalhar($entity->id());
         }else{
             $result = false;
             $this->program->console()->error("Registro {$nome->answer()} não foi criado.");
