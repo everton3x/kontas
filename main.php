@@ -24,10 +24,12 @@ try {
     
     $adicionarOrigem = new \Kontas\Routine\Origem\Adicionar($program);
     $alterarOrigem = new \Kontas\Routine\Origem\Alterar($program);
+    $listarOrigens = new \Kontas\Routine\Origem\Listar($program);
     $gerenciarOrigens = new \Kontas\Routine\GerenciarOrigens($program);
     $gerenciarOrigens
             ->registerSubRoutine($adicionarOrigem)
             ->registerSubRoutine($alterarOrigem)
+            ->registerSubRoutine($listarOrigens)
             ;
     
     $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);

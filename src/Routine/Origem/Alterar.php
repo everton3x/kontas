@@ -58,6 +58,7 @@ class Alterar extends \PTK\Console\Flow\Routine\RoutineAbstract {
             if ($entity->update($novoNome, $novoAtivo) !== false) {
                 $result = true;
                 $entity->load($id);
+                // @task Colocar uma tela com os detalhes da origem no lugar dessas mensagens
                 $this->program->console()->info("Registro {$entity->nome()} atualizado com id {$entity->id()}.");
             } else {
                 $result = false;
