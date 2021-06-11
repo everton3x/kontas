@@ -30,19 +30,27 @@ class Alterar extends \PTK\Console\Flow\Routine\RoutineAbstract {
         $nome = new \PTK\Console\Form\Field\TextField('nome', 'Nome');
         $nome->setDefault($entity->nome())->ask();
 
-        $ativo = new \PTK\Console\Form\Field\ChoiceField('ativo', 'Ativo', ['s' => true, 'n' => false]);
+        $ativo = new \PTK\Console\Form\Field\ChoiceField('ativo', 'Ativo', ['a' => 'Ativo', 'i' => 'Inativo']);
         switch ($entity->ativo()) {
             case true:
-                $ativo->setDefault('s');
+                $ativo->setDefault('a');
                 break;
             case false:
-                $ativo->setDefault('n');
+                $ativo->setDefault('i');
                 break;
         }
         $ativo->ask();
 
         $novoNome = $nome->answer();
-        $novoAtivo = (int) $ativo->answer()[key($ativo->answer())];
+        switch(key($ativo->answer())){
+            case 'a':
+                $novoAtivo = 1;
+                break;
+            case 'i':
+                $novoAtivo = 0;
+                break;
+        }
+        
         if ($novoNome === $entity->nome() && $novoAtivo == $entity->ativo()) {
             $result = true;
             $this->program->console()->info("Nenhuma alteração necessária.");
