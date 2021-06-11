@@ -30,12 +30,15 @@ try {
     
     $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
     
+    $gerenciarProjetos = new \Kontas\Routine\GerenciarProjetos($program);
+    
     
     $gerenciarCadastros = new Kontas\Routine\GerenciarCadastros($program);
     $gerenciarCadastros
             ->registerSubRoutine($gerenciarOrigens)
             ->registerSubRoutine($gerenciarAplicacoes)
             ->registerSubRoutine($gerenciarCentrosDeCustos)
+            ->registerSubRoutine($gerenciarProjetos)
             ->registerSubRoutine($gerenciarMeiosDePagamento);
 
     $mainMenu = new \Kontas\Routine\MainMenu($program);
