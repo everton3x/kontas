@@ -4,7 +4,7 @@ namespace Kontas\Routine\Origem;
 
 class Listar extends \PTK\Console\Flow\Routine\RoutineAbstract {
 
-    protected string $label = 'Listagem';
+    protected string $label = 'Lista';
 
     public function __construct(\PTK\Console\Flow\Program\ProgramInterface $program) {
         parent::__construct($program);
