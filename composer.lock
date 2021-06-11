@@ -474,12 +474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-tool-kit/console-form.git",
-                "reference": "30f5c6cccee8500efe56062a303c021b291a4ccf"
+                "reference": "0c0c0538b71726a792b025c286d9ddec3ef631df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-tool-kit/console-form/zipball/30f5c6cccee8500efe56062a303c021b291a4ccf",
-                "reference": "30f5c6cccee8500efe56062a303c021b291a4ccf",
+                "url": "https://api.github.com/repos/php-tool-kit/console-form/zipball/0c0c0538b71726a792b025c286d9ddec3ef631df",
+                "reference": "0c0c0538b71726a792b025c286d9ddec3ef631df",
                 "shasum": ""
             },
             "require": {
@@ -506,9 +506,9 @@
             "description": "Ferramenta para entrada de dados no console, simulando um formul\u0000rio.",
             "support": {
                 "issues": "https://github.com/php-tool-kit/console-form/issues",
-                "source": "https://github.com/php-tool-kit/console-form/tree/v1.0.0-beta"
+                "source": "https://github.com/php-tool-kit/console-form/tree/main"
             },
-            "time": "2021-06-08T18:31:23+00:00"
+            "time": "2021-06-11T13:49:42+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",

@@ -23,9 +23,11 @@ try {
             ->registerSubRoutine($detalharPeriodo);
     
     $adicionarOrigem = new \Kontas\Routine\Origem\Adicionar($program);
+    $alterarOrigem = new \Kontas\Routine\Origem\Alterar($program);
     $gerenciarOrigens = new \Kontas\Routine\GerenciarOrigens($program);
     $gerenciarOrigens
             ->registerSubRoutine($adicionarOrigem)
+            ->registerSubRoutine($alterarOrigem)
             ;
     
     $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);
