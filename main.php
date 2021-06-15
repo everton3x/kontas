@@ -34,9 +34,19 @@ try {
             ->registerSubRoutine($detalharOrigem)
             ;
     
-    $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);
-    
+    $adicionarCentroDeCusto = new \Kontas\Routine\CentroDeCusto\Adicionar($program);
+    $alterarCentroDeCusto = new Kontas\Routine\CentroDeCusto\Alterar($program);
+    $listarCentroDeCusto = new Kontas\Routine\CentroDeCusto\Listar($program);
+    $detalharCentroDeCusto = new Kontas\Routine\CentroDeCusto\Detalhar($program);
     $gerenciarCentrosDeCustos = new Kontas\Routine\GerenciarCentrosDeCustos($program);
+    $gerenciarCentrosDeCustos
+            ->registerSubRoutine($adicionarCentroDeCusto)
+            ->registerSubRoutine($alterarCentroDeCusto)
+            ->registerSubRoutine($listarCentroDeCusto)
+            ->registerSubRoutine($detalharCentroDeCusto)
+            ;
+    
+    $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);
     
     $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
     

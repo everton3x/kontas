@@ -2,7 +2,7 @@
 
 namespace Kontas\Entity;
 
-class Origem extends EntityBase {
+class CentroDeCusto extends EntityBase {
 
     protected \PTK\Console\Flow\Program\ProgramInterface $program;
     protected \PDO $dbh;
@@ -14,7 +14,7 @@ class Origem extends EntityBase {
     }
 
     protected function exists(string $nome): bool {
-        $stmt = $this->dbh->prepare('SELECT * FROM origens WHERE nome LIKE :nome');
+        $stmt = $this->dbh->prepare('SELECT * FROM cc WHERE nome LIKE :nome');
         $stmt->bindValue(':nome', $nome);
         if ($stmt->execute() === false) {
             throw new \PDOException("Falha ao executar consulta: {$stmt->errorInfo()}");
@@ -39,12 +39,12 @@ class Origem extends EntityBase {
         }
 
         //calcula nova id
-        $this->id = $this->nextIdFor('origens');
+        $this->id = $this->nextIdFor('cc');
 
         //adiciona
 
         $this->dbh->beginTransaction();
-        $stmt = $this->dbh->prepare('INSERT INTO origens (id, nome, ativo) VALUES (:id, :nome, 1)');
+        $stmt = $this->dbh->prepare('INSERT INTO cc (id, nome, ativo) VALUES (:id, :nome, 1)');
         $stmt->bindValue(':id', $this->id);
         $stmt->bindValue(':nome', $nome);
 
@@ -63,7 +63,7 @@ class Origem extends EntityBase {
     }
 
     public function load(int $id): bool {
-        $stmt = $this->dbh->prepare('SELECT * FROM origens WHERE id LIKE :id');
+        $stmt = $this->dbh->prepare('SELECT * FROM cc WHERE id LIKE :id');
         $stmt->bindValue(':id', $id);
         if ($stmt->execute() === false) {
             throw new \PDOException("Falha ao executar consulta: {$stmt->errorInfo()}");
@@ -82,7 +82,7 @@ class Origem extends EntityBase {
     }
 
     public function nome(): string {
-        $stmt = $this->dbh->prepare('SELECT * FROM origens WHERE id = :id');
+        $stmt = $this->dbh->prepare('SELECT * FROM cc WHERE id = :id');
         $stmt->bindValue(':id', $this->id);
         if ($stmt->execute() === false) {
             throw new \PDOException("Falha ao executar consulta: {$stmt->errorInfo()}");
@@ -97,7 +97,7 @@ class Origem extends EntityBase {
     }
 
     public function ativo(): bool {
-        $stmt = $this->dbh->prepare('SELECT * FROM origens WHERE id = :id');
+        $stmt = $this->dbh->prepare('SELECT * FROM cc WHERE id = :id');
         $stmt->bindValue(':id', $this->id);
         if ($stmt->execute() === false) {
             throw new \PDOException("Falha ao executar consulta: {$stmt->errorInfo()}");
@@ -119,16 +119,16 @@ class Origem extends EntityBase {
         $this->dbh->beginTransaction();
 
         if ($nome !== null && $ativo !== null) {
-            $stmt = $this->dbh->prepare('UPDATE origens SET nome = :nome, ativo = :ativo WHERE id = :id');
+            $stmt = $this->dbh->prepare('UPDATE cc SET nome = :nome, ativo = :ativo WHERE id = :id');
             $stmt->bindValue(':id', $this->id);
             $stmt->bindValue(':nome', $nome);
             $stmt->bindValue(':ativo', $ativo, \PDO::PARAM_INT);
         } elseif ($nome !== null && $ativo === null) {
-            $stmt = $this->dbh->prepare('UPDATE origens SET nome = :nome WHERE id = :id');
+            $stmt = $this->dbh->prepare('UPDATE cc SET nome = :nome WHERE id = :id');
             $stmt->bindValue(':id', $this->id);
             $stmt->bindValue(':nome', $nome);
         } elseif ($nome === null && $ativo !== null) {
-            $stmt = $this->dbh->prepare('UPDATE origens SET ativo = :ativo WHERE id = :id');
+            $stmt = $this->dbh->prepare('UPDATE cc SET ativo = :ativo WHERE id = :id');
             $stmt->bindValue(':id', $this->id);
             $stmt->bindValue(':ativo', $ativo, \PDO::PARAM_INT);
         } else {
@@ -152,7 +152,7 @@ class Origem extends EntityBase {
 
     public function list(\PDOStatement|null $stmt = null): array {
         if ($stmt === null) {
-            $stmt = $this->dbh->prepare('SELECT * FROM origens ORDER BY ativo DESC, nome ASC');
+            $stmt = $this->dbh->prepare('SELECT * FROM cc ORDER BY ativo DESC, nome ASC');
         }
         if ($stmt->execute() === false) {
             throw new \PDOException("Falha ao executar consulta: {$stmt->errorInfo()}");
