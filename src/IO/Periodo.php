@@ -39,7 +39,7 @@ class Periodo extends IOBase {
                     $aberto = '?';
                     break;
             }
-            $this->console->inline($periodo)->tab()->out($aberto);
+            $this->console()->inline($periodo)->tab()->out($aberto);
         }
     }
     

@@ -58,10 +58,20 @@ try {
             ->registerSubRoutine($detalharAplicacao)
             ;
     
+    $adicionarProjeto = new \Kontas\Routine\Projeto\Adicionar($program);
+    $alterarProjeto = new Kontas\Routine\Projeto\Alterar($program);
+    $listarProjetos = new Kontas\Routine\Projeto\Listar($program);
+    $detalharProjeto = new Kontas\Routine\Projeto\Detalhar($program);
+    $gerenciarProjetos = new \Kontas\Routine\GerenciarProjetos($program);
+    $gerenciarProjetos
+            ->registerSubRoutine($adicionarProjeto)
+            ->registerSubRoutine($alterarProjeto)
+            ->registerSubRoutine($listarProjetos)
+            ->registerSubRoutine($detalharProjeto)
+            ;
     
     $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
     
-    $gerenciarProjetos = new \Kontas\Routine\GerenciarProjetos($program);
     
     
     $gerenciarCadastros = new Kontas\Routine\GerenciarCadastros($program);
