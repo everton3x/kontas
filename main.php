@@ -36,17 +36,28 @@ try {
     
     $adicionarCentroDeCusto = new \Kontas\Routine\CentroDeCusto\Adicionar($program);
     $alterarCentroDeCusto = new Kontas\Routine\CentroDeCusto\Alterar($program);
-    $listarCentroDeCusto = new Kontas\Routine\CentroDeCusto\Listar($program);
+    $listarCentroDeCustos = new Kontas\Routine\CentroDeCusto\Listar($program);
     $detalharCentroDeCusto = new Kontas\Routine\CentroDeCusto\Detalhar($program);
     $gerenciarCentrosDeCustos = new Kontas\Routine\GerenciarCentrosDeCustos($program);
     $gerenciarCentrosDeCustos
             ->registerSubRoutine($adicionarCentroDeCusto)
             ->registerSubRoutine($alterarCentroDeCusto)
-            ->registerSubRoutine($listarCentroDeCusto)
+            ->registerSubRoutine($listarCentroDeCustos)
             ->registerSubRoutine($detalharCentroDeCusto)
             ;
     
+    $adicionarAplicacao = new \Kontas\Routine\Aplicacao\Adicionar($program);
+    $alterarAplicacao = new Kontas\Routine\Aplicacao\Alterar($program);
+    $listarAplicacoes = new Kontas\Routine\Aplicacao\Listar($program);
+    $detalharAplicacao = new Kontas\Routine\Aplicacao\Detalhar($program);
     $gerenciarAplicacoes = new \Kontas\Routine\GerenciarAplicacoes($program);
+    $gerenciarAplicacoes
+            ->registerSubRoutine($adicionarAplicacao)
+            ->registerSubRoutine($alterarAplicacao)
+            ->registerSubRoutine($listarAplicacoes)
+            ->registerSubRoutine($detalharAplicacao)
+            ;
+    
     
     $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
     
@@ -56,8 +67,8 @@ try {
     $gerenciarCadastros = new Kontas\Routine\GerenciarCadastros($program);
     $gerenciarCadastros
             ->registerSubRoutine($gerenciarOrigens)
-            ->registerSubRoutine($gerenciarAplicacoes)
             ->registerSubRoutine($gerenciarCentrosDeCustos)
+            ->registerSubRoutine($gerenciarAplicacoes)
             ->registerSubRoutine($gerenciarProjetos)
             ->registerSubRoutine($gerenciarMeiosDePagamento);
 
