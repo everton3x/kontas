@@ -70,7 +70,17 @@ try {
             ->registerSubRoutine($detalharProjeto)
             ;
     
+    $adicionarMeioDePagamento = new \Kontas\Routine\MeioDePagamento\Adicionar($program);
+    $alterarMeioDePagamento = new Kontas\Routine\MeioDePagamento\Alterar($program);
+    $listarMeiosDePagamento = new Kontas\Routine\MeioDePagamento\Listar($program);
+    $detalharMeioDePagamento = new Kontas\Routine\MeioDePagamento\Detalhar($program);
     $gerenciarMeiosDePagamento = new \Kontas\Routine\GerenciarMeiosDePagamento($program);
+    $gerenciarMeiosDePagamento
+            ->registerSubRoutine($adicionarMeioDePagamento)
+            ->registerSubRoutine($alterarMeioDePagamento)
+            ->registerSubRoutine($listarMeiosDePagamento)
+            ->registerSubRoutine($detalharMeioDePagamento)
+            ;
     
     
     
