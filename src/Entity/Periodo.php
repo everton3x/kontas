@@ -251,4 +251,25 @@ class Periodo {
         
         return $this;
     }
+    
+    /**
+     * 
+     * @param string|null $periodo aaaa-mm
+     * @return string aaaa-mm-dd
+     */
+    public function getLastDay(string|null $periodo = null): string {
+        if($periodo === null){
+            $periodo = $this->object;
+        }else{
+            $periodo = \DateTime::createFromFormat('Y-m', $periodo);
+        }
+        
+        $year = $periodo->format('Y');
+        $month = $periodo->format('m');
+        $day = $periodo->format('t');
+        
+        $periodo->setDate($year, $month, $day);
+        
+        return $periodo->format('Y-m-d');
+    }
 }

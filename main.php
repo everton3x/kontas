@@ -91,10 +91,16 @@ try {
             ->registerSubRoutine($gerenciarAplicacoes)
             ->registerSubRoutine($gerenciarProjetos)
             ->registerSubRoutine($gerenciarMeiosDePagamento);
+    
+    $adicionarReceita = new Kontas\Routine\Receita\Adicionar($program);
+    $gerenciarReceitas = new Kontas\Routine\GerenciarReceitas($program);
+    $gerenciarReceitas
+            ->registerSubRoutine($adicionarReceita);
 
     $mainMenu = new \Kontas\Routine\MainMenu($program);
     $mainMenu
             ->registerSubRoutine($gerenciarPeriodos)
+            ->registerSubRoutine($gerenciarReceitas)
             ->registerSubRoutine($gerenciarCadastros);
 
     $program->entryPoint($mainMenu);
