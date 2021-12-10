@@ -11,12 +11,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=8.0.3",
-        "league/climate": "@dev",
-        "twig/twig": "3.x-dev",
-        "phpoffice/phpspreadsheet": "dev-master",
-        "php-tool-kit/console-form": "dev-main",
-        "php-tool-kit/console-flow": "dev-main"
+        "php": ">=8.0.3"
     },
     "autoload": {
         "psr-4": {
