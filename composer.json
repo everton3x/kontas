@@ -14,9 +14,10 @@
         "php": ">=8.0.12"
     },
     "autoload": {
-        "psr-4": {
-            "Kontas\\": "src"
-        }
+        "files": [
+            "lib/tpl.php",
+            "lib/time.php"
+        ]
     },
     "scripts": {
         "push": [
