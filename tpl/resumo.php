@@ -1,4 +1,4 @@
-<?php carregaTemplate('theader');?>
+<?php carregaTemplate('header');?>
         <!-- Seletor de períodos -->
         <div class="ui center aligned basic segment">
             <div class="ui buttons">
@@ -142,4 +142,4 @@
             </table>
         </div>
         <!-- fim dos resultados -->
-        <?php carregaTemplate('fheader');?>
+        <?php carregaTemplate('footer');?>

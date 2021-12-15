@@ -16,6 +16,8 @@
     "autoload": {
         "files": [
             "lib/tpl.php",
+            "lib/contabil.php",
+            "lib/db.php",
             "lib/time.php"
         ]
     },
