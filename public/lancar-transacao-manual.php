@@ -63,7 +63,8 @@ if (sizeof($lancamentos) > 0) {
         Transação manual
         <!-- <div class="sub header">Operações contábeis.</div> -->
     </div>
-</h2><!-- título -->
+</h2>
+<div class="ui divider"></div><!-- título -->
 
 <!-- formulário -->
 <form class="ui form" id="transacao-manual">

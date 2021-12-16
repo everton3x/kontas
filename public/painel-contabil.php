@@ -32,7 +32,7 @@ carregaTemplate('header');
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <div class="header">Plano de contas</div>
+            <a class="header" href="gerir-planodecontas.php">Plano de contas</a>
             <div class="description">Gerenciamento do plano de contas contábeis.</div>
         </div>
     </div>

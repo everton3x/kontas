@@ -155,3 +155,110 @@ function adicionarTransacao(string $id, DateTime $data, string $historico, array
 
     return $result;
 }
+
+function pegarHierarquiaSuperiorDaContaContabil(string $codigo): array
+{
+    $parte1 = substr($codigo, 0, 3);
+    $parte2 = substr($codigo, 3);
+    $niveis1 = str_split($parte1, 1);
+    $niveis2 = str_split($parte2, 2);
+    $niveis = array_merge($niveis1, $niveis2);
+    $anterior = '';
+    $hierarquia = [];
+    foreach ($niveis as $item) {
+        $anterior .= $item;
+        $hierarquia[] = str_pad($anterior, 9, '0', STR_PAD_RIGHT);
+        if ($codigo === str_pad($anterior, 9, '0', STR_PAD_RIGHT)) break;
+    }
+
+    return $hierarquia;
+}
+
+function atualizarContaContabil(string $codigo, string $nome, string $descricao, string $debitaQuando, string $creditaQuando, string $naturezaSaldo): array
+{
+    $result = ['success' => true];
+    switch ($naturezaSaldo) {
+        case 'D':
+        case 'C':
+        case 'DC':
+            break;
+
+        default:
+            $result['success'] = false;
+            $result['errors'][] = "Natureza do saldo inválida: $naturezaSaldo";
+            return $result;
+            break;
+    }
+    $sql['UPDATE planodecontas SET nome = :nome, descricao = :descricao, debitaQuando = :debitaQuando, creditaQuando = :creditaQuando, naturezaSaldo = :naturezaSaldo WHERE codigo = :codigo'][] = [
+        ':codigo' => $codigo,
+        ':nome' => $nome,
+        ':descricao' => $descricao,
+        ':debitaQuando' => $debitaQuando,
+        ':creditaQuando' => $creditaQuando,
+        ':naturezaSaldo' => $naturezaSaldo
+    ];
+
+    $result['success'] = salvarNoDb($sql);
+    $result['messages'][] = "Conta $codigo atualizada com sucesso.";
+    return $result;
+}
+
+function excluirContaContabil(string $codigo): array
+{
+    $result = ['success' => true];
+    $info = buscarDadosDaContaContabil($codigo);
+
+    if ($info['tipoNivel'] === 'S') { //verifica se tem contas filhas
+        $filhas = buscarContasContabeisFilhas($codigo);
+        if (sizeof($filhas) > 0) {
+            $result['success'] = false;
+            $result['errors'][] = "A conta $codigo é sintética e possui contas contábeis filhas.";
+            return $result;
+        }
+    } elseif ($info['tipoNivel'] === 'A') { //verifica se tem lançamentos
+        $sql = 'SELECT * FROM lancamentos WHERE contaContabil LIKE :codigo';
+        $lancamentos = consultarNoDb($sql, [':codigo' => $codigo]);
+        if (sizeof($lancamentos->fetchAll(PDO::FETCH_ASSOC)) > 0) {
+            $result['success'] = false;
+            $result['errors'][] = "A conta $codigo é analítica e possui lançamentos.";
+            return $result;
+        }
+    }
+    $sql = [];
+    $sql['DELETE FROM planodecontas WHERE codigo LIKE :codigo'] = [[':codigo' => $codigo]];
+    $exclusao = salvarNoDb($sql);
+    if ($exclusao === false) {
+        $result['success'] = false;
+        $result['errors'][] = "A conta $codigo não foi excluída.";
+        return $result;
+    }
+    $result['messages'][] = "Conta contábil $codigo foi excluída.";
+    return $result;
+}
+
+function buscarContasContabeisFilhas(string $codigo): array
+{
+    $parte1 = substr($codigo, 0, 3);
+    $parte2 = substr($codigo, 3);
+    $niveis1 = str_split($parte1, 1);
+    $niveis2 = str_split($parte2, 2);
+    $niveis = array_merge($niveis1, $niveis2);
+
+    $buscar = '';
+    foreach ($niveis as $item) {
+        if ($item === '0') break;
+        if ($item === '00') break;
+        $buscar .= $item;
+    }
+    $buscar .= '%';
+
+    $sql = 'SELECT * FROM planodecontas WHERE codigo LIKE :base AND codigo NOT LIKE :codigo ORDER BY codigo ASC';
+
+
+    $filhas = consultarNoDb($sql, [
+        ':codigo' => $codigo,
+        ':base' => $buscar
+    ]);
+
+    return $filhas->fetchAll(PDO::FETCH_ASSOC);
+}

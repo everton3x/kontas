@@ -45,3 +45,52 @@ function formatarMoeda(int|float $valor): string
 {
     return number_format($valor, 2, ',', '.');
 }
+
+function explicaTipoNivelContaContabil(string $tipoNivel): string
+{
+    switch ($tipoNivel) {
+        case 'S':
+            return 'Sintética';
+            break;
+        case 'A':
+            return 'Analítica';
+            break;
+        default:
+            return 'Indeterminado';
+            break;
+    }
+}
+
+function explicaNaturezaDoSaldo(string $natureza): string
+{
+    switch ($natureza) {
+        case 'D':
+            return 'Devedor';
+            break;
+        case 'C':
+            return 'Credor';
+            break;
+        case 'DC':
+            return 'Misto';
+            break;
+        
+        default:
+            return 'Indeterminado';
+            break;
+    }
+}
+
+function explicaStatusDaContaContabil(int $status): string
+{
+    switch ($status) {
+        case 0:
+            return 'Ativa';
+            break;
+        case 1:
+            return 'Inativa';
+            break;
+        default:
+            return 'Indeterminado';
+            break;
+    }
+}
