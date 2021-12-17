@@ -52,7 +52,7 @@ carregaTemplate('header');
             echo "<a class='ui right floated small primary icon button' href='editar-conta-contabil.php?codigo={$item['codigo']}'><i class='edit icon'></i></a>";
             switch ($item['tipoNivel']) {
                 case 'S':
-                    echo "<a class='ui right floated small positive icon button' href='adicionar-conta-contabil.php?pai={$item['codigo']}'><i class='plus icon'></i></a>";
+                    echo "<a class='ui right floated small positive icon button' href='criar-conta-contabil.php?pai={$item['codigo']}'><i class='plus icon'></i></a>";
                     break;
                     case 'A':
                         echo "<div class='ui disabled right floated small positive icon button'><i class='plus icon'></i></div>";

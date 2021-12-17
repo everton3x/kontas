@@ -18,6 +18,7 @@ function buscarDadosDaContaContabil(string $codigo): array
 {
     $stmt = consultarNoDb('SELECT * FROM planodecontas WHERE codigo = :codigo', [':codigo' => $codigo]);
     if ($stmt === false) return [];
+    if($stmt->rowCount() === 0) return [];
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -261,4 +262,64 @@ function buscarContasContabeisFilhas(string $codigo): array
     ]);
 
     return $filhas->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function buscarContasContabeisPossiveis(string $codigo): array
+{
+    $parte1 = substr($codigo, 0, 3);
+    $parte2 = substr($codigo, 3);
+    $niveis1 = str_split($parte1, 1);
+    $niveis2 = str_split($parte2, 2);
+    $niveis = array_merge($niveis1, $niveis2);
+
+    $base = '';
+    $nivel = 1;
+    foreach ($niveis as $item) {
+        if ($item === '0') break;
+        if ($item === '00') break;
+        $base .= $item;
+        $nivel++;
+    }
+    $irmas = [];
+    if ($nivel <= 3) {
+        $maximo = 9;
+        $tamanho = 1;
+    } else {
+        $maximo = 99;
+        $tamanho = 2;
+    }
+    for ($contador = 1; $contador <= $maximo; $contador++) {
+        $irmas[] = str_pad($base . str_pad($contador, $tamanho, '0', STR_PAD_LEFT), 9, '0', STR_PAD_RIGHT);
+    }
+    return $irmas;
+}
+
+function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome, string $descricao, string $debitaQuando, string $creditaQuando, string $naturezaSaldo): array
+{
+    $result = ['success' => true];
+    switch ($naturezaSaldo) {
+        case 'D':
+        case 'C':
+        case 'DC':
+            break;
+
+        default:
+            $result['success'] = false;
+            $result['errors'][] = "Natureza do saldo inválida: $naturezaSaldo";
+            return $result;
+            break;
+    }
+    $sql['INSERT INTO planodecontas (codigo, tipoNivel, nome, descricao, debitaQuando, creditaQuando, naturezaSaldo) VALUES(:codigo, :tipoNivel, :nome, :descricao, :debitaQuando, :creditaQuando, :naturezaSaldo);'][] = [
+        ':codigo' => $codigo,
+        ':tipoNivel' => $tipoNivel,
+        ':nome' => $nome,
+        ':descricao' => $descricao,
+        ':debitaQuando' => $debitaQuando,
+        ':creditaQuando' => $creditaQuando,
+        ':naturezaSaldo' => $naturezaSaldo
+    ];
+
+    $result['success'] = salvarNoDb($sql);
+    $result['messages'][] = "Conta $codigo criada com sucesso.";
+    return $result;
 }
