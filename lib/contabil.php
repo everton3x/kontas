@@ -311,9 +311,10 @@ function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome,
             break;
     }
     $nivel = qualNivelDaContaContabil($codigo);
+    // echo $nivel, PHP_EOL;
     if($nivel <= 3 && $tipoNivel !== 'S'){
         $result['success'] = false;
-            $result['errors'][] = "A conta $codigo tem nível $nivel mas não é $tipoNivel";
+            $result['errors'][] = "A conta $codigo tem nível $nivel mas não é Sintética: $tipoNivel";
             return $result;
     }
     $sql['INSERT INTO planodecontas (codigo, tipoNivel, nome, descricao, debitaQuando, creditaQuando, naturezaSaldo) VALUES(:codigo, :tipoNivel, :nome, :descricao, :debitaQuando, :creditaQuando, :naturezaSaldo);'][] = [
@@ -338,7 +339,7 @@ function qualNivelDaContaContabil(string $codigo): int
     $niveis1 = str_split($parte1, 1);
     $niveis2 = str_split($parte2, 2);
     $niveis = array_merge($niveis1, $niveis2);
-    $nivel = 1;
+    $nivel = 0;
     foreach ($niveis as $item) {
         if ($item === '0') break;
         if ($item === '00') break;

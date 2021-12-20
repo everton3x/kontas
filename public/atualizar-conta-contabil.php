@@ -50,4 +50,19 @@ if($result['success'] === false){
         'messages' => ['Retorno inválido!']
     ]);
 }
-carregaTemplate('footer');
+?>
+
+<div class="ui text menu">
+    <div class="header item">O que deseja fazer agora?</div>
+    <a class="item" href="detalhes-conta-contabil.php?codigo=<?=$codigo;?>">
+        Voltar para os detalhes da conta
+    </a>
+    <a class="item" href="gerir-planodecontas.php#cc<?=$codigo;?>">
+        Voltar para o plano de contas
+    </a>
+    <a class="item" href="painel-contabil.php">
+        Voltar para as opções contábeis
+    </a>
+</div>
+
+<?php carregaTemplate('footer');?>

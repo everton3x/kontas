@@ -15,14 +15,14 @@ $eDevedor = '';
 $eCredor = '';
 switch ($naturezaSaldo) {
     case 'D':
-        $eDevedor = 'checked';
+        $eDevedor = 'checked ';
         break;
     case 'C':
-        $eCredor = 'checked';
+        $eCredor = 'checked ';
         break;
     case 'DC':
-        $eDevedor = 'checked';
-        $eCredor = 'checked';
+        $eDevedor = 'checked ';
+        $eCredor = 'checked ';
         break;
 
     default:
@@ -75,14 +75,14 @@ carregaTemplate('header');
         <textarea name="creditaQuando"><?= $creditaQuando; ?></textarea>
     </div>
     <div class="grouped fields">
-        <label for="fruit">Natureza do saldo</label>
-        <div class="ui checkbox">
-            <input type="checkbox" tabindex="0" class="hidden" name="devedor" <?= $eDevedor; ?>>
-            <label>Devedor</label>
+        <label>Natureza do saldo</label>
+        <div class="ui <?=$eDevedor;?>checkbox">
+            <input id="devedor" type="checkbox" name="devedor" <?= $eDevedor; ?>>
+            <label for="devedor">Devedor</label>
         </div>
-        <div class="ui checkbox">
-            <input type="checkbox" tabindex="0" class="hidden" name="credor" <?= $eDevedor; ?>>
-            <label>Credor</label>
+        <div class="ui <?=$eCredor;?>checkbox">
+            <input id="credor" type="checkbox" name="credor" <?= $eCredor; ?>>
+            <label for="credor">Credor</label>
         </div>
     </div>
     <!-- botões do formulário -->
