@@ -310,6 +310,12 @@ function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome,
             return $result;
             break;
     }
+    $nivel = qualNivelDaContaContabil($codigo);
+    if($nivel <= 3 && $tipoNivel !== 'S'){
+        $result['success'] = false;
+            $result['errors'][] = "A conta $codigo tem nível $nivel mas não é $tipoNivel";
+            return $result;
+    }
     $sql['INSERT INTO planodecontas (codigo, tipoNivel, nome, descricao, debitaQuando, creditaQuando, naturezaSaldo) VALUES(:codigo, :tipoNivel, :nome, :descricao, :debitaQuando, :creditaQuando, :naturezaSaldo);'][] = [
         ':codigo' => $codigo,
         ':tipoNivel' => $tipoNivel,
@@ -323,4 +329,20 @@ function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome,
     $result['success'] = salvarNoDb($sql);
     $result['messages'][] = "Conta $codigo criada com sucesso.";
     return $result;
+}
+
+function qualNivelDaContaContabil(string $codigo): int
+{
+    $parte1 = substr($codigo, 0, 3);
+    $parte2 = substr($codigo, 3);
+    $niveis1 = str_split($parte1, 1);
+    $niveis2 = str_split($parte2, 2);
+    $niveis = array_merge($niveis1, $niveis2);
+    $nivel = 1;
+    foreach ($niveis as $item) {
+        if ($item === '0') break;
+        if ($item === '00') break;
+        $nivel++;
+    }
+    return $nivel;
 }

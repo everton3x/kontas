@@ -69,7 +69,7 @@ if ($result['success'] === false) {
             Cadastrar outra
         </a>
     <?php endif; ?>
-    <a class="item" href="gerir-planodecontas.php">
+    <a class="item" href="gerir-planodecontas.php#cc<?=$codigo;?>">
         Voltar para o plano de contas
     </a>
     <a class="item" href="painel-contabil.php">
