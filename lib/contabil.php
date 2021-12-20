@@ -297,6 +297,7 @@ function buscarContasContabeisPossiveis(string $codigo): array
 function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome, string $descricao, string $debitaQuando, string $creditaQuando, string $naturezaSaldo): array
 {
     $result = ['success' => true];
+    if(strlen($codigo) < 9) $codigo = str_pad($codigo, 9, '0', STR_PAD_RIGHT);//completa com zeros se o código não tiver 9 caracteres.
     switch ($naturezaSaldo) {
         case 'D':
         case 'C':

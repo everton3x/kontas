@@ -46,26 +46,26 @@ carregaTemplate('header');
 </h4>
 <div class="ui divider"></div><!-- título -->
 <!-- tabela de irmãs -->
-<table class="ui celled table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Código</th>
-            <th>Nome</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach ($contas as $codigo => $item) {
-            if ($item === []) {
-                echo '<tr><td class="center aligned">', "<input type='radio' name='codigo' value='$codigo' form='form-detalhes'>", '</td><td>', formatarCodigoContaContabil($codigo), '</td><td><a href="#detalhes"><i class="angle double down icon"></i></a></td></tr>', PHP_EOL;
-            } else {
-                echo '<tr><td></td><td>', formatarCodigoContaContabil($codigo), '</td><td>', $item['nome'], '</td></tr>', PHP_EOL;
+<div class="field">
+    <label>Código</label>
+    <div class="ui selection dropdown">
+        <input type="hidden" name="codigo" form="form-detalhes">
+        <i class="dropdown icon"></i>
+        <div class="default text">Escolha o código</div>
+        <div class="menu">
+            <?php
+            foreach ($contas as $codigo => $item) {
+                if ($item === []) {
+                    echo '<option class="item" data-value="', $codigo, '">', formatarCodigoContaContabil($codigo), '</otpion>';
+                } else {
+                    echo '<optgroup class="item" label="', formatarCodigoContaContabil($codigo), ' ', $item['nome'], '"></optgroup>';
+                }
             }
-        }
-        ?>
-    </tbody>
-</table><!-- tabela de irmãs -->
+            ?>
+        </div>
+    </div>
+</div>
+<!-- tabela de irmãs -->
 
 <a id="detalhes"></a>
 <!-- título -->
@@ -132,8 +132,8 @@ carregaTemplate('header');
 <script>
     $('.ui.checkbox')
         .checkbox();
-    $('.ui.radio.checkbox')
-        .checkbox();
+    $('.ui.selection.dropdown')
+        .dropdown();
 </script>
 
 <?php carregaTemplate('footer'); ?>

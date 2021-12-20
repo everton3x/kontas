@@ -9,17 +9,21 @@ $descricao = $_POST['descricao'];
 $debitaQuando = $_POST['debitaQuando'];
 $debitaQuando = $_POST['debitaQuando'];
 $creditaQuando = $_POST['creditaQuando'];
-if(key_exists('devedor', $_POST) && !key_exists('credor', $_POST)){
+if (key_exists('devedor', $_POST) && !key_exists('credor', $_POST)) {
     $naturezaSaldo = 'D';
-}elseif(!key_exists('devedor', $_POST) && key_exists('credor', $_POST)){
+} elseif (!key_exists('devedor', $_POST) && key_exists('credor', $_POST)) {
     $naturezaSaldo = 'C';
-}elseif(key_exists('devedor', $_POST) && key_exists('credor', $_POST)){
+} elseif (key_exists('devedor', $_POST) && key_exists('credor', $_POST)) {
     $naturezaSaldo = 'DC';
-}else{
+} else {
     $naturezaSaldo = '';
 }
 
 $result = adicionarContaContabil($codigo, $tipoNivel, $nome, $descricao, $debitaQuando, $creditaQuando, $naturezaSaldo);
+// $result = [
+//     'success' => true,
+//     'messages' => ['Isto é um teste']
+// ];
 
 carregaTemplate('header');
 ?>
@@ -38,17 +42,39 @@ carregaTemplate('header');
 </div><!-- trilha -->
 
 <?php
-if($result['success'] === false){
+if ($result['success'] === false) {
     carregaTemplate('error', [
         'messages' => $result['errors']
     ]);
-}elseif($result['success'] === true){
+} elseif ($result['success'] === true) {
     carregaTemplate('success', [
         'messages' => $result['messages']
     ]);
-}else {
+} else {
     carregaTemplate('warning', [
         'messages' => ['Retorno inválido!']
     ]);
 }
-carregaTemplate('footer');
+?>
+
+<div class="ui text menu">
+    <div class="header item">O que deseja fazer agora?</div>
+    <?php if ($result['success'] === true) : ?>
+        <?php
+            $hierarquia = pegarHierarquiaSuperiorDaContaContabil($codigo);
+            array_pop($hierarquia);
+            $pai = array_pop($hierarquia);
+        ?>
+        <a class="active item" href="criar-conta-contabil.php?pai=<?=$pai;?>">
+            Cadastrar outra
+        </a>
+    <?php endif; ?>
+    <a class="item" href="gerir-planodecontas.php">
+        Voltar para o plano de contas
+    </a>
+    <a class="item" href="painel-contabil.php">
+        Voltar para as opções contábeis
+    </a>
+</div>
+
+<?php carregaTemplate('footer'); ?>
