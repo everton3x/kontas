@@ -39,7 +39,7 @@ carregaTemplate('header');
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <div class="header">Transações</div>
+            <a class="header" href="gerenciar-transacoes.php">Transações</a>
             <div class="description">Gerencia as transações registradas.</div>
         </div>
     </div>
