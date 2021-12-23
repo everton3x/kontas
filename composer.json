@@ -18,7 +18,8 @@
             "lib/tpl.php",
             "lib/contabil.php",
             "lib/db.php",
-            "lib/time.php"
+            "lib/time.php",
+            "lib/config.php"
         ]
     },
     "scripts": {

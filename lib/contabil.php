@@ -6,7 +6,9 @@
 
 function buscarContasContabeis(): PDOStatement
 {
-    return consultarNoDb('SELECT * FROM planodecontas ORDER BY codigo ASC');
+    // return consultarNoDb('SELECT * FROM planodecontas ORDER BY codigo ASC');
+    $con = conexao();
+    return $con->query('SELECT * FROM planodecontas ORDER BY codigo ASC');
 }
 
 function gerarCodigoDeTransacao(): string
@@ -16,9 +18,15 @@ function gerarCodigoDeTransacao(): string
 
 function buscarDadosDaContaContabil(string $codigo): array
 {
-    $stmt = consultarNoDb('SELECT * FROM planodecontas WHERE codigo = :codigo', [':codigo' => $codigo]);
+    /*$stmt = consultarNoDb('SELECT * FROM planodecontas WHERE codigo = :codigo', [':codigo' => $codigo]);
     if ($stmt === false) return [];
     if($stmt->rowCount() === 0) return [];
+    return $stmt->fetch(PDO::FETCH_ASSOC);*/
+    $con = conexao();
+    $stmt = $con->prepare('SELECT * FROM planodecontas WHERE codigo = :codigo');
+    if ($stmt === false) return [];
+    $stmt->execute([':codigo' => $codigo]);
+    if ($stmt->rowCount() === 0) return [];
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -217,11 +225,19 @@ function excluirContaContabil(string $codigo): array
             return $result;
         }
     } elseif ($info['tipoNivel'] === 'A') { //verifica se tem lançamentos
-        $sql = 'SELECT * FROM lancamentos WHERE contaContabil LIKE :codigo';
+        /*$sql = 'SELECT * FROM lancamentos WHERE contaContabil LIKE :codigo';
         $lancamentos = consultarNoDb($sql, [':codigo' => $codigo]);
         if (sizeof($lancamentos->fetchAll(PDO::FETCH_ASSOC)) > 0) {
             $result['success'] = false;
             $result['errors'][] = "A conta $codigo é analítica e possui lançamentos.";
+            return $result;
+        }*/
+        $con = conexao();
+        $stmt = $con->prepare('SELECT * FROM lancamentos WHERE contaContabil LIKE :codigo');
+        $stmt->execute([':codigo' => $codigo]);
+        if (sizeof($stmt->fetchAll(PDO::FETCH_ASSOC)) > 0) {
+            $result['success'] = false;
+            $result['errors'][] = "A conta $codigo possui lançamentos.";
             return $result;
         }
     }
@@ -253,15 +269,21 @@ function buscarContasContabeisFilhas(string $codigo): array
     }
     $buscar .= '%';
 
-    $sql = 'SELECT * FROM planodecontas WHERE codigo LIKE :base AND codigo NOT LIKE :codigo ORDER BY codigo ASC';
-
-
+    /*$sql = 'SELECT * FROM planodecontas WHERE codigo LIKE :base AND codigo NOT LIKE :codigo ORDER BY codigo ASC';
     $filhas = consultarNoDb($sql, [
         ':codigo' => $codigo,
         ':base' => $buscar
     ]);
 
-    return $filhas->fetchAll(PDO::FETCH_ASSOC);
+    return $filhas->fetchAll(PDO::FETCH_ASSOC);*/
+
+    $con = conexao();
+    $stmt = $con->prepare('SELECT * FROM planodecontas WHERE codigo LIKE :base AND codigo NOT LIKE :codigo ORDER BY codigo ASC');
+    $stmt->execute([
+        ':codigo' => $codigo,
+        ':base' => $buscar
+    ]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function buscarContasContabeisPossiveis(string $codigo): array
@@ -297,7 +319,7 @@ function buscarContasContabeisPossiveis(string $codigo): array
 function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome, string $descricao, string $debitaQuando, string $creditaQuando, string $naturezaSaldo): array
 {
     $result = ['success' => true];
-    if(strlen($codigo) < 9) $codigo = str_pad($codigo, 9, '0', STR_PAD_RIGHT);//completa com zeros se o código não tiver 9 caracteres.
+    if (strlen($codigo) < 9) $codigo = str_pad($codigo, 9, '0', STR_PAD_RIGHT); //completa com zeros se o código não tiver 9 caracteres.
     switch ($naturezaSaldo) {
         case 'D':
         case 'C':
@@ -312,10 +334,10 @@ function adicionarContaContabil(string $codigo, string $tipoNivel, string $nome,
     }
     $nivel = qualNivelDaContaContabil($codigo);
     // echo $nivel, PHP_EOL;
-    if($nivel <= 3 && $tipoNivel !== 'S'){
+    if ($nivel <= 3 && $tipoNivel !== 'S') {
         $result['success'] = false;
-            $result['errors'][] = "A conta $codigo tem nível $nivel mas não é Sintética: $tipoNivel";
-            return $result;
+        $result['errors'][] = "A conta $codigo tem nível $nivel mas não é Sintética: $tipoNivel";
+        return $result;
     }
     $sql['INSERT INTO planodecontas (codigo, tipoNivel, nome, descricao, debitaQuando, creditaQuando, naturezaSaldo) VALUES(:codigo, :tipoNivel, :nome, :descricao, :debitaQuando, :creditaQuando, :naturezaSaldo);'][] = [
         ':codigo' => $codigo,

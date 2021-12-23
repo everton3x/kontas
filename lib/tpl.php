@@ -13,24 +13,30 @@ function carregaTemplate(string $template, array $data = []): void
     require $tplFile;
 }
 
-function montaOptionsDasContasContabeis(): string
+function montaOptionsDasContasContabeis(string $select = ''): string
 {
     $contasContabeis = buscarContasContabeis();
     if($contasContabeis === false) return '';
     if($contasContabeis->rowCount() === 0) return '';
     $options = '';
     $anterior = '';
+    $selected = '';
     foreach($contasContabeis->fetchAll(PDO::FETCH_ASSOC) as $item){
         if($item['status'] != 0) continue;
         $codigoFormatado = formatarCodigoContaContabil($item['codigo']);
+        if($select!== ''){
+            if($select === $item['codigo']){
+                $selected = 'selected';
+            }
+        }
         if($item['tipoNivel'] == 'S' && $anterior !== 'A'){
             $options .= "<optgroup label='{$codigoFormatado} {$item['nome']}'>".PHP_EOL;
             $anterior = $item['tipoNivel'];
         }elseif ($item['tipoNivel'] == 'S' && $anterior === 'A') {
             $options .= '</optgroup>'.PHP_EOL;
-            $group = false;
         }else{
-            $options .= "<option value='{$item['codigo']}'>{$codigoFormatado} {$item['nome']}</option>".PHP_EOL;
+            $options .= "<option value='{$item['codigo']}' $selected>{$codigoFormatado} {$item['nome']}</option>".PHP_EOL;
+            $selected = '';
         }
     }
     return $options;
