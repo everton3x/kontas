@@ -124,10 +124,6 @@
                     <i class="minus circle icon"></i>
                     Despesas
                 </a>
-                <a class="item" href="painel-contabil.php">
-                    <i class="closed captioning icon"></i>
-                    Contábil
-                </a>
                 <a class="item" href="painel-relatorios.php">
                     <i class="chart pie icon"></i>
                     Relatórios

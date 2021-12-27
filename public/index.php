@@ -2,12 +2,9 @@
 
 require_once '../vendor/autoload.php';
 
-$periodo = filter_input(INPUT_GET, 'periodo', FILTER_VALIDATE_REGEXP, [
-    'options' => [
-        'regexp' => '/[0-9]{6}/',
-        'default' => date('Ym')
-    ]
-]);
+$periodo = date('Y-m');
+if (key_exists('periodo', $_POST)) $periodo = $_POST['periodo'];
+if (key_exists('periodo', $_GET)) $periodo = $_GET['periodo'];
 
 carregaTemplate('resumo', [
     'mesAnterior' => periodoAnterior($periodo),

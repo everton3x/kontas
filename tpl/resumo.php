@@ -2,9 +2,9 @@
         <!-- Seletor de períodos -->
         <div class="ui center aligned basic segment">
             <div class="ui buttons">
-                <a class="ui grey basic button" href="index.php?periodo=<?=$mesAnterior->format('Ym');?>"><?=$mesAnterior->format('F/Y');?></a>
+                <a class="ui grey basic button" href="index.php?periodo=<?=$mesAnterior->format('Y-m');?>"><?=$mesAnterior->format('F/Y');?></a>
                 <a class="ui grey button"><?=$mesAtual->format('F/Y');?></a>
-                <a class="ui grey basic button" href="index.php?periodo=<?=$mesPosterior->format('Ym');?>"><?=$mesPosterior->format('F/Y');?></a>
+                <a class="ui grey basic button" href="index.php?periodo=<?=$mesPosterior->format('Y-m');?>"><?=$mesPosterior->format('F/Y');?></a>
             </div>
         </div>
         <!-- Fim do Seletor de períodos -->
