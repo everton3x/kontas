@@ -14,7 +14,7 @@ function conexao(): PDO
     return $con;
 }
 
-function consultarNoDb(string $sql, array $data = []): PDOStatement|bool
+/*function consultarNoDb(string $sql, array $data = []): PDOStatement|bool
 {
     $con = conexao();
     if (strtolower(substr($sql, 0, 6)) !== 'select') {
@@ -27,7 +27,7 @@ function consultarNoDb(string $sql, array $data = []): PDOStatement|bool
         $sth = $con->query($sql);
     }
     return $sth;
-}
+}*/
 
 function salvarNoDb(array $sql): bool
 {
