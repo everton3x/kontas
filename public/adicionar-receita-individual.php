@@ -33,7 +33,7 @@ $result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcel
     <div class="divider"> / </div>
     <a class="section" href="painel-receitas.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="lancar-receita-individual.php">Previsão individual</a>
+    <a class="section" href="lancar-receita-individual.php">Previsão</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->

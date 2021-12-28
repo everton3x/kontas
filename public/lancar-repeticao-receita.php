@@ -30,14 +30,14 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="divider"> / </div>
     <a class="section" href="painel-receitas.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="active section">Previsão repetida</div>
+    <div class="active section">Repetição</div>
 </div><!-- trilha -->
 
 <!-- título -->
 <h2 class="ui header">
     <i class="edit icon"></i>
     <div class="content">
-        Previsão repetida da receita
+        Repetição da previsão da receita
         <!-- <div class="sub header">Operações contábeis.</div> -->
     </div>
 </h2>
@@ -103,7 +103,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="fields">
         <div class="five wide field">
             <label>Agrupador</label>
-            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>">
+            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>" autocomplete="off">
         </div>
     </div>
 
@@ -121,8 +121,8 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <datalist id="tags">
     <!--<option value="Fulano">-->
     <?php foreach (listarTags() as $item) : ?>
-        <option value="<?=$item['tag'];?>">
-    <?php endforeach; ?>
+        <option value="<?= $item['tag']; ?>">
+        <?php endforeach; ?>
 </datalist>
 
 <script>

@@ -91,3 +91,55 @@ function salvarReceitaRepetida(string $periodo, string $descricao, float $valorI
     if($ocorreuErro) $result['success'] = false;
     return $result;
 }
+
+function salvarReceitaParcelada($periodos, $descricao, $valores, $agrupador, $parcelas, $tags, $valor, $parcela): array
+{
+    $result['success'] = true;
+    $result['messages'] = [];
+    $result['errors'] = [];
+    $ocorreuErro = false;
+
+    if(strlen($agrupador) == 0) {
+        $result['success'] = false;
+        $result['errors'][] = 'Agrupador é obrigatório.';
+        $ocorreuErro = true;
+    }
+    $soma = round(array_sum($valores), 2);
+    if($valor != $soma) {
+        $result['success'] = false;
+        $result['errors'][] = "A soma das parcelas $soma é diferente do total: $valor";
+        $ocorreuErro = true;
+    }
+    $count = sizeof($parcelas);
+    if($count != $parcela) {
+        $result['success'] = false;
+        $result['errors'][] = "O total das parcelas $count é diferente das parcelas: $parcela";
+        $ocorreuErro = true;
+    }
+    $count = sizeof($periodos);
+    if($count != $parcela) {
+        $result['success'] = false;
+        $result['errors'][] = "O total de períodos $count é diferente das parcelas: $parcela";
+        $ocorreuErro = true;
+    }
+    $count = sizeof($valores);
+    if($count != $parcela) {
+        $result['success'] = false;
+        $result['errors'][] = "O total de valores $count é diferente das parcelas: $parcela";
+        $ocorreuErro = true;
+    }
+    if($ocorreuErro) return $result;
+
+    for($i = 1; $i <= $parcela; $i++){
+        $periodo = $periodos[$i];
+        $v = $valores[$i];
+        $p = $parcelas[$i];
+        if($periodo instanceof DateTime) $periodo = $periodo->format('Y-m');
+        $return = salvarReceita($periodo, $descricao, $v, $agrupador, $p, $tags);
+        $result['messages'] = array_merge($result['messages'], $return['messages']);
+        $result['errors'] = array_merge($result['errors'], $return['errors']);
+        if($return['success'] === false) $ocorreuErro = true;
+    }
+    if($ocorreuErro) $result['success'] = false;
+    return $result;
+}

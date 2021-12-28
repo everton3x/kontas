@@ -30,7 +30,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="divider"> / </div>
     <a class="section" href="painel-receitas.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="active section">Previsão individual</div>
+    <div class="active section">Previsão</div>
 </div><!-- trilha -->
 
 <!-- título -->
