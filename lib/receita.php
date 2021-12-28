@@ -73,3 +73,21 @@ function buscarDadosDaReceita(string $cod): array
     if($stmt->execute([':cod' => $cod]) === false) return [];
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function salvarReceitaRepetida(string $periodo, string $descricao, float $valorInicial, string $agrupador, int $parcelas, array $tags): array
+{
+    $result['success'] = true;
+    $result['messages'] = [];
+    $result['errors'] = [];
+    $ocorreuErro = false;
+    for($i = 1; $i <= $parcelas; $i++){
+        if($periodo instanceof DateTime) $periodo = $periodo->format('Y-m');
+        $return = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, 0, $tags);
+        $result['messages'] = array_merge($result['messages'], $return['messages']);
+        $result['errors'] = array_merge($result['errors'], $return['errors']);
+        if($return['success'] === false) $ocorreuErro = true;
+        $periodo = proximoPeriodo($periodo);
+    }
+    if($ocorreuErro) $result['success'] = false;
+    return $result;
+}
