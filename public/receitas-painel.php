@@ -46,7 +46,7 @@ carregaTemplate('header');
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <a class="header" href="gerenciar-receitas.php">Receitas</a>
+            <a class="header" href="receitas-gerenciar.php">Receitas</a>
             <div class="description">Gerencia as receitas registradas.</div>
         </div>
     </div>
