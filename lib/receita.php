@@ -66,12 +66,66 @@ function salvarReceita(string $periodo, string $descricao, float $valorInicial, 
     }
 }
 
+function salvarAlteracaoReceita(string $cod, float $valor, string $observacao): array
+{
+    $result['success'] = null;
+    $result['messages'] = [];
+    $result['errors'] = [];
+
+    $valor = round($valor, 2);
+    
+    $con = conexao();
+
+    try{
+        $con->beginTransaction();
+        $stmt = $con->prepare('INSERT INTO receitaalteracao (receita, valor, observacao) VALUES (:cod, :valor, :observacao)');
+        $stmt->execute([
+            ':cod' => $cod,
+            ':valor' => $valor,
+            ':observacao' => $observacao
+        ]);
+
+        $con->commit();
+        $result['success'] = true;
+        $result['messages'][] = "Alteração salva!";
+    }catch(Exception $e){
+        $con->rollBack();
+        $result['success'] = false;
+        $result['errors'][] = $stmt->errorInfo()[2];
+    }finally{
+        // print_r($result);
+        return $result;
+    }
+}
+
 function buscarDadosDaReceita(string $cod): array
 {
     $con = conexao();
-    $stmt = $con->prepare('SELECT * FROM receitas WHERE cod LIKE :cod');
+    $stmt = $con->prepare('SELECT * FROM receitasresumo WHERE cod LIKE :cod');
     if($stmt->execute([':cod' => $cod]) === false) return [];
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $detalhes = $stmt->fetch(PDO::FETCH_ASSOC);
+    $detalhes['tags'] = buscarTagsDaReceita($cod);
+    $detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
+    $detalhes['areceber'] = round($detalhes['previsto'] + $detalhes['recebido'], 2);
+
+    $stmt = $con->prepare('SELECT * FROM receitaalteracao WHERE receita LIKE :cod');
+    if($stmt->execute([':cod' => $cod]) === false) $detalhes['alteracoes'] = [];
+    $detalhes['alteracoes'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // print_r($detalhes['alteracoes']);
+
+    return $detalhes;
+}
+
+function buscarTagsDaReceita(string $cod): array
+{
+    $con = conexao();
+    $stmt = $con->prepare('SELECT tag FROM tags WHERE receita LIKE :receita');
+    $stmt->execute([':receita' => $cod]);
+    $tags = [];
+    foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $item){
+        $tags[] = $item['tag'];
+    }
+    return $tags;
 }
 
 function salvarReceitaRepetida(string $periodo, string $descricao, float $valorInicial, string $agrupador, int $parcelas, array $tags): array

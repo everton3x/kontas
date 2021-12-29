@@ -110,7 +110,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 
     <!-- botões do formulário -->
     <div class="ui divider"></div>
-    <button class="ui left floated negative button" formaction=""><i class="cancel icon"></i>Cancelar</button>
+    <button class="ui left floated negative button" onclick="history.back()"><i class="cancel icon"></i>Cancelar</button>
     <button class="ui right floated positive button" type="submit" formaction="receita-repetir-salvar.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
     <!-- botões do formulário -->
     <?php foreach ($tags as $index => $tag) : ?>

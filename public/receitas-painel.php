@@ -25,7 +25,7 @@ carregaTemplate('header');
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <a class="header" href="receitas-adicionar.php">Previsão individual</a>
+            <a class="header" href="receita-adicionar.php">Previsão individual</a>
             <div class="description">Inclui uma previsão de receita individual.</div>
         </div>
     </div>

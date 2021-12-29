@@ -100,8 +100,11 @@ $receitas->execute([
                 <td class="right aligned"><?= formatNumber($item['recebido']); ?></td>
                 <td class="right aligned"><?= formatNumber($item['areceber']); ?></td>
                 <td>
-                    <a class="ui primary icon button" href="receita-detalhe.php?cod=<?=$item['cod'];?>">
+                    <a class="ui icon button" href="receita-detalhe.php?cod=<?=$item['cod'];?>">
                         <i class="eye icon"></i>
+                    </a>
+                    <a class="ui primary icon button" href="receita-alterar-valor.php?cod=<?=$item['cod'];?>">
+                        <i class="random icon"></i>
                     </a>
                 </td>
             </tr>
