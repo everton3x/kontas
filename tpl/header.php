@@ -116,7 +116,7 @@
                 Kontas
             </a>
             <div class="ui secondary labeled icon menu">
-                <a class="item" href="painel-receitas.php">
+                <a class="item" href="receitas-painel.php">
                     <i class="plus circle icon"></i>
                     Receitas
                 </a>

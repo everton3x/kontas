@@ -64,7 +64,7 @@ if (key_exists('calcular', $_GET)) {
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="painel-receitas.php">Receitas</a>
+    <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
     <div class="active section">Parcelamento</div>
 </div><!-- trilha -->
@@ -119,7 +119,7 @@ if (key_exists('calcular', $_GET)) {
             <label>Parcelas</label>
             <input type="number" name="parcela" min="2" step="1" value="<?= $parcela; ?>" required>
         </div>
-        <button class="ui primary button" formaction="lancar-receita-parcelada.php?calcular=calcular#parcelas" formmethod="POST">
+        <button class="ui primary button" formaction="receita-parcelar.php?calcular=calcular#parcelas" formmethod="POST">
             <i class="calculator icon"></i>
             Calular
         </button>
@@ -138,7 +138,7 @@ if (key_exists('calcular', $_GET)) {
                         $calcular = '';
                     }
                 ?>
-                <button class="ui icon button" formaction="lancar-receita-parcelada.php<?=$calcular;?>#taglist" formmethod="POST">
+                <button class="ui icon button" formaction="receita-parcelar.php<?=$calcular;?>#taglist" formmethod="POST">
                     <i class="plus squared icon"></i>
                 </button>
             </div>
@@ -199,7 +199,7 @@ if (key_exists('calcular', $_GET)) {
     <!-- botões do formulário -->
     <div class="ui divider"></div>
     <button class="ui left floated negative button" formaction=""><i class="cancel icon"></i>Cancelar</button>
-    <button class="ui right floated positive button" type="submit" formaction="adicionar-receita-parcelada.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
+    <button class="ui right floated positive button" type="submit" formaction="receita-parcelar-salvar.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
     <!-- botões do formulário -->
     <?php foreach ($tags as $index => $tag) : ?>
         <input type="hidden" name="tags[<?= $index; ?>]" value="<?= $tag; ?>" id="tagf_<?= $index; ?>">

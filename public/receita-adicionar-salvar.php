@@ -31,9 +31,9 @@ $result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcel
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="painel-receitas.php">Receitas</a>
+    <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="lancar-receita-individual.php">Previsão</a>
+    <a class="section" href="receitas-adicionar.php">Previsão</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->
@@ -89,7 +89,7 @@ if ($result['success'] === true) {
         </tbody>
     </table>
     <div class="ui buttons">
-        <a class="ui button" href="lancar-receita-individual.php">Novo</a>
+        <a class="ui button" href="receitas-adicionar.php">Novo</a>
         <div class="or" data-text="ou"></div>
         <a class="ui positive button" href="index.php#receita_<?= $result['cod']; ?>">Ver</a>
     </div>

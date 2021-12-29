@@ -16,7 +16,7 @@ if (key_exists('descricao', $_POST)) $descricao = $_POST['descricao'];
 $agrupador = '';
 if (key_exists('agrupador', $_POST)) $agrupador = $_POST['agrupador'];
 
-$parcela = 0;
+$parcela = 1;
 if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
 
 $tags = [];
@@ -28,16 +28,16 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="painel-receitas.php">Receitas</a>
+    <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="active section">Previsão</div>
+    <div class="active section">Repetição</div>
 </div><!-- trilha -->
 
 <!-- título -->
 <h2 class="ui header">
     <i class="edit icon"></i>
     <div class="content">
-        Previsão individual da receita
+        Repetição da previsão da receita
         <!-- <div class="sub header">Operações contábeis.</div> -->
     </div>
 </h2>
@@ -47,7 +47,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <form class="ui form">
     <h4 class="ui dividing header">Informações básicas</h4>
     <div class="required field">
-        <label>Período</label>
+        <label>Período inicial</label>
         <input type="month" name="periodo" required autofocus value="<?= $periodo; ?>">
     </div>
     <div class="required field">
@@ -59,6 +59,10 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
             <label>Valor</label>
             <input type="number" name="valorInicial" required min="0.01" step="0.01" value="<?= $valorInicial; ?>">
         </div>
+        <div class="two wide required field">
+            <label>Número de períodos</label>
+            <input type="number" name="parcela" min="1" step="1" value="<?= $parcela; ?>" required>
+        </div>
     </div>
 
     <a id="taglist"></a>
@@ -67,7 +71,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
         <div class="three wide field">
             <div class="ui action input">
                 <input type="text" name="tag" placeholder="Informe as tags desejadas" list="tags" autocomplete="off">
-                <button class="ui icon button" formaction="lancar-receita-individual.php#taglist" formmethod="POST">
+                <button class="ui icon button" formaction="receita-repetir.php#taglist" formmethod="POST">
                     <i class="plus squared icon"></i>
                 </button>
             </div>
@@ -99,11 +103,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="fields">
         <div class="five wide field">
             <label>Agrupador</label>
-            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>">
-        </div>
-        <div class="two wide field">
-            <label>Parcela</label>
-            <input type="number" name="parcela" min="0" step="1" value="<?= $parcela; ?>">
+            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>" autocomplete="off">
         </div>
     </div>
 
@@ -111,7 +111,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <!-- botões do formulário -->
     <div class="ui divider"></div>
     <button class="ui left floated negative button" formaction=""><i class="cancel icon"></i>Cancelar</button>
-    <button class="ui right floated positive button" type="submit" formaction="adicionar-receita-individual.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
+    <button class="ui right floated positive button" type="submit" formaction="receita-repetir-salvar.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
     <!-- botões do formulário -->
     <?php foreach ($tags as $index => $tag) : ?>
         <input type="hidden" name="tags[<?= $index; ?>]" value="<?= $tag; ?>" id="tagf_<?= $index; ?>">
@@ -121,8 +121,8 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <datalist id="tags">
     <!--<option value="Fulano">-->
     <?php foreach (listarTags() as $item) : ?>
-        <option value="<?=$item['tag'];?>">
-    <?php endforeach; ?>
+        <option value="<?= $item['tag']; ?>">
+        <?php endforeach; ?>
 </datalist>
 
 <script>

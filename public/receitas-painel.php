@@ -25,21 +25,21 @@ carregaTemplate('header');
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <a class="header" href="lancar-receita-individual.php">Previsão individual</a>
+            <a class="header" href="receitas-adicionar.php">Previsão individual</a>
             <div class="description">Inclui uma previsão de receita individual.</div>
         </div>
     </div>
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <a class="header" href="lancar-repeticao-receita.php">Repetição de previsão</a>
+            <a class="header" href="receita-repetir.php">Repetição de previsão</a>
             <div class="description">Repete em vários meses uma mesma previsão da receita.</div>
         </div>
     </div>
     <div class="item">
         <i class="angle right icon"></i>
         <div class="content">
-            <a class="header" href="lancar-receita-parcelada.php">Parcelamento de receita</a>
+            <a class="header" href="receita-parcelar.php">Parcelamento de receita</a>
             <div class="description">Lança uma receita com o recebimento parcelado.</div>
         </div>
     </div>
