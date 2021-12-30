@@ -27,20 +27,22 @@ function salvarReceita(string $periodo, string $descricao, float $valorInicial, 
     // print_r($result);
     if($result['success'] === false) return $result;
 
-    $cod = gerarId();
+    // $cod = gerarId();
     $con = conexao();
 
     try{
         $con->beginTransaction();
-        $stmt = $con->prepare('INSERT INTO receitas (cod, periodo, descricao, valorInicial, agrupador, parcela) VALUES (:cod, :periodo, :descricao, :valorInicial, :agrupador, :parcela)');
+        // $stmt = $con->prepare('INSERT INTO receitas (cod, periodo, descricao, valorInicial, agrupador, parcela) VALUES (:cod, :periodo, :descricao, :valorInicial, :agrupador, :parcela)');
+        $stmt = $con->prepare('INSERT INTO receitas (periodo, descricao, valorInicial, agrupador, parcela) VALUES (:periodo, :descricao, :valorInicial, :agrupador, :parcela)');
         $stmt->execute([
-            ':cod' => $cod,
+            // ':cod' => $cod,
             ':periodo' => periodo2Int($periodo),
             ':descricao' => $descricao,
             ':valorInicial' => $valorInicial,
             ':agrupador' => $agrupador,
             ':parcela' => $parcela
         ]);
+        $cod = $con->lastInsertId();
 
         if(sizeof($tags) > 0){
             $stmt = $con->prepare('INSERT INTO tags (tag, receita) VALUES(:tag, :receita)');

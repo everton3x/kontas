@@ -28,7 +28,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-painel.php">Receitas</a>
+    <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
     <div class="active section">Previsão</div>
 </div><!-- trilha -->
@@ -67,7 +67,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
         <div class="three wide field">
             <div class="ui action input">
                 <input type="text" name="tag" placeholder="Informe as tags desejadas" list="tags" autocomplete="off">
-                <button class="ui icon button" formaction="receitas-adicionar.php#taglist" formmethod="POST">
+                <button class="ui icon button" formaction="receita-adicionar.php#taglist" formmethod="POST">
                     <i class="plus squared icon"></i>
                 </button>
             </div>

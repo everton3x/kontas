@@ -33,7 +33,7 @@ $result = salvarReceitaRepetida($periodo, $descricao, $valorInicial, $agrupador,
     <div class="divider"> / </div>
     <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-adicionar.php">Repetição</a>
+    <a class="section" href="receita-adicionar.php">Repetição</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->

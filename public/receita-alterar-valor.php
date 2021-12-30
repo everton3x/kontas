@@ -11,9 +11,9 @@ if (key_exists('cod', $_GET)) $cod = $_GET['cod'];
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-painel.php">Receitas</a>
+    <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="section">Previsão</div>
+    <a class="section" href="receita-detalhe.php?cod=<?=$cod;?>">Previsão</a>
     <div class="divider"> / </div>
     <div class="active section">Alteração</div>
 </div><!-- trilha -->

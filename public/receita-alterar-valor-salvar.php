@@ -18,11 +18,11 @@ $result = salvarAlteracaoReceita($cod, $valor, $observacao);
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-painel.php">Receitas</a>
+    <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="section">Previsão</div>
+    <a class="section" href="receita-detalhe.php?cod=<?=$cod;?>">Previsão</a>
     <div class="divider"> / </div>
-    <div class="section">Alteração</div>
+    <a class="section" href="javascript:history.back()">Alteração</a>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->
 
@@ -49,7 +49,7 @@ if ($result['success'] === true) {
 <div class="ui buttons">
     <a class="ui primary button" href="receita-detalhe.php?cod=<?=$cod;?>">Detalhes</a>
     <div class="or" data-text="ou"></div>
-    <a class="ui positive button" href="index.php#receita_<?= $cod; ?>">Início</a>
+    <a class="ui positive button" href="index.php">Início</a>
 </div>
 
 <?php carregaTemplate('footer'); ?>

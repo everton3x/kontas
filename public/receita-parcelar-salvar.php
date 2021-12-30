@@ -53,7 +53,7 @@ $result = salvarReceitaParcelada($periodos, $descricao, $valores, $agrupador, $p
     <div class="divider"> / </div>
     <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-adicionar.php">Parcelamento</a>
+    <a class="section" href="receita-adicionar.php">Parcelamento</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->

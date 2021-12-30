@@ -6,28 +6,34 @@ carregaTemplate('header');
 
 $con = conexao();
 
-if (key_exists('periodoInicial', $_POST)){
+if (key_exists('periodoInicial', $_POST)) {
     $pInicial = date_create_from_format('Y-m', $_POST['periodoInicial']);
-}else{
+} else {
     $pInicial = new DateTime();
 }
-if (key_exists('periodoFinal', $_POST)){
+if (key_exists('periodoFinal', $_POST)) {
     $pFinal = date_create_from_format('Y-m', $_POST['periodoFinal']);
-}else{
+} else {
     $pFinal = new DateTime();
     $pFinal->add(new DateInterval('P11M'));
 }
 
-if (key_exists('descricao', $_POST) && strlen($_POST['descricao']) > 0){
+if (key_exists('descricao', $_POST) && strlen($_POST['descricao']) > 0) {
     $descricao = $_POST['descricao'];
-}else{
+} else {
     $descricao = '%';
 }
-$receitas = $con->prepare("SELECT * FROM receitasresumo WHERE (periodo BETWEEN :pi AND :pf) AND descricao LIKE :descricao ORDER BY periodo ASC");
+if (key_exists('agrupador', $_POST) && strlen($_POST['agrupador']) > 0) {
+    $agrupador = $_POST['agrupador'];
+} else {
+    $agrupador = '%';
+}
+$receitas = $con->prepare("SELECT * FROM receitasresumo WHERE (periodo BETWEEN :pi AND :pf) AND descricao LIKE :descricao AND agrupador LIKE :agrupador ORDER BY periodo ASC");
 $receitas->execute([
     ':pi' => $pInicial->format('Ym'),
     ':pf' => $pFinal->format('Ym'),
-    ':descricao' => $descricao
+    ':descricao' => $descricao,
+    ':agrupador' => $agrupador
 ]);
 
 ?>
@@ -69,9 +75,17 @@ $receitas->execute([
         <label>Descrição</label>
         <input type="text" name="descricao" placeholder="Curingas: % e _, para vários ou único caracteres.">
     </div>
+    <div class="field">
+        <label>Agrupador</label>
+        <input type="text" name="agrupador" placeholder="Curingas: % e _, para vários ou único caracteres.">
+    </div>
     <button class="ui primary right labeled icon button" formmethod="POST">
         Filtrar
         <i class="search icon"></i>
+    </button>
+    <button class="ui secondary right labeled icon button" formaction="#lista" formmethod="POST">
+        Limpar
+        <i class="eraser icon"></i>
     </button>
 </form>
 <div class="ui divider"></div><!-- filtro -->
@@ -96,14 +110,14 @@ $receitas->execute([
             <tr>
                 <td><?= int2DateTime($item['periodo'])->format('F/Y'); ?></td>
                 <td><?= $item['descricao']; ?></td>
-                <td class="right aligned"><?= formatNumber($item['previsto']); ?></td>
+                <td class="right aligned"><?= formatNumber(round($item['valorInicial'] + $item['alteracao'], 2)); ?></td>
                 <td class="right aligned"><?= formatNumber($item['recebido']); ?></td>
-                <td class="right aligned"><?= formatNumber($item['areceber']); ?></td>
+                <td class="right aligned"><?= formatNumber(round($item['valorInicial'] + $item['alteracao'] - $item['recebido'], 2)); ?></td>
                 <td>
-                    <a class="ui icon button" href="receita-detalhe.php?cod=<?=$item['cod'];?>">
+                    <a class="ui icon button" href="receita-detalhe.php?cod=<?= $item['cod']; ?>">
                         <i class="eye icon"></i>
                     </a>
-                    <a class="ui primary icon button" href="receita-alterar-valor.php?cod=<?=$item['cod'];?>">
+                    <a class="ui primary icon button" href="receita-alterar-valor.php?cod=<?= $item['cod']; ?>">
                         <i class="random icon"></i>
                     </a>
                 </td>
