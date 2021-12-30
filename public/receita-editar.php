@@ -3,23 +3,28 @@
 require_once '../vendor/autoload.php';
 carregaTemplate('header');
 
-$periodo = date('Y-m');
+$cod = '';
+if (key_exists('cod', $_GET)) $cod = $_GET['cod'];
+if (key_exists('cod', $_POST)) $cod = $_POST['cod'];
+$detalhes = buscarDadosDaReceita($cod);
+
+$periodo = int2DateTime($detalhes['periodo'])->format('Y-m');
 if (key_exists('periodo', $_POST)) $periodo = $_POST['periodo'];
 if (key_exists('periodo', $_GET)) $periodo = $_GET['periodo'];
 
-$valorInicial = 0.0;
+$valorInicial = $detalhes['valorInicial'];
 if (key_exists('valorInicial', $_POST)) $valorInicial = $_POST['valorInicial'];
 
-$descricao = '';
+$descricao = $detalhes['descricao'];
 if (key_exists('descricao', $_POST)) $descricao = $_POST['descricao'];
 
-$agrupador = '';
+$agrupador = $detalhes['agrupador'];
 if (key_exists('agrupador', $_POST)) $agrupador = $_POST['agrupador'];
 
-$parcela = 1;
+$parcela = $detalhes['parcela'];
 if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
 
-$tags = [];
+$tags = buscarTagsDaReceita($cod);
 if (key_exists('tags', $_POST)) $tags = $_POST['tags'];
 
 if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
@@ -30,14 +35,14 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="divider"> / </div>
     <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <div class="active section">Repetição</div>
+    <div class="active section">Editar</div>
 </div><!-- trilha -->
 
 <!-- título -->
 <h2 class="ui header">
     <i class="edit icon"></i>
     <div class="content">
-        Repetição da previsão da receita
+        Edição de receita
         <!-- <div class="sub header">Operações contábeis.</div> -->
     </div>
 </h2>
@@ -47,7 +52,11 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <form class="ui form">
     <h4 class="ui dividing header">Informações básicas</h4>
     <div class="required field">
-        <label>Período inicial</label>
+        <label>Código</label>
+        <input type="number" name="cod" required value="<?= $cod; ?>" readonly>
+    </div>
+    <div class="required field">
+        <label>Período</label>
         <input type="month" name="periodo" required autofocus value="<?= $periodo; ?>">
     </div>
     <div class="required field">
@@ -59,10 +68,6 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
             <label>Valor</label>
             <input type="number" name="valorInicial" required min="0.01" step="0.01" value="<?= $valorInicial; ?>">
         </div>
-        <div class="two wide required field">
-            <label>Número de períodos</label>
-            <input type="number" name="parcela" min="1" step="1" value="<?= $parcela; ?>" required>
-        </div>
     </div>
 
     <a id="taglist"></a>
@@ -71,7 +76,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
         <div class="three wide field">
             <div class="ui action input">
                 <input type="text" name="tag" placeholder="Informe as tags desejadas" list="tags" autocomplete="off">
-                <button class="ui icon button" formaction="receita-repetir.php#taglist" formmethod="POST">
+                <button class="ui icon button" formaction="receita-editar.php#taglist" formmethod="POST">
                     <i class="plus squared icon"></i>
                 </button>
             </div>
@@ -105,13 +110,17 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
             <label>Agrupador</label>
             <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>" autocomplete="off">
         </div>
+        <div class="two wide field">
+            <label>Parcela</label>
+            <input type="number" name="parcela" min="0" step="1" value="<?= $parcela; ?>">
+        </div>
     </div>
 
 
     <!-- botões do formulário -->
     <div class="ui divider"></div>
     <button class="ui left floated negative button" onclick="history.back()"><i class="cancel icon"></i>Cancelar</button>
-    <button class="ui right floated positive button" type="submit" formaction="receita-repetir-salvar.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
+    <button class="ui right floated positive button" type="submit" formaction="receita-editar-salvar.php" formmethod="POST"><i class="save icon"></i>Salvar</button>
     <!-- botões do formulário -->
     <?php foreach ($tags as $index => $tag) : ?>
         <input type="hidden" name="tags[<?= $index; ?>]" value="<?= $tag; ?>" id="tagf_<?= $index; ?>">
@@ -121,8 +130,8 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <datalist id="tags">
     <!--<option value="Fulano">-->
     <?php foreach (listarTags() as $item) : ?>
-        <option value="<?= $item['tag']; ?>">
-        <?php endforeach; ?>
+        <option value="<?=$item['tag'];?>">
+    <?php endforeach; ?>
 </datalist>
 
 <script>

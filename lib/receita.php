@@ -4,7 +4,7 @@
  * Funções para receita
  */
 
-function salvarReceita(string $periodo, string $descricao, float $valorInicial, string $agrupador, int $parcela, array $tags): array
+function salvarReceita(string $periodo, string $descricao, float $valorInicial, string $agrupador, int $parcela, array $tags, ?string $recebidoem = null): array
 {
     $result['success'] = null;
     $result['messages'] = [];
@@ -44,6 +44,17 @@ function salvarReceita(string $periodo, string $descricao, float $valorInicial, 
         ]);
         $cod = $con->lastInsertId();
 
+        if(!is_null($recebidoem)){
+            $recebidoem = date_create_from_format('Y-m-d', $recebidoem);
+            $recebimento = salvarRecebimento($cod, $valorInicial, $recebidoem->format('Y-m-d'), "Recebimento automático.");
+            if($recebimento['success'] === false){
+                $result['success'] = false;
+                $result['errors'] = array_merge($result['errors'], $recebimento['errors']);
+            }else{
+                $result['messages'] = array_merge($result['messages'], $recebimento['messages']);
+            }
+        }
+
         if(sizeof($tags) > 0){
             $stmt = $con->prepare('INSERT INTO tags (tag, receita) VALUES(:tag, :receita)');
             foreach($tags as $tag){
@@ -68,7 +79,72 @@ function salvarReceita(string $periodo, string $descricao, float $valorInicial, 
     }
 }
 
-function salvarAlteracaoReceita(string $cod, float $valor, string $observacao): array
+function atualizarReceita(int $cod, string $periodo, string $descricao, float $valorInicial, string $agrupador, int $parcela, array $tags): array
+{
+    $result['success'] = null;
+    $result['messages'] = [];
+    $result['errors'] = [];
+
+    if(!testarPeriodo($periodo)){
+        $result['success'] = false;
+        $result['errors'][] = "O período não é válido: $periodo";
+    }
+    if(strlen($descricao) === 0){
+        $result['success'] = false;
+        $result['errors'][] = "A descrição está vazia.";
+    }
+    $valorInicial = round($valorInicial, 2);
+    if($valorInicial <= 0){
+        $result['success'] = false;
+        $result['errors'][] = "O valor inicial é menor ou igual a zero: $valorInicial";
+    }
+
+    if($result['success'] === false) return $result;
+
+    $con = conexao();
+
+    try{
+        $con->beginTransaction();
+        $stmt = $con->prepare('UPDATE receitas SET periodo = :periodo, descricao = :descricao, valorInicial = :valorInicial, agrupador = :agrupador, parcela = :parcela WHERE cod = :cod');
+        $stmt->execute([
+            ':cod' => $cod,
+            ':periodo' => periodo2Int($periodo),
+            ':descricao' => $descricao,
+            ':valorInicial' => $valorInicial,
+            ':agrupador' => $agrupador,
+            ':parcela' => $parcela
+        ]);
+        $cod = $con->lastInsertId();
+
+        $stmt = $con->prepare('DELETE FROM tags WHERE receita = :cod');
+        $stmt->execute([
+            ':cod' => $cod
+        ]);
+
+        if(sizeof($tags) > 0){
+            $stmt = $con->prepare('INSERT INTO tags (tag, receita) VALUES(:tag, :receita)');
+            foreach($tags as $tag){
+                $stmt->execute([
+                    ':tag' => $tag,
+                    ':receita' => $cod
+                ]);
+            }
+        }
+
+        $con->commit();
+        $result['success'] = true;
+        $result['messages'][] = "Receita editada com sucesso.";
+    }catch(Exception $e){
+        $con->rollBack();
+        $result['success'] = false;
+        $result['errors'][] = $stmt->errorInfo()[2];
+    }finally{
+        // print_r($result);
+        return $result;
+    }
+}
+
+function salvarAlteracaoReceita(string $receita, float $valor, string $observacao): array
 {
     $result['success'] = null;
     $result['messages'] = [];
@@ -80,9 +156,9 @@ function salvarAlteracaoReceita(string $cod, float $valor, string $observacao): 
 
     try{
         $con->beginTransaction();
-        $stmt = $con->prepare('INSERT INTO receitaalteracao (receita, valor, observacao) VALUES (:cod, :valor, :observacao)');
+        $stmt = $con->prepare('INSERT INTO receitaalteracao (receita, valor, observacao) VALUES (:receita, :valor, :observacao)');
         $stmt->execute([
-            ':cod' => $cod,
+            ':receita' => $receita,
             ':valor' => $valor,
             ':observacao' => $observacao
         ]);
@@ -100,20 +176,73 @@ function salvarAlteracaoReceita(string $cod, float $valor, string $observacao): 
     }
 }
 
+function salvarRecebimento(string $receita, float $valor, string $data, string $observacao): array
+{
+    $result['success'] = null;
+    $result['messages'] = [];
+    $result['errors'] = [];
+    $detalhes = buscarDadosDaReceita($receita);
+    // print_r($detalhes);
+    $suplementar = 0.0;
+    //corrige problema de quando a receita e o recebimento estão na mesma transação
+    if($detalhes !== [] && $detalhes['areceber'] < $valor) $suplementar = round($valor - $detalhes['areceber'], 2);
+
+    $valor = round($valor, 2);
+    $data = date_create_from_format('Y-m-d', $data);
+    
+    $con = conexao();
+
+    try{
+        $con->beginTransaction();
+        $stmt = $con->prepare('INSERT INTO recebimentos (receita, valor, data, observacao) VALUES (:receita, :valor, :data, :observacao)');
+        $stmt->execute([
+            ':receita' => $receita,
+            ':valor' => $valor,
+            ':data' => $data->format('Y-m-d'),
+            ':observacao' => $observacao
+        ]);
+        if($suplementar > 0.0){
+            salvarAlteracaoReceita($receita, $suplementar, "Valor suplementado automaticamente no recebimento: {$con->lastInsertId()}");
+            $result['messages'][] = "Suplementação da receita realizada: ".formatNumber($suplementar);
+        }
+
+        $con->commit();
+        $result['success'] = true;
+        $result['messages'][] = "Recebimento salvo!";
+    }catch(Exception $e){
+        $con->rollBack();
+        $result['success'] = false;
+        $result['errors'][] = $stmt->errorInfo()[2];
+    }finally{
+        // print_r($result);
+        return $result;
+    }
+}
+
 function buscarDadosDaReceita(string $cod): array
 {
     $con = conexao();
-    $stmt = $con->prepare('SELECT * FROM receitasresumo WHERE cod LIKE :cod');
+    $stmt = $con->prepare('SELECT * FROM receitasresumo WHERE cod = :cod');
     if($stmt->execute([':cod' => $cod]) === false) return [];
     $detalhes = $stmt->fetch(PDO::FETCH_ASSOC);
+    if($detalhes === false) return  [];
     $detalhes['tags'] = buscarTagsDaReceita($cod);
-    $detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
-    $detalhes['areceber'] = round($detalhes['previsto'] + $detalhes['recebido'], 2);
+    // print_r($detalhes);
+    //linhas necessárias porque no autorecebimento, como está dentro da transação, ainda não tem a receita efetivamente no banco buscar
+    // if(!key_exists('valorInicial', $detalhes)) $detalhes['valorInicial'] = 0.0;
+    // if(!key_exists('alteracao', $detalhes)) $detalhes['alteracao'] = 0.0;
+    // if(!key_exists('recebido', $detalhes)) $detalhes['recebido'] = 0.0;
 
-    $stmt = $con->prepare('SELECT * FROM receitaalteracao WHERE receita LIKE :cod');
+    $detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
+    $detalhes['areceber'] = round($detalhes['previsto'] - $detalhes['recebido'], 2);
+
+    $stmt = $con->prepare('SELECT * FROM receitaalteracao WHERE receita = :cod');
     if($stmt->execute([':cod' => $cod]) === false) $detalhes['alteracoes'] = [];
     $detalhes['alteracoes'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // print_r($detalhes['alteracoes']);
+    
+    $stmt = $con->prepare('SELECT * FROM recebimentos WHERE receita = :cod');
+    if($stmt->execute([':cod' => $cod]) === false) $detalhes['recebimentos'] = [];
+    $detalhes['recebimentos'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $detalhes;
 }

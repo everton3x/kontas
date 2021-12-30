@@ -51,9 +51,9 @@ $result = salvarReceitaParcelada($periodos, $descricao, $valores, $agrupador, $p
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <a class="section" href="receitas-painel.php">Receitas</a>
+    <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="receita-adicionar.php">Parcelamento</a>
+    <a class="section" href="receita-parcelar.php">Parcelamento</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->

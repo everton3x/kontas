@@ -3,29 +3,19 @@
 require_once '../vendor/autoload.php';
 carregaTemplate('header');
 
-$periodo = false;
-if (key_exists('periodo', $_POST)) $periodo = $_POST['periodo'];
+$cod = 0;
+if (key_exists('cod', $_POST)) $cod = $_POST['cod'];
 
-$valorInicial = false;
-if (key_exists('valorInicial', $_POST)) $valorInicial = $_POST['valorInicial'];
+$valor = 0.0;
+if (key_exists('valor', $_POST)) $valor = $_POST['valor'];
 
-$descricao = false;
-if (key_exists('descricao', $_POST)) $descricao = $_POST['descricao'];
+$data = '';
+if (key_exists('data', $_POST)) $data = $_POST['data'];
 
-$agrupador = '';
-if (key_exists('agrupador', $_POST)) $agrupador = $_POST['agrupador'];
+$observacao = '';
+if (key_exists('observacao', $_POST)) $observacao = $_POST['observacao'];
 
-$parcela = 1;
-if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
-
-$tags = [];
-if (key_exists('tags', $_POST)) $tags = $_POST['tags'];
-
-$result = salvarReceitaRepetida($periodo, $descricao, $valorInicial, $agrupador, $parcela, $tags);
-// $result['success'] = true;
-// $result['messages'][] = 'testes';
-// $result['cod'] = '15f039898beb244f5250933e237fb74d971f44ee';
-// print_r($result);
+$result = salvarRecebimento($cod, $valor, $data, $observacao);
 ?>
 <!-- trilha -->
 <div class="ui breadcrumb">
@@ -33,8 +23,9 @@ $result = salvarReceitaRepetida($periodo, $descricao, $valorInicial, $agrupador,
     <div class="divider"> / </div>
     <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="receita-repetir.php">Repetição</a>
+    <a class="section" href="receita-detalhe.php?cod=<?=$cod;?>">Detalhe</a>
     <div class="divider"> / </div>
+    <a class="section" href="javascript:history.back()">Receber</a>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->
 
@@ -42,8 +33,7 @@ $result = salvarReceitaRepetida($periodo, $descricao, $valorInicial, $agrupador,
 <h2 class="ui header">
     <i class="save icon"></i>
     <div class="content">
-        Repetição da previsão da receita
-        <!-- <div class="sub header">Operações contábeis.</div> -->
+        Recebimento de receita
     </div>
 </h2>
 <div class="ui divider"></div><!-- título -->
@@ -57,8 +47,9 @@ if ($result['success'] === true) {
     carregaTemplate('warning', ['messages' => ['Retorno inesperado!']]);
 }
 ?>
+
 <div class="ui buttons">
-    <a class="ui button" href="receita-repetir.php">Novo</a>
+    <a class="ui primary button" href="receita-detalhe.php?cod=<?=$cod;?>">Detalhes</a>
     <div class="or" data-text="ou"></div>
     <a class="ui positive button" href="index.php">Início</a>
 </div>

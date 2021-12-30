@@ -14,7 +14,7 @@ $detalhes = buscarDadosDaReceita($cod);
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <div class="section">Receitas</div>
+    <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
     <div class="active section">Detalhes</div>
 </div><!-- trilha -->
@@ -40,7 +40,7 @@ $detalhes = buscarDadosDaReceita($cod);
                     <a class="ui green button" href="#recebimentos"><i class="download icon"></i></a>
                 </div>
                 <div class="ui icon buttons">
-                    <a class="ui red basic button" href=""><i class="edit icon"></i></a>
+                    <a class="ui teal button" href="receita-editar.php?cod=<?=$cod;?>"><i class="edit icon"></i></a>
                 </div>
             </th>
         </tr>
@@ -70,7 +70,7 @@ $detalhes = buscarDadosDaReceita($cod);
             <td class="active">Tags</td>
             <td>
                 <?php foreach ($detalhes['tags'] as $tag) : ?>
-                    <a class="ui label">
+                    <a class="ui label" href="tag-detalhe.php?tag=<?=$tag;?>#receitas">
                         <i class="hashtag icon"></i>
                         <?= $tag; ?>
                     </a>
@@ -120,7 +120,7 @@ $detalhes = buscarDadosDaReceita($cod);
     <tbody>
         <?php foreach ($detalhes['alteracoes'] as $item) : ?>
             <tr>
-                <td><?= $item['registro']; ?></td>
+                <td><?= date_create_from_format('Y-m-d h:i:s', $item['registro'])->format('d/m/Y'); ?></td>
                 <td class="right aligned"><?= formatNumber($item['valor']); ?></td>
                 <td><?= $item['observacao']; ?></td>
             </tr>
@@ -131,6 +131,9 @@ $detalhes = buscarDadosDaReceita($cod);
             <th class="right aligned">Total</th>
             <th class="right aligned"><?= formatNumber($detalhes['alteracao']); ?></th>
             <th class="right aligned">
+                <a class="ui secondary icon button" href="#">
+                    <i class="angle double up icon"></i>
+                </a>
                 <a class="ui primary icon button" href="receita-alterar-valor.php?cod=<?= $cod; ?>">
                     <i class="random icon"></i>
                 </a>
@@ -143,6 +146,43 @@ $detalhes = buscarDadosDaReceita($cod);
 
 <a id="recebimentos"></a>
 <!-- recebimentos -->
-<!-- recebimentos -->
+<h3 class="ui header">
+    <i class="download icon"></i>
+    <div class="content">
+        Recebimentos
+    </div>
+</h3>
+<table class="ui table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th class="right aligned">Valor</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($detalhes['recebimentos'] as $item) : ?>
+            <tr>
+                <td><?= date_create_from_format('Y-m-d', $item['data'])->format('d/m/Y'); ?></td>
+                <td class="right aligned"><?= formatNumber($item['valor']); ?></td>
+                <td><?= $item['observacao']; ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th class="right aligned">Total</th>
+            <th class="right aligned"><?= formatNumber($detalhes['recebido']); ?></th>
+            <th class="right aligned">
+                <a class="ui secondary icon button" href="#">
+                    <i class="angle double up icon"></i>
+                </a>
+                <a class="ui primary icon button" href="receita-receber.php?cod=<?= $cod; ?>">
+                    <i class="download icon"></i>
+                </a>
+            </th>
+        </tr>
+    </tfoot>
+</table><!-- recebimentos -->
 
 <?php carregaTemplate('footer'); ?>

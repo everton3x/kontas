@@ -41,7 +41,7 @@ $receitas->execute([
 <div class="ui breadcrumb">
     <a class="section" href="index.php">Início</a>
     <div class="divider"> / </div>
-    <div class="section">Receitas</div>
+    <a class="section" href="receitas-painel.php">Receitas</a>
     <div class="divider"> / </div>
     <div class="active section">Gerenciar</div>
 </div><!-- trilha -->
@@ -114,11 +114,14 @@ $receitas->execute([
                 <td class="right aligned"><?= formatNumber($item['recebido']); ?></td>
                 <td class="right aligned"><?= formatNumber(round($item['valorInicial'] + $item['alteracao'] - $item['recebido'], 2)); ?></td>
                 <td>
-                    <a class="ui icon button" href="receita-detalhe.php?cod=<?= $item['cod']; ?>">
+                    <a class="ui secondary icon button" href="receita-detalhe.php?cod=<?= $item['cod']; ?>">
                         <i class="eye icon"></i>
                     </a>
                     <a class="ui primary icon button" href="receita-alterar-valor.php?cod=<?= $item['cod']; ?>">
                         <i class="random icon"></i>
+                    </a>
+                    <a class="ui green icon button" href="receita-receber.php?cod=<?= $item['cod']; ?>">
+                        <i class="download icon"></i>
                     </a>
                 </td>
             </tr>

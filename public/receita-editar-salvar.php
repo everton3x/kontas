@@ -1,7 +1,11 @@
 <?php
 // print_r($_POST);
+// exit();
 require_once '../vendor/autoload.php';
 carregaTemplate('header');
+
+$cod = 0;
+if (key_exists('cod', $_POST)) $cod = $_POST['cod'];
 
 $periodo = false;
 if (key_exists('periodo', $_POST)) $periodo = $_POST['periodo'];
@@ -18,14 +22,14 @@ if (key_exists('agrupador', $_POST)) $agrupador = $_POST['agrupador'];
 $parcela = 0;
 if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
 
-$recebidoem = null;
-if (key_exists('recebidoem', $_POST) && strlen($_POST['recebidoem']) > 0) $recebidoem = $_POST['recebidoem'];
-
 $tags = [];
 if (key_exists('tags', $_POST)) $tags = $_POST['tags'];
 
-$result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcela, $tags, $recebidoem);
-
+$result = atualizarReceita($cod, $periodo, $descricao, $valorInicial, $agrupador, $parcela, $tags);
+// $result['success'] = true;
+// $result['messages'][] = 'testes';
+// $result['cod'] = '15f039898beb244f5250933e237fb74d971f44ee';
+// print_r($result);
 ?>
 <!-- trilha -->
 <div class="ui breadcrumb">
@@ -33,7 +37,7 @@ $result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcel
     <div class="divider"> / </div>
     <a class="section" href="receitas-gerenciar.php">Receitas</a>
     <div class="divider"> / </div>
-    <a class="section" href="javascript:history.back()">Previsão</a>
+    <a class="section" href="javascript:history.back()">Edição</a>
     <div class="divider"> / </div>
     <div class="active section">Salvando...</div>
 </div><!-- trilha -->
@@ -42,7 +46,7 @@ $result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcel
 <h2 class="ui header">
     <i class="save icon"></i>
     <div class="content">
-        Previsão individual da receita
+        Edição da receita
         <!-- <div class="sub header">Operações contábeis.</div> -->
     </div>
 </h2>
@@ -51,7 +55,7 @@ $result = salvarReceita($periodo, $descricao, $valorInicial, $agrupador, $parcel
 <?php
 if ($result['success'] === true) {
     carregaTemplate('success', ['messages' => $result['messages']]);
-    $receita = buscarDadosDaReceita($result['cod']);
+    $receita = buscarDadosDaReceita($cod);
 } elseif ($result['success'] === false) {
     carregaTemplate('error', ['messages' => $result['errors']]);
 } else {

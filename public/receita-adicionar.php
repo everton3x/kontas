@@ -99,7 +99,7 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
     <div class="fields">
         <div class="five wide field">
             <label>Agrupador</label>
-            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>">
+            <input type="text" name="agrupador" placeholder="Agrupador de parcelas/despesas" value="<?= $agrupador; ?>" autocomplete="off">
         </div>
         <div class="two wide field">
             <label>Parcela</label>
@@ -107,6 +107,13 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
         </div>
     </div>
 
+    <h4 class="ui dividing header">Recebimento</h4>
+    <div class="fields">
+        <div class="four wide field">
+            <label>Recebido em</label>
+            <input type="date" name="recebidoem">
+        </div>
+    </div>
 
     <!-- botões do formulário -->
     <div class="ui divider"></div>
@@ -121,8 +128,8 @@ if (key_exists('tag', $_POST)) $tags[] = $_POST['tag'];
 <datalist id="tags">
     <!--<option value="Fulano">-->
     <?php foreach (listarTags() as $item) : ?>
-        <option value="<?=$item['tag'];?>">
-    <?php endforeach; ?>
+        <option value="<?= $item['tag']; ?>">
+        <?php endforeach; ?>
 </datalist>
 
 <script>

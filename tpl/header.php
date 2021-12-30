@@ -120,11 +120,15 @@
                     <i class="plus circle icon"></i>
                     Receitas
                 </a>
-                <a class="item" href="painel-despesas.php">
+                <a class="item" href="despesas-painel.php">
                     <i class="minus circle icon"></i>
                     Despesas
                 </a>
-                <a class="item" href="painel-relatorios.php">
+                <a class="item" href="tags-painel.php">
+                    <i class="hashtag icon"></i>
+                    Tags
+                </a>
+                <a class="item" href="relatorios-painel.php">
                     <i class="chart pie icon"></i>
                     Relatórios
                 </a>
