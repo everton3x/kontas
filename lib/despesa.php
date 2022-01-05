@@ -79,7 +79,7 @@ function buscarDadosDaDespesa(string $cod): array
 {
     $con = conexao();
     // $stmt = $con->prepare('SELECT * FROM receitasresumo WHERE cod = :cod');
-    $stmt = $con->prepare('SELECT * FROM despesas WHERE cod = :cod');
+    $stmt = $con->prepare('SELECT * FROM despesasresumo WHERE cod = :cod');
     if($stmt->execute([':cod' => $cod]) === false) return [];
     $detalhes = $stmt->fetch(PDO::FETCH_ASSOC);
     if($detalhes === false) return  [];
@@ -90,10 +90,11 @@ function buscarDadosDaDespesa(string $cod): array
     // if(!key_exists('alteracao', $detalhes)) $detalhes['alteracao'] = 0.0;
     // if(!key_exists('recebido', $detalhes)) $detalhes['recebido'] = 0.0;
 
-    /*$detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
-    $detalhes['areceber'] = round($detalhes['previsto'] - $detalhes['recebido'], 2);
+    $detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
+    $detalhes['agastar'] = round($detalhes['previsto'] - $detalhes['gasto'], 2);
+    $detalhes['apagar'] = round($detalhes['gasto'] - $detalhes['pago'], 2);
 
-    $stmt = $con->prepare('SELECT * FROM receitaalteracao WHERE receita = :cod');
+    /*$stmt = $con->prepare('SELECT * FROM receitaalteracao WHERE receita = :cod');
     if($stmt->execute([':cod' => $cod]) === false) $detalhes['alteracoes'] = [];
     $detalhes['alteracoes'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
