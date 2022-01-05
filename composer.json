@@ -17,10 +17,12 @@
         "files": [
             "lib/tpl.php",
             "lib/receita.php",
+            "lib/despesa.php",
             "lib/tags.php",
             "lib/number.php",
             "lib/db.php",
             "lib/time.php",
+            "lib/mp.php",
             "lib/config.php"
         ]
     },
