@@ -91,6 +91,16 @@ function buscarDadosDaDespesa(string $cod): array
     // if(!key_exists('alteracao', $detalhes)) $detalhes['alteracao'] = 0.0;
     // if(!key_exists('recebido', $detalhes)) $detalhes['recebido'] = 0.0;
 
+    /*$stmt = $con->prepare('SELECT * FROM gastos WHERE despesa = :despesa');
+    $stmt->execute([':despesa' => $cod]);
+    $detalhes['gastos'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $detalhes['pago'] = 0.0;
+    foreach ($detalhes['gastos'] as $item) {
+        $stmt = $con->prepare('SELECT SUM(valor) AS pago FROM pagamentos WHERE gasto = :gasto');
+        $stmt->execute([':gasto' => $item['cod']]);
+        $detalhes['pago'] += (float) $stmt->fetch(PDO::FETCH_ASSOC)['pago'];
+    }*/
+
     $detalhes['previsto'] = round($detalhes['valorInicial'] + $detalhes['alteracao'], 2);
     $detalhes['agastar'] = round($detalhes['previsto'] - $detalhes['gasto'], 2);
     $detalhes['apagar'] = round($detalhes['gasto'] - $detalhes['pago'], 2);

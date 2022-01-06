@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Jan-2022 às 14:57
+-- Tempo de geração: 06-Jan-2022 às 15:36
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -61,14 +61,18 @@ CREATE TABLE IF NOT EXISTS `despesas` (
   `parcela` int(11) DEFAULT NULL,
   `registro` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`cod`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `despesas`
 --
 
 INSERT INTO `despesas` (`cod`, `periodo`, `descricao`, `valorInicial`, `agrupador`, `parcela`, `registro`) VALUES
-(12, 202201, 'teste', '1000.00', '', 0, '2022-01-06 13:42:52');
+(12, 202201, 'teste', '1000.00', '', 0, '2022-01-06 13:42:52'),
+(13, 202301, 'teste', '123.00', '', 0, '2022-01-06 14:11:20'),
+(14, 202301, 'teste', '123.00', '', 0, '2022-01-06 14:12:01'),
+(15, 202302, 'teste', '123.00', '', 0, '2022-01-06 14:12:01'),
+(16, 202303, 'teste', '123.00', '', 0, '2022-01-06 14:12:01');
 
 -- --------------------------------------------------------
 
@@ -288,7 +292,7 @@ INSERT INTO `tags` (`cod`, `tag`, `receita`, `despesa`) VALUES
 --
 DROP TABLE IF EXISTS `despesasresumo`;
 
-CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `despesasresumo`  AS SELECT `despesas`.`cod` AS `cod`, `despesas`.`periodo` AS `periodo`, `despesas`.`descricao` AS `descricao`, `despesas`.`valorInicial` AS `valorInicial`, `despesas`.`agrupador` AS `agrupador`, `despesas`.`parcela` AS `parcela`, `despesas`.`registro` AS `registro`, (select coalesce(sum(`despesaalteracao`.`valor`),0) from `despesaalteracao` where `despesaalteracao`.`despesa` = `despesas`.`cod`) AS `alteracao`, (select coalesce(sum(`gastos`.`valor`),0) from `gastos` where `gastos`.`despesa` = `despesas`.`cod`) AS `gasto`, (select coalesce(sum(`pagamentos`.`valor`),0) from ((`pagamentos` join `gastos`) join `despesas`) where `pagamentos`.`gasto` = `gastos`.`cod` and `gastos`.`despesa` = `despesas`.`cod`) AS `pago` FROM `despesas` ;
+CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `despesasresumo`  AS SELECT `despesas`.`cod` AS `cod`, `despesas`.`periodo` AS `periodo`, `despesas`.`descricao` AS `descricao`, `despesas`.`valorInicial` AS `valorInicial`, `despesas`.`agrupador` AS `agrupador`, `despesas`.`parcela` AS `parcela`, `despesas`.`registro` AS `registro`, (select coalesce(sum(`despesaalteracao`.`valor`),0) from `despesaalteracao` where `despesaalteracao`.`despesa` = `despesas`.`cod`) AS `alteracao`, (select coalesce(sum(`gastos`.`valor`),0) from `gastos` where `gastos`.`despesa` = `despesas`.`cod`) AS `gasto`, (select coalesce(sum(`pagamentos_gastos_despesas`.`valor`),0) from `pagamentos_gastos_despesas` where `pagamentos_gastos_despesas`.`despesa` = `despesas`.`cod`) AS `pago` FROM `despesas` ;
 
 -- --------------------------------------------------------
 
