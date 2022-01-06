@@ -40,15 +40,18 @@ function salvarDespesa($periodo, $descricao, $valorInicial, $agrupador, $parcela
         ]);
         $cod = $con->lastInsertId();
 
-        if(!is_null($gastoem)){//@todo
-            // $recebidoem = date_create_from_format('Y-m-d', $recebidoem);
-            // $recebimento = salvarRecebimento($cod, $valorInicial, $recebidoem->format('Y-m-d'), "Recebimento automático.");
-            // if($recebimento['success'] === false){
-            //     $result['success'] = false;
-            //     $result['errors'] = array_merge($result['errors'], $recebimento['errors']);
-            // }else{
-            //     $result['messages'] = array_merge($result['messages'], $recebimento['messages']);
-            // }
+        if(!is_null($gastoem)){
+            $gastoem = date_create_from_format('Y-m-d', $gastoem);
+            $gasto = salvarGasto($cod, $gastoem->format('Y-m-d'), $valorInicial, null, "Gasto automático.", $mp, $autopagar);
+            if($gasto['success'] === false){
+                $result['success'] = false;
+                $result['errors'] = array_merge($result['errors'], $gasto['errors']);
+            }else{
+                $result['messages'] = array_merge($result['messages'], $gasto['messages']);
+            }
+            if($autopagar === 1){//@todo
+
+            }
         }
 
         if(sizeof($tags) > 0){
