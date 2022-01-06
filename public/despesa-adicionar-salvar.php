@@ -21,10 +21,10 @@ if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
 
 $gastoem = null;
 if (key_exists('gastoem', $_POST) && strlen($_POST['gastoem']) > 0) $gastoem = $_POST['gastoem'];
-$mp = 0;
+$mp = null;
 if (key_exists('mp', $_POST)) $mp = $_POST['mp'];
-$autopagar = 0;
-if (key_exists('autopagar', $_POST)) $autopagar = $_POST['autopagar'];
+$autopagar = null;
+if (key_exists('autopagar', $_POST)) $autopagar = 1;
 
 $tags = [];
 if (key_exists('tags', $_POST)) $tags = $_POST['tags'];
