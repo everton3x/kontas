@@ -22,7 +22,7 @@ if (key_exists('parcela', $_POST)) $parcela = $_POST['parcela'];
 $gastoem = null;
 if (key_exists('gastoem', $_POST) && strlen($_POST['gastoem']) > 0) $gastoem = $_POST['gastoem'];
 $mp = null;
-if (key_exists('mp', $_POST)) $mp = $_POST['mp'];
+if (key_exists('mp', $_POST)) $mp = (int) $_POST['mp'];
 $autopagar = null;
 if (key_exists('autopagar', $_POST)) $autopagar = 1;
 

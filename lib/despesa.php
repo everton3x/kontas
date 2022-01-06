@@ -160,6 +160,17 @@ function salvarGasto(int $despesa, string $data, float $valor, ?string $vencimen
 
     $con = conexao();
 
+    $detalhes = buscarDadosDaDespesa($despesa);
+    if ($detalhes['agastar'] < $valor) {
+        $alteracao = salvarAlteracaoDespesa($despesa, round($valor - $detalhes['agastar'], 2), 'Suplementação automática');
+        if ($alteracao['success'] === false) {
+            $result['success'] = false;
+            $result['errors'] = array_merge($result['errors'], $alteracao['errors']);
+        } else {
+            $result['messages'] = array_merge($result['messages'], $alteracao['messages']);
+        }
+    }
+
     if ($autopagar === 0) {
         $stmt = $con->query("SELECT autopagar FROM mp WHERE cod = $mp");
         if ($stmt->fetch(PDO::FETCH_ASSOC)['autopagar'] === 1) $autopagar = 1;
