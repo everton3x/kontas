@@ -116,3 +116,35 @@ function buscarTagsDaDespesa(string $cod): array
     }
     return $tags;
 }
+
+function salvarAlteracaoDespesa(string $despesa, float $valor, string $observacao): array
+{
+    $result['success'] = null;
+    $result['messages'] = [];
+    $result['errors'] = [];
+
+    $valor = round($valor, 2);
+    
+    $con = conexao();
+
+    try{
+        $con->beginTransaction();
+        $stmt = $con->prepare('INSERT INTO despesaalteracao (despesa, valor, observacao) VALUES (:despesa, :valor, :observacao)');
+        $stmt->execute([
+            ':despesa' => $despesa,
+            ':valor' => $valor,
+            ':observacao' => $observacao
+        ]);
+
+        $con->commit();
+        $result['success'] = true;
+        $result['messages'][] = "Alteração salva!";
+    }catch(Exception $e){
+        $con->rollBack();
+        $result['success'] = false;
+        $result['errors'][] = $stmt->errorInfo()[2];
+    }finally{
+        // print_r($result);
+        return $result;
+    }
+}
