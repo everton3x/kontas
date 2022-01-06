@@ -173,7 +173,8 @@ function salvarGasto(int $despesa, string $data, float $valor, ?string $vencimen
 
     if ($autopagar === 0) {
         $stmt = $con->query("SELECT autopagar FROM mp WHERE cod = $mp");
-        if ($stmt->fetch(PDO::FETCH_ASSOC)['autopagar'] === 1) $autopagar = 1;
+        // var_dump($stmt->fetch(PDO::FETCH_ASSOC)['autopagar']);exit();
+        if ($stmt->fetch(PDO::FETCH_ASSOC)['autopagar'] == 1) $autopagar = 1;
     }
 
     try {
