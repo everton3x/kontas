@@ -128,7 +128,7 @@ $despesas->execute([
                         <i class="random icon"></i>
                     </a>
                     <a class="ui red icon button" href="despesa-gastar.php?cod=<?= $item['cod']; ?>">
-                        <i class="upload icon"></i>
+                        <i class="shopping cart icon"></i>
                     </a>
                 </td>
             </tr>

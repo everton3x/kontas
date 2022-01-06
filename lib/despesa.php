@@ -40,16 +40,16 @@ function salvarDespesa($periodo, $descricao, $valorInicial, $agrupador, $parcela
         ]);
         $cod = $con->lastInsertId();
 
-        /*if(!is_null($gastoem)){
-            $recebidoem = date_create_from_format('Y-m-d', $recebidoem);
-            $recebimento = salvarRecebimento($cod, $valorInicial, $recebidoem->format('Y-m-d'), "Recebimento automático.");
-            if($recebimento['success'] === false){
-                $result['success'] = false;
-                $result['errors'] = array_merge($result['errors'], $recebimento['errors']);
-            }else{
-                $result['messages'] = array_merge($result['messages'], $recebimento['messages']);
-            }
-        }*/
+        if(!is_null($gastoem)){//@todo
+            // $recebidoem = date_create_from_format('Y-m-d', $recebidoem);
+            // $recebimento = salvarRecebimento($cod, $valorInicial, $recebidoem->format('Y-m-d'), "Recebimento automático.");
+            // if($recebimento['success'] === false){
+            //     $result['success'] = false;
+            //     $result['errors'] = array_merge($result['errors'], $recebimento['errors']);
+            // }else{
+            //     $result['messages'] = array_merge($result['messages'], $recebimento['messages']);
+            // }
+        }
 
         if(sizeof($tags) > 0){
             $stmt = $con->prepare('INSERT INTO tags (tag, despesa) VALUES(:tag, :despesa)');
@@ -139,6 +139,50 @@ function salvarAlteracaoDespesa(string $despesa, float $valor, string $observaca
         $con->commit();
         $result['success'] = true;
         $result['messages'][] = "Alteração salva!";
+    }catch(Exception $e){
+        $con->rollBack();
+        $result['success'] = false;
+        $result['errors'][] = $stmt->errorInfo()[2];
+    }finally{
+        // print_r($result);
+        return $result;
+    }
+}
+
+function salvarGasto(int $despesa, string $data, float $valor, ?string $vencimento = null, ?string $observacao = null, int $mp, int $autopagar): array{
+    $result['success'] = null;
+    $result['messages'] = [];
+    $result['errors'] = [];
+
+    $valor = round($valor, 2);
+    
+    $con = conexao();
+
+    if($autopagar === 0){
+        $stmt = $con->query("SELECT autopagar FROM mp WHERE cod = $mp");
+        if($stmt->fetch(PDO::FETCH_ASSOC)['autopagar'] === 1) $autopagar = 1;
+    }
+
+    try{
+        $con->beginTransaction();
+        $stmt = $con->prepare('INSERT INTO gastos (despesa, data, valor, mp, vencimento, observacao) VALUES (:despesa, :data, :valor, :mp, :vencimento, :observacao)');
+        $stmt->execute([
+            ':despesa' => $despesa,
+            ':data' => $data,
+            ':valor' => $valor,
+            ':mp' => $mp,
+            ':vencimento' => $vencimento,
+            ':observacao' => $observacao
+        ]);
+        $cod = $con->lastInsertId();
+
+        if($autopagar === 1){
+            //@todo
+        }
+        $con->commit();
+        $result['success'] = true;
+        $result['messages'][] = "Gasto salvo com código $cod.";
+        $result['cod'] = $cod;
     }catch(Exception $e){
         $con->rollBack();
         $result['success'] = false;
